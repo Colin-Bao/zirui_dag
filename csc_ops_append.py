@@ -5,14 +5,11 @@
 # @Author    :Colin
 # @Note      :None
 import os
-from tabnanny import check
 import pendulum
 from airflow.decorators import dag, task
 from datetime import datetime, timedelta
 # import logging
 
-# -----------------处理数据源合并----------------- #
-# from zirui_dag.map_table import *
 
 # -----------------输出文件的路径----------------- #
 OUTPUT_PATH = '/home/lianghua/rtt/soft/airflow/dags/zirui_dag/output/'
@@ -62,10 +59,10 @@ def dag_success_alert(context):
     catchup=False,
     dagrun_timeout=timedelta(minutes=60),
     on_success_callback=dag_success_alert,
-    tags=['数据运维'],
+    tags=['数据运维', '1期项目'],
 )
 # 在DAG中定义任务
-def csc_database_etl():
+def csc_ops_append():
     # 提取-> 从数据库按照日期提取需要的表
     @task(on_failure_callback=task_failure_alert)
     def extract_sql(connector_id, table_name, column, date_column, start_date) -> dict:
@@ -91,14 +88,16 @@ def csc_database_etl():
 
         # 防止服务器内存占用过大
         chunk_count = 0
-        chunks = sql_hook.get_pandas_df_by_chunks(query_sql, chunksize=10000)
+        chunks = sql_hook.get_pandas_df_by_chunks(query_sql, chunksize=1000)
         path = ''
         for df_chunk in chunks:
             if chunk_count == 0:
                 path = OUTPUT_PATH + table_filename + f'/{start_date}.csv'
                 df_chunk.to_csv(path, index=False)
+                break
             else:
-                # TODO 解决合并问题
+                # TODO 只保存10000行，如果超过10000行要分片保存再合并
+                break
                 path = OUTPUT_PATH + table_filename + \
                     f'/{start_date}_{chunk_count}.csv'
                 df_chunk.to_csv(path, index=False)
@@ -176,15 +175,15 @@ def csc_database_etl():
 
 
 # [START dag_invocation]
-dag = csc_database_etl()
+dag = csc_ops_append()
 # [END dag_invocation]
 
 
 # -----------------调试命令----------------- #
+# source activate zirui_env 要在我的虚拟环境中执行
 # kill $(cat /home/lianghua/rtt/soft/airflow/airflow-scheduler.pid)
 # kill $(cat airflow-scheduler.pid)
 # lsof -i :8080|grep -v "PID"|awk '{print "kill -9",$2}'|sh
-# source activate zirui_env 要在我的虚拟环境中执行
 # kill $(cat /home/lianghua/rtt/soft/airflow/airflow-webserver.pid)
 # airflow webserver --port 8080
 # ps - ef | grep 8080 | grep - v grep | cut - c 9-15 | xargs kill - 9

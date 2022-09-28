@@ -78,6 +78,7 @@ class MapCsc:
                                    for table, _ in self.MAP_DICT[self.CSC_MERGE_TABLE][db].items()]
 
             elif db == 'suntime':
+                # TODO 没有写增量表，需要增加逻辑判断
                 import json
                 with open('sql_files/suntime_sql_merge' + '.json') as f:
                     suntime_sql_dict = json.load(f)  # 去数据字典文件中寻找
