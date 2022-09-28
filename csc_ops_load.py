@@ -11,7 +11,6 @@ from airflow import DAG, Dataset
 from airflow.models import Variable
 from datetime import datetime, timedelta
 
-
 # -----------------输出文件的路径----------------- #
 DAG_PATH = Variable.get("csc_dag_path")
 OUTPUT_PATH = DAG_PATH+'output/'
@@ -50,16 +49,16 @@ def csc_ops_load():
         elif db == 'suntime':
             # TODO 没有写增量表，需要增加逻辑判断
             import json
-            with open(DAG_PATH+'sql_files/suntime_sql_merge' + '.json') as f:
-                suntime_sql_dict = json.load(f)  # 去数据字典文件中寻找
-            return_sql = suntime_sql_dict[table_name]['sql'] % (
-                table_name, f"{load_date}")
+            with open('sql_files/suntime_sql_merge' + '.json') as f:
+                suntime_sql = json.load(f)[table_name]['sql']  # 去数据字典文件中寻找
+            return_sql = suntime_sql % (
+                'zyyx.'+table_name, f"{load_date}") if suntime_sql else None
         else:
             raise Exception
         return (db + AF_CONN, return_sql)
 
     # 提取-> 从数据库按照日期提取需要的表
-    @task()
+    @task
     def load_sql_query(table_name: str, load_date: str):
         # ----------------- 生成查询语句----------------- #
         connector_id, query_sql = get_sql_by_table(table_name, load_date)
@@ -72,8 +71,8 @@ def csc_ops_load():
         if not os.path.exists(OUTPUT_PATH + table_name):
             os.mkdir(OUTPUT_PATH + table_name)
 
-        chunk_count = 0
         # 防止服务器内存占用过大
+        chunk_count = 0
         for df_chunk in sql_hook.get_pandas_df_by_chunks(query_sql, chunksize=1000):
             if chunk_count == 0:
                 path = OUTPUT_PATH + table_name + f'/{load_date}.csv'
@@ -84,17 +83,20 @@ def csc_ops_load():
                 break
             chunk_count += 1
 
-    # [START main_flow]  API 2.0 会根据任务流调用自动生成依赖项,不需要定义依赖
-    def start_tasks(table_name: str):  # 按照规则运行所有任务流
-        load_sql_query.override(task_id='L_'+table_name, outlets=['L' +
-                                                                  OUTPUT_PATH+table_name])(table_name, '20220301')
+    # [START main_flow]
+     # 按照规则运行所有任务流
+    def start_tasks(table_name: str):
+        load_sql_query.override(
+            task_id='L_'+table_name, outlets=[Dataset(table_name)])(table_name, '20220301')
 
-    # 多进程异步执行,submit()中填写函数和形参
-    # start_tasks('ASHAREBALANCESHEET', '20220301')
-    from concurrent.futures import ThreadPoolExecutor  # 多进程并行
+    # 多进程异步执行
+    from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=1) as executor:
         _ = {executor.submit(start_tasks, table): table for table in [
-            'FIN_BALANCE_SHEET_GEN', 'ASHAREBALANCESHEET', ]}
+            'FIN_BALANCE_SHEET_GEN', 'ASHAREBALANCESHEET', 'ASHARECASHFLOW', 'FIN_CASH_FLOW_GEN',
+            'ASHAREINCOME', 'FIN_INCOME_GEN', 'ASHAREEODPRICES', 'QT_STK_DAILY', 'ASHAREEODDERIVATIVEINDICATOR',
+            'ASHAREPROFITNOTICE', 'FIN_PERFORMANCE_FORECAST', 'ASHAREPROFITEXPRESS', 'FIN_PERFORMANCE_EXPRESS',
+            'ASHAREDIVIDEND', 'ASHAREEXRIGHTDIVIDENDRECORD', 'BAS_STK_HISDISTRIBUTION']}
 
     # [END main_flow]
 

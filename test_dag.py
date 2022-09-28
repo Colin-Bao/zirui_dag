@@ -30,9 +30,11 @@ def get_sql_by_table(table_name: str, load_date: str) -> tuple:
         # TODO 没有写增量表，需要增加逻辑判断
         import json
         with open('sql_files/suntime_sql_merge' + '.json') as f:
-            suntime_sql_dict = json.load(f)  # 去数据字典文件中寻找
-        return_sql = suntime_sql_dict[table_name]['sql'] % (
-            table_name, f"{load_date}")
+            suntime_sql = json.load(f)[table_name]['sql']  # 去数据字典文件中寻找
+
+        return_sql = suntime_sql % (
+            'zyyx.'+table_name, f"{load_date}") if suntime_sql else None
+
     else:
         raise Exception
     return (db + AF_CONN, return_sql)
@@ -63,4 +65,11 @@ def load_sql_query(table_name: str, load_date: str):
         chunk_count += 1
 
 
-load_sql_query('ASHAREBALANCESHEET', '20220101')
+table_list = [
+    'FIN_BALANCE_SHEET_GEN', 'ASHAREBALANCESHEET', 'ASHARECASHFLOW', 'FIN_CASH_FLOW_GEN',
+    'ASHAREINCOME', 'FIN_INCOME_GEN', 'ASHAREEODPRICES', 'QT_STK_DAILY', 'ASHAREEODDERIVATIVEINDICATOR',
+    'ASHAREPROFITNOTICE', 'FIN_PERFORMANCE_FORECAST', 'ASHAREPROFITEXPRESS', 'FIN_PERFORMANCE_EXPRESS',
+    'ASHAREDIVIDEND', 'ASHAREEXRIGHTDIVIDENDRECORD', 'BAS_STK_HISDISTRIBUTION']
+
+for i in table_list:
+    load_sql_query(i, '20220101')
