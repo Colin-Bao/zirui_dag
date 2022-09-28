@@ -55,9 +55,9 @@ def dag_success_alert(context):
 
 # [START DAG] 实例化一个DAG
 @dag(
-    default_args={'owner': 'ZIRUI', },
-    schedule_interval=None,
+    default_args={'owner': 'zirui', },
     # schedule_interval="@daily",
+    schedule_interval="0 0 * * 1-5",
     start_date=pendulum.datetime(2022, 9, 1, tz="UTC"),
     catchup=False,
     dagrun_timeout=timedelta(minutes=60),
