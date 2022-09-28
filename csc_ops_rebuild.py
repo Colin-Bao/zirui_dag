@@ -5,9 +5,8 @@ import pendulum
 from datetime import datetime, timedelta
 from airflow import DAG, Dataset
 from airflow.decorators import dag, task
+from airflow.models import Variable
 # Define datasets
-dag1_dataset = Dataset('load_data')
-dag2_dataset = Dataset('transform_data')
 
 
 @dag(
@@ -18,7 +17,7 @@ dag2_dataset = Dataset('transform_data')
 
 )
 def csc_ops_load():
-    @task(outlets=[dag1_dataset])
+    @task(outlets=[Dataset(Variable.get("csc_load_path")+'load.csv')])
     def out():
         print('ok')
     out()
@@ -26,14 +25,14 @@ def csc_ops_load():
 
 @dag(
     default_args={'owner': 'zirui'},
-    schedule=[dag1_dataset],
+    schedule=[Dataset(Variable.get("csc_load_path")+'load.csv')],
     tags=['数据运维', '1期项目'],
     start_date=pendulum.datetime(2021, 1, 1, tz="UTC"),
     # outlets=[dag2_dataset]
 
 )
 def csc_ops_transform():
-    @task(outlets=[dag2_dataset])
+    @task(outlets=[Dataset(Variable.get("csc_load_path")+'trans.csv')])
     def out():
         pass
     out()

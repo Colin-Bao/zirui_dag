@@ -8,6 +8,7 @@
 from airflow.providers.common.sql.hooks.sql import BaseHook  # 通用数据库接口
 from zirui_dag.map_table import *
 import pandas as pd
+AF_CONN = '_af_connector'
 
 
 def extract_sql(connector_id, table_name, column, date_column, start_date, end_date) -> pd.DataFrame:
@@ -226,4 +227,39 @@ def test_sql_byfile():
         print(conn, table, sql)
 
     # test_trans('CSC_Prices')
-test_sql_byfile()
+# test_sql_byfile()
+
+
+def get_sql_by_table(table_name: str, load_date: str) -> tuple:
+    """
+    根据表名和日期返回sql查询语句
+    :return:( connector_id, table_name, sql, )
+    """
+    import json
+    # 查找属于何种数据源
+    with open('sql_files/all_table_db' + '.json') as f:  # 去数据字典文件中寻找
+        db = json.load(f)[table_name]
+
+    # 不同数据源操作
+    if db == 'wind':
+        from sql_files.wind_sql import sql_sentence
+        wind_sql_dict = {k.upper(): v.replace('\n      ', '').replace(
+            '\n', '') for k, v in sql_sentence.items()}  # 转成大写
+        return_sql = wind_sql_dict[table_name] % f"\'{load_date}\'"
+
+    elif db == 'suntime':
+        # TODO 没有写增量表，需要增加逻辑判断
+        import json
+        with open('sql_files/suntime_sql_merge' + '.json') as f:
+            suntime_sql_dict = json.load(f)  # 去数据字典文件中寻找
+        return_sql = suntime_sql_dict[table_name]['sql'] % (
+            table_name, f"{load_date}")
+
+    else:
+        raise Exception
+
+    return (db + AF_CONN, table_name, return_sql)
+
+
+a, b, c = get_sql_by_table('ASHAREBALANCESHEET', '20220101')
+print(a, b,)
