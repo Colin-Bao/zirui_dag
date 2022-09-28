@@ -195,3 +195,8 @@ dag = csc_database_etl()
 #           --lastname LAST_NAME \
 #           --role Admin \
 #           --email admin@example.org
+
+# -----------------GIT命令----------------- #
+# apt-get install gnutls-bin
+# git config - -global http.sslVerify false
+# git config - -global http.postBuffer 1048576000
