@@ -62,6 +62,37 @@ class MapCsc:
         self.MULTI_MAP_TABLES = all_map_tables
         return self.MULTI_MAP_TABLES
 
+    # 返回sql语句
+    # 从写好的文件从返回
+    def get_map_tables_by_date(self,load_date)->list:
+        """
+        :return:[( connector_id, table_name, sql ),...]
+        """
+        all_map_tables = []
+        for db in [i for i in self.MAP_DICT[self.CSC_MERGE_TABLE].keys()]:
+
+            if db == 'wind':
+                from sql_files.wind_sql import sql_sentence
+                wind_sql_dict={k.upper():v.replace('\n      ','').replace('\n','') for k ,v in sql_sentence.items()}# 转成大写
+                all_map_tables += [(db + self.AF_CONN,table,wind_sql_dict[table] % f"\'{load_date}\'")
+                                   for table, _ in self.MAP_DICT[self.CSC_MERGE_TABLE][db].items()]
+
+            elif db == 'suntime':
+                import json
+                with open('sql_files/suntime_sql_merge' + '.json') as f:
+                    suntime_sql_dict = json.load(f)  # 去数据字典文件中寻找
+                all_map_tables += [(db + self.AF_CONN, table, suntime_sql_dict[table]['sql']% (table,f"{load_date}") )
+                                   for table, _ in self.MAP_DICT[self.CSC_MERGE_TABLE][db].items()]
+                # print(suntime_sql_dict)
+
+            else:
+                raise Exception
+
+        self.MULTI_MAP_TABLES = all_map_tables
+        return self.MULTI_MAP_TABLES
+
+
+
     # 从外部更新多源数据
     def update_multi_data(self, db: str, table_name: str, file_name: str):
         # print(self.MULTI_DB_DICT[db])

@@ -218,4 +218,12 @@ def test_trans(csc_table):
     print()
 
 
-# test_trans('CSC_Prices')
+# 测试新的静态文件
+def test_sql_byfile():
+    from map_table import MapCsc
+    app = MapCsc('CSC_Prices')
+    for conn, table, sql in app.get_map_tables_by_date('20220101'):
+        print(conn, table, sql)
+
+    # test_trans('CSC_Prices')
+test_sql_byfile()
