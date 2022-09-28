@@ -85,12 +85,16 @@ def csc_ops_load():
             chunk_count += 1
 
     # [START main_flow]  API 2.0 会根据任务流调用自动生成依赖项,不需要定义依赖
-    def start_tasks(table_name: str, load_date: str):  # 按照规则运行所有任务流
+    def start_tasks(table_name: str):  # 按照规则运行所有任务流
         load_sql_query.override(task_id='L_'+table_name, outlets=['L' +
-                                                                  OUTPUT_PATH+table_name])(table_name, load_date)
+                                                                  OUTPUT_PATH+table_name])(table_name, '20220301')
 
     # 多进程异步执行,submit()中填写函数和形参
-    start_tasks('ASHAREBALANCESHEET', '20220301')
+    # start_tasks('ASHAREBALANCESHEET', '20220301')
+    from concurrent.futures import ThreadPoolExecutor  # 多进程并行
+    with ThreadPoolExecutor(max_workers=1) as executor:
+        _ = {executor.submit(start_tasks, table): table for table in [
+            'FIN_BALANCE_SHEET_GEN', 'ASHAREBALANCESHEET', ]}
 
     # [END main_flow]
 
