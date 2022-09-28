@@ -193,3 +193,5 @@ dag = csc_database_etl()
 #           --lastname LAST_NAME \
 #           --role Admin \
 #           --email admin@example.org
+# $ git config --global user.name 'colin_bao'
+# $ git config --global user.email 'colin_bao@163.com'
