@@ -3,7 +3,7 @@ import pendulum
 from airflow.decorators import dag, task
 from airflow import DAG, Dataset
 from airflow.models import Variable
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 OUTPUT_PATH = Variable.get("csc_load_path")
 
@@ -65,11 +65,5 @@ def load_sql_query(table_name: str, load_date: str):
         chunk_count += 1
 
 
-table_list = [
-    'FIN_BALANCE_SHEET_GEN', 'ASHAREBALANCESHEET', 'ASHARECASHFLOW', 'FIN_CASH_FLOW_GEN',
-    'ASHAREINCOME', 'FIN_INCOME_GEN', 'ASHAREEODPRICES', 'QT_STK_DAILY', 'ASHAREEODDERIVATIVEINDICATOR',
-    'ASHAREPROFITNOTICE', 'FIN_PERFORMANCE_FORECAST', 'ASHAREPROFITEXPRESS', 'FIN_PERFORMANCE_EXPRESS',
-    'ASHAREDIVIDEND', 'ASHAREEXRIGHTDIVIDENDRECORD', 'BAS_STK_HISDISTRIBUTION']
-
-for i in table_list:
-    load_sql_query(i, '20220101')
+print((date.today()+timedelta(-1)).strftime('%Y%m%d')
+      )

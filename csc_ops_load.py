@@ -9,7 +9,7 @@ import pendulum
 from airflow.decorators import dag, task
 from airflow import DAG, Dataset
 from airflow.models import Variable
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 # -----------------输出文件的路径----------------- #
 DAG_PATH = Variable.get("csc_dag_path")
@@ -19,11 +19,11 @@ OUTPUT_PATH = DAG_PATH+'output/'
 # [START DAG] 实例化一个DAG
 @dag(
     default_args={'owner': 'zirui', },
-    schedule="0 0 * * 1-5",
+    schedule="0 17 * * 1-7",
     start_date=pendulum.datetime(2022, 9, 1, tz="UTC"),
     catchup=False,
     dagrun_timeout=timedelta(minutes=60),
-    tags=['数据运维', '1期项目'],
+    tags=['数据运维', ],
 )
 # 在DAG中定义任务
 def csc_ops_load():
@@ -33,9 +33,9 @@ def csc_ops_load():
         根据表名和日期返回sql查询语句
         :return:( connector_id, table_name, sql, )
         """
-        AF_CONN = '_af_connector'  # 数据库连接器名称
-        import json
+
         # 查找属于何种数据源
+        import json
         with open(DAG_PATH+'sql_files/all_table_db' + '.json') as f:  # 去数据字典文件中寻找
             db = json.load(f)[table_name]
 
@@ -55,7 +55,7 @@ def csc_ops_load():
                 'zyyx.'+table_name, f"{load_date}") if suntime_sql else None
         else:
             raise Exception
-        return (db + AF_CONN, return_sql)
+        return (db + '_af_connector', return_sql)
 
     # 提取-> 从数据库按照日期提取需要的表
     @task
@@ -84,10 +84,10 @@ def csc_ops_load():
             chunk_count += 1
 
     # [START main_flow]
-     # 按照规则运行所有任务流
     def start_tasks(table_name: str):
+        load_date = (date.today()+timedelta(-1)).strftime('%Y%m%d')  # 下载昨天的数据
         load_sql_query.override(
-            task_id='L_'+table_name, outlets=[Dataset(table_name)])(table_name, '20220301')
+            task_id='L_'+table_name, outlets=[Dataset('L_'+table_name)])(table_name, load_date)
 
     # 多进程异步执行
     from concurrent.futures import ThreadPoolExecutor

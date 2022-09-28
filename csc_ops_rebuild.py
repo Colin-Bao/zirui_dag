@@ -36,7 +36,3 @@ def csc_ops_transform():
     def out():
         pass
     out()
-
-
-dag1 = csc_ops_load()
-dag2 = csc_ops_transform()
