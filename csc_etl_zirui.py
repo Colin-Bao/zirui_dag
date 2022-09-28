@@ -55,6 +55,7 @@ def dag_success_alert(context):
 
 # [START DAG] 实例化一个DAG
 @dag(
+    default_args={'owner': 'ZIRUI', },
     schedule_interval=None,
     # schedule_interval="@daily",
     start_date=pendulum.datetime(2022, 9, 1, tz="UTC"),
@@ -160,13 +161,14 @@ def csc_database_etl():
             task_id='C_' + csc_merge_table)(csc_merge_table, dict_m['table_path'])
 
     # 多进程异步执行,submit()中填写函数和形参
-    # start_tasks('CSC_Income')
-    from concurrent.futures import ThreadPoolExecutor  # 多进程并行
-    from zirui_dag.map_table import MapCsc
-    table_list = list(MapCsc().MAP_DICT.keys())
-    with ThreadPoolExecutor(max_workers=1) as executor:
-        _ = {executor.submit(start_tasks, table): table for table in [
-            'CSC_Balance_Sheet', 'CSC_CashFlow', 'CSC_Income', 'CSC_Prices', 'CSC_Profit_Notice', 'CSC_Profit_Express']}
+    start_tasks('CSC_Income')
+
+    # from concurrent.futures import ThreadPoolExecutor  # 多进程并行
+    # from zirui_dag.map_table import MapCsc
+    # table_list = list(MapCsc().MAP_DICT.keys())
+    # with ThreadPoolExecutor(max_workers=1) as executor:
+    #     _ = {executor.submit(start_tasks, table): table for table in [
+    #         'CSC_Balance_Sheet', 'CSC_CashFlow', 'CSC_Income', 'CSC_Prices', 'CSC_Profit_Notice', 'CSC_Profit_Express']}
     # [END main_flow]
 
 
@@ -193,5 +195,3 @@ dag = csc_database_etl()
 #           --lastname LAST_NAME \
 #           --role Admin \
 #           --email admin@example.org
-# $ git config --global user.name 'colin_bao'
-# $ git config --global user.email 'colin_bao@163.com'
