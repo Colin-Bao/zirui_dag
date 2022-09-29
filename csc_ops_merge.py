@@ -99,7 +99,7 @@ for csc_table, tables in get_map_tables().items():  # csc_table, tables作为传
                     pass
 
             # ------------------储存并输出----------------------#
-            TRANSFORM_PATH = Variable.get("csc_transform_path") + csc_table
+            TRANSFORM_PATH = Variable.get("csc_transform_path") + csc_name
             import os
             if not os.path.exists(TRANSFORM_PATH):
                 os.mkdir(TRANSFORM_PATH)
@@ -167,7 +167,7 @@ for csc_table, tables in get_map_tables().items():  # csc_table, tables作为传
             return output_path
 
         @task
-        def check_table(table_path):
+        def check_table(csc_name, table_path):
             import pandas as pd
             df_compare = pd.read_csv(table_path)
             # print(df_compare.columns, df_compare)
@@ -182,7 +182,7 @@ for csc_table, tables in get_map_tables().items():  # csc_table, tables作为传
 
             # 输出
             output_path = Variable.get(
-                "csc_merge_path") + f"{csc_table}_COUNT.csv"
+                "csc_merge_path") + f"{csc_name}_COUNT.csv"
             df_null_count.reset_index().to_csv(output_path, index=False)
 
         table_path = []
@@ -196,6 +196,6 @@ for csc_table, tables in get_map_tables().items():  # csc_table, tables作为传
             task_id='M_'+csc_table, outlets=[Dataset('M_'+csc_table)])(csc_table, tables, table_path,)
         # 3.检查
         check_table.override(
-            task_id='C_'+csc_table, outlets=[Dataset('C_'+csc_table)])(merge_path)
+            task_id='C_'+csc_table, outlets=[Dataset('C_'+csc_table)])(csc_table, merge_path)
 
     dynamic_generated_mergedag()

@@ -23,16 +23,12 @@ def extract_sql_by_table(table_name: str, load_date: str) -> dict:
     db = json.loads(Variable.get("csc_table_db"))[table_name]  # 去数据字典文件中寻找
     # 不同数据源操作
     if db == 'wind':
-        from zirui_dag.sql_files.wind_sql import sql_sentence
-        wind_sql_dict = {k.upper(): v.replace('\n      ', '').replace(
-            '\n', '') for k, v in sql_sentence.items()}  # 转成大写
-        return_sql = wind_sql_dict[table_name] % f"\'{load_date}\'"
+        wind_sql = json.loads(Variable.get("csc_wind_sql"))
+        return_sql = wind_sql[table_name] % f"\'{load_date}\'"
 
     elif db == 'suntime':
         # TODO 没有写增量表，需要增加逻辑判断
-        import json
-        with open('sql_files/suntime_sql_merge' + '.json') as f:
-            suntime_sql = json.load(f)[table_name]['sql']  # 去数据字典文件中寻找
+        suntime_sql = json.loads(Variable.get("csc_suntime_sql"))  # 去数据字典文件中寻找
         return_sql = suntime_sql % (
             'zyyx.'+table_name, f"{load_date}") if suntime_sql else None
     else:

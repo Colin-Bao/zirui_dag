@@ -1,10 +1,19 @@
 
 
 # 格式转换
+
+
 def dict_to_json(old_dict, name):
     import json
     with open(f'/home/lianghua/rtt/soft/airflow/dags/zirui_dag/sql_files/{name}.json', 'w') as json_file:
         json_file.write(json.dumps(old_dict, ensure_ascii=False))
+
+
+def wind_sql():
+    from wind_sql import sql_sentence
+    wind_sql_dict = {k.upper(): v.replace('\n      ', '').replace(
+        '\n', '').replace('    ', '') for k, v in sql_sentence.items()}
+    dict_to_json(wind_sql_dict, 'wind_sql')
 
 
 def get_sql_by_table(table_name) -> str:
