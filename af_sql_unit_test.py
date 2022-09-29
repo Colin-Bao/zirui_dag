@@ -259,7 +259,3 @@ def get_sql_by_table(table_name: str, load_date: str) -> tuple:
         raise Exception
 
     return (db + AF_CONN, table_name, return_sql)
-
-
-a, b, c = get_sql_by_table('ASHAREBALANCESHEET', '20220101')
-print(a, b,)
