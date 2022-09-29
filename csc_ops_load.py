@@ -23,7 +23,7 @@ OUTPUT_PATH = DAG_PATH+'output/'
     start_date=pendulum.datetime(2022, 9, 1, tz="UTC"),
     catchup=False,
     dagrun_timeout=timedelta(minutes=60),
-    tags=['数据运维', ],
+    tags=['数据运维', '数据加载'],
 )
 # 在DAG中定义任务
 def csc_ops_load():

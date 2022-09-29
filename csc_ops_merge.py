@@ -15,7 +15,7 @@ from airflow.models import Variable
 # TODO 生成多个DAG用于处理
 
 # 获取上游数据表,生成下游动态DAG
-def get_map_tables() -> dict:
+def get_map_tables() -> dict[str, str]:
     import json
     map_dict = json.loads(Variable.get("csc_map_dict"))
     dag_configs = {}
@@ -23,18 +23,17 @@ def get_map_tables() -> dict:
         table_list = []
         for v in db.values():
             table_list += v.keys()
-        dag_configs.update(
-            {csc_table.lower(): [Dataset('L_'+i) for i in table_list]})  # 完成Load后的操作
+        dag_configs.update({csc_table: table_list})  # 完成Load后的操作
     return dag_configs
 
 
 # 为数据集生成动态dag
-for dag_name, tables in get_map_tables().items():
+for csc_table, tables in get_map_tables().items():  # csc_table, tables作为传入参数给dag
     @dag(
         default_args={'owner': 'zirui', },
-        dag_id=f"{dag_name}_merge",
+        dag_id=csc_table.lower()+"_merge",
         start_date=datetime(2022, 2, 1),
-        schedule=tables,
+        schedule=[Dataset('L_'+i) for i in tables],
         tags=['数据运维', '数据合并']
     )
     # 动态生成DAG
