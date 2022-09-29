@@ -52,7 +52,7 @@ for csc_table, tables in get_map_tables().items():  # csc_table, tables作为传
     def dynamic_generated_mergedag():
         # 合并任务 - 根据不同的名称选择不同的操作
         @task
-        def transform_table(csc_name, table_name):
+        def transform_table(csc_name, table_name) -> str:
             # 昨天的日期 TODO DAG之间传递参数
             load_date = (date.today()+timedelta(-1)
                          ).strftime('%Y%m%d')  # 昨天的数据
@@ -99,15 +99,103 @@ for csc_table, tables in get_map_tables().items():  # csc_table, tables作为传
                     pass
 
             # ------------------储存并输出----------------------#
-            TRANSFORM_PATH = Variable.get("csc_transform_path") + table_name
+            TRANSFORM_PATH = Variable.get("csc_transform_path") + csc_table
             import os
             if not os.path.exists(TRANSFORM_PATH):
                 os.mkdir(TRANSFORM_PATH)
-            df_table.to_csv(TRANSFORM_PATH+f'/{load_date}.csv', index=False)
+            output_path = TRANSFORM_PATH+f'/{table_name}.csv'
+            df_table.to_csv(output_path, index=False)
+            return TRANSFORM_PATH
 
+        @task
+        def merge_table(csc_name, tables, table_path) -> str:
+            if len(tables) > 2:
+                # TODO 3表的没有做
+                return None
+            # 1.从第一个表获取所有的索引字段
+            import pandas as pd
+            table_info_dict = get_transform_info_by_table(csc_name, tables[0])
+            index_column = table_info_dict['index_column']
+            index_df = pd.DataFrame(
+                columns=index_column).set_index(index_column)
+
+            # 2.遍历表
+            df_alldbs = []  # 不同数据源
+            for i, table in enumerate(tables):
+                table_index = get_transform_info_by_table(
+                    csc_name, table)['index_column']
+                # 根据路径读取df
+                df_table = pd.read_csv(
+                    table_path[i]+f'/{table}.csv', dtype={j: 'str' for j in table_index})
+                # 设置索引
+                df_table.set_index(table_index, inplace=True)
+                # 自身索引去重
+                df_table = df_table[~df_table.index.duplicated()]
+                # 追加df
+                df_alldbs.append(df_table)
+                # 追加索引
+                index_df.index = index_df.index.append(
+                    df_table.index)
+
+            # 3.迭代join
+            # 索引去重
+            index_df.index = index_df.index.drop_duplicates()
+
+            # 分别join
+            # TODO 只做了2源的，如果多个要拓展
+            df_wind = index_df.join(
+                df_alldbs[0], how='left', on=index_df.index.names)
+            df_suntime = index_df.join(
+                df_alldbs[1], how='left', on=index_df.index.names)
+
+            # 5.对比
+            # TODO 只做了2个的,如果要做2个以上的需要自己写一个对比+合并函数
+            # print(self.CSC_MERGE_TABLE,)
+            assert df_wind.shape == df_suntime.shape
+
+            df_suntime.columns = df_wind.columns
+            df_compare = df_wind.compare(
+                df_suntime, keep_shape=True, keep_equal=True)
+
+            # 改名字
+            df_compare.columns = [f'{i[1]}_{i[0]}'.replace('self', 'wind').replace('other', 'suntime')
+                                  for i in df_compare.columns]
+
+            # 6.输出
+            output_path = Variable.get("csc_merge_path") + csc_table+'.csv'
+            df_compare.sort_index().reset_index().to_csv(output_path, index=False)
+            return output_path
+
+        @task
+        def check_table(table_path):
+            import pandas as pd
+            df_compare = pd.read_csv(table_path)
+            # print(df_compare.columns, df_compare)
+            # 逐字段打印出缺失率
+            # attr1 = df_compare[pd.isnull(df_compare['wind_ADV_FROM_CUST']) & pd.notnull(
+            # df_compare['suntime_ADV_FROM_CUST'])]
+            # 统计缺失率
+            df_null_count = (df_compare.isnull().sum()/len(df_compare))
+            df_null_count = df_null_count.drop(
+                [i for i in df_null_count.index if 'suntime_' in i]).sort_values(ascending=False)
+            # print(df_null_count)
+
+            # 输出
+            output_path = Variable.get(
+                "csc_merge_path") + f"{csc_table}_COUNT.csv"
+            df_null_count.reset_index().to_csv(output_path, index=False)
+
+        table_path = []
         # 1.转换为可比的表
         for table in tables:
-            transform_table.override(
-                task_id='T_'+table, outlets=[Dataset('T_'+csc_table)])(csc_table, table)
+            res = transform_table.override(
+                task_id='T_'+table)(csc_table, table)
+            table_path.append(res)
+        # 2.合并
+        merge_path = merge_table.override(
+            task_id='M_'+csc_table, outlets=[Dataset('M_'+csc_table)])(csc_table, tables, table_path,)
+        # 3.检查
+        check_table.override(
+            task_id='C_'+csc_table, outlets=[Dataset('C_'+csc_table)])(merge_path)
 
     dynamic_generated_mergedag()
