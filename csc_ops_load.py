@@ -101,7 +101,8 @@ def csc_ops_load():
         'ASHAREDIVIDEND', 'ASHAREEXRIGHTDIVIDENDRECORD', 'BAS_STK_HISDISTRIBUTION']
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=1) as executor:
-        _ = {executor.submit(start_tasks, table): table for table in table_list}
+        _ = {executor.submit(start_tasks, table): table for table in [
+            'FIN_BALANCE_SHEET_GEN', 'ASHAREBALANCESHEET']}
 
     # [END main_flow]
 
@@ -111,3 +112,6 @@ def csc_ops_load():
 # [START dag_invocation]
 dag = csc_ops_load()
 # [END dag_invocation]
+
+# airflow webserver
+# airflow scheduler
