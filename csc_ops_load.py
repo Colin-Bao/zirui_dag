@@ -101,8 +101,8 @@ def csc_ops_load():
         'ASHAREDIVIDEND', 'ASHAREEXRIGHTDIVIDENDRECORD', 'BAS_STK_HISDISTRIBUTION']
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=1) as executor:
-        _ = {executor.submit(start_tasks, table): table for table in [
-            'FIN_BALANCE_SHEET_GEN', 'ASHAREBALANCESHEET']}
+        _ = {executor.submit(start_tasks, table): table for table in
+             table_list}
 
     # [END main_flow]
 
@@ -113,5 +113,9 @@ def csc_ops_load():
 dag = csc_ops_load()
 # [END dag_invocation]
 
-# airflow webserver
+# kill -9 2819187
+# airflow webserver --port 8081
 # airflow scheduler
+# kill $(cat /home/lianghua/rtt/soft/airflow/airflow-webserver.pid)
+# sudo lsof - i: 8080 | grep - v "PID" | awk '{print "kill -9",$2}' | sh
+# kill $(cat /home/lianghua/rtt/soft/airflow/airflow-scheduler.pid)

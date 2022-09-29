@@ -108,6 +108,6 @@ for csc_table, tables in get_map_tables().items():  # csc_table, tables作为传
         # 1.转换为可比的表
         for table in tables:
             transform_table.override(
-                task_id='T_'+csc_table, outlets=[Dataset('T_'+csc_table)])(csc_table, table)
+                task_id='T_'+table, outlets=[Dataset('T_'+csc_table)])(csc_table, table)
 
     dynamic_generated_mergedag()
