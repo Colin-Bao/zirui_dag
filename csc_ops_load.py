@@ -11,9 +11,33 @@ from airflow import DAG, Dataset
 from airflow.models import Variable
 from datetime import datetime, timedelta, date
 
-# -----------------输出文件的路径----------------- #
-DAG_PATH = Variable.get("csc_dag_path")
-OUTPUT_PATH = DAG_PATH+'output/'
+
+@task
+def extract_sql_by_table(table_name: str, load_date: str) -> dict:
+    """
+        根据表名和日期返回sql查询语句
+        :return:( connector_id, return_sql, table_name, load_date)
+    """
+    # 查找属于何种数据源
+    import json
+    db = json.loads(Variable.get("csc_table_db"))[table_name]  # 去数据字典文件中寻找
+    # 不同数据源操作
+    if db == 'wind':
+        from zirui_dag.sql_files.wind_sql import sql_sentence
+        wind_sql_dict = {k.upper(): v.replace('\n      ', '').replace(
+            '\n', '') for k, v in sql_sentence.items()}  # 转成大写
+        return_sql = wind_sql_dict[table_name] % f"\'{load_date}\'"
+
+    elif db == 'suntime':
+        # TODO 没有写增量表，需要增加逻辑判断
+        import json
+        with open('sql_files/suntime_sql_merge' + '.json') as f:
+            suntime_sql = json.load(f)[table_name]['sql']  # 去数据字典文件中寻找
+        return_sql = suntime_sql % (
+            'zyyx.'+table_name, f"{load_date}") if suntime_sql else None
+    else:
+        raise Exception
+    return {'connector_id': db + '_af_connector', 'query_sql': return_sql, 'table_name': table_name, 'load_date': load_date}
 
 
 # [START DAG] 实例化一个DAG
@@ -28,40 +52,17 @@ OUTPUT_PATH = DAG_PATH+'output/'
 # 在DAG中定义任务
 def csc_ops_load():
 
-    def get_sql_by_table(table_name: str, load_date: str) -> tuple:
-        """
-        根据表名和日期返回sql查询语句
-        :return:( connector_id, table_name, sql, )
-        """
-
-        # 查找属于何种数据源
-        import json
-        with open(DAG_PATH+'sql_files/all_table_db' + '.json') as f:  # 去数据字典文件中寻找
-            db = json.load(f)[table_name]
-
-        # 不同数据源操作
-        if db == 'wind':
-            from zirui_dag.sql_files.wind_sql import sql_sentence
-            wind_sql_dict = {k.upper(): v.replace('\n      ', '').replace(
-                '\n', '') for k, v in sql_sentence.items()}  # 转成大写
-            return_sql = wind_sql_dict[table_name] % f"\'{load_date}\'"
-
-        elif db == 'suntime':
-            # TODO 没有写增量表，需要增加逻辑判断
-            import json
-            with open('sql_files/suntime_sql_merge' + '.json') as f:
-                suntime_sql = json.load(f)[table_name]['sql']  # 去数据字典文件中寻找
-            return_sql = suntime_sql % (
-                'zyyx.'+table_name, f"{load_date}") if suntime_sql else None
-        else:
-            raise Exception
-        return (db + '_af_connector', return_sql)
-
     # 提取-> 从数据库按照日期提取需要的表
     @task
-    def load_sql_query(table_name: str, load_date: str):
-        # ----------------- 生成查询语句----------------- #
-        connector_id, query_sql = get_sql_by_table(table_name, load_date)
+    def load_sql_query(data_dict: dict):
+        # -----------------参数传递----------------- #
+        connector_id = data_dict['connector_id']
+        query_sql = data_dict['query_sql']
+        table_name = data_dict['table_name']
+        load_date = data_dict['load_date']
+
+        # -----------------输出文件的路径----------------- #
+        OUTPUT_PATH = Variable.get("csc_load_path")
 
         # ----------------- 从Airflow保存的connection获取多数据源连接----------------- #
         from airflow.providers.common.sql.hooks.sql import BaseHook  # airflow通用数据库接口
@@ -85,18 +86,22 @@ def csc_ops_load():
 
     # [START main_flow]
     def start_tasks(table_name: str):
+        # extract_sql_by_table()
         load_date = (date.today()+timedelta(-1)).strftime('%Y%m%d')  # 下载昨天的数据
         load_sql_query.override(
-            task_id='L_'+table_name, outlets=[Dataset('L_'+table_name)])(table_name, load_date)
+            task_id='L_'+table_name, outlets=[Dataset('L_'+table_name, extra={'load_date': load_date})])(
+                extract_sql_by_table.override(task_id='E_'+table_name,)(table_name, load_date))
 
     # 多进程异步执行
+    # start_tasks('FIN_BALANCE_SHEET_GEN')
+    table_list = [
+        'FIN_BALANCE_SHEET_GEN', 'ASHAREBALANCESHEET', 'ASHARECASHFLOW', 'FIN_CASH_FLOW_GEN',
+        'ASHAREINCOME', 'FIN_INCOME_GEN', 'ASHAREEODPRICES', 'QT_STK_DAILY', 'ASHAREEODDERIVATIVEINDICATOR',
+        'ASHAREPROFITNOTICE', 'FIN_PERFORMANCE_FORECAST', 'ASHAREPROFITEXPRESS', 'FIN_PERFORMANCE_EXPRESS',
+        'ASHAREDIVIDEND', 'ASHAREEXRIGHTDIVIDENDRECORD', 'BAS_STK_HISDISTRIBUTION']
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=1) as executor:
-        _ = {executor.submit(start_tasks, table): table for table in [
-            'FIN_BALANCE_SHEET_GEN', 'ASHAREBALANCESHEET', 'ASHARECASHFLOW', 'FIN_CASH_FLOW_GEN',
-            'ASHAREINCOME', 'FIN_INCOME_GEN', 'ASHAREEODPRICES', 'QT_STK_DAILY', 'ASHAREEODDERIVATIVEINDICATOR',
-            'ASHAREPROFITNOTICE', 'FIN_PERFORMANCE_FORECAST', 'ASHAREPROFITEXPRESS', 'FIN_PERFORMANCE_EXPRESS',
-            'ASHAREDIVIDEND', 'ASHAREEXRIGHTDIVIDENDRECORD', 'BAS_STK_HISDISTRIBUTION']}
+        _ = {executor.submit(start_tasks, table): table for table in table_list}
 
     # [END main_flow]
 
