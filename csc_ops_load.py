@@ -28,7 +28,8 @@ def extract_sql_by_table(table_name: str, load_date: str) -> dict:
 
     elif db == 'suntime':
         # TODO 没有写增量表，需要增加逻辑判断
-        suntime_sql = json.loads(Variable.get("csc_suntime_sql"))  # 去数据字典文件中寻找
+        suntime_sql = json.loads(Variable.get("csc_suntime_sql"))[
+            table_name]['sql']  # 去数据字典文件中寻找
         return_sql = suntime_sql % (
             'zyyx.'+table_name, f"{load_date}") if suntime_sql else None
     else:
@@ -58,21 +59,21 @@ def csc_ops_load():
         load_date = data_dict['load_date']
 
         # -----------------输出文件的路径----------------- #
-        OUTPUT_PATH = Variable.get("csc_load_path")
+        LOAD_PATH = Variable.get("csc_load_path") + table_name
 
         # ----------------- 从Airflow保存的connection获取多数据源连接----------------- #
         from airflow.providers.common.sql.hooks.sql import BaseHook  # airflow通用数据库接口
         sql_hook = BaseHook.get_connection(connector_id).get_hook()
 
         # -----------------df执行sql查询,保存文件----------------- #
-        if not os.path.exists(OUTPUT_PATH + table_name):
-            os.mkdir(OUTPUT_PATH + table_name)
+        if not os.path.exists(LOAD_PATH):
+            os.mkdir(LOAD_PATH)
 
         # 防止服务器内存占用过大
         chunk_count = 0
         for df_chunk in sql_hook.get_pandas_df_by_chunks(query_sql, chunksize=1000):
             if chunk_count == 0:
-                path = OUTPUT_PATH + table_name + f'/{load_date}.csv'
+                path = LOAD_PATH + f'/{load_date}.csv'
                 df_chunk.to_csv(path, index=False)
                 break
             else:

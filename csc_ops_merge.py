@@ -162,7 +162,7 @@ for csc_table, tables in get_map_tables().items():  # csc_table, tables作为传
                                   for i in df_compare.columns]
 
             # 6.输出
-            output_path = Variable.get("csc_merge_path") + csc_table+'.csv'
+            output_path = Variable.get("csc_merge_path") + csc_name+'.csv'
             df_compare.sort_index().reset_index().to_csv(output_path, index=False)
             return output_path
 
