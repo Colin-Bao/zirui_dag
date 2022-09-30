@@ -1,106 +1,82 @@
-# @Time      :2022-09-28 15:49:50
-# @Author    :Colin
-# @Note      :删除并覆盖历史文件
-
 import os
 import pendulum
 from airflow.decorators import dag, task
-from airflow import DAG, Dataset
+from airflow import DAG
 from airflow.models import Variable
 from datetime import datetime, timedelta, date
-
-# -----------------输出文件的路径----------------- #
-DAG_PATH = Variable.get("csc_dag_path")
-OUTPUT_PATH = DAG_PATH+'output/'
+from airflow.datasets import Dataset
+from airflow.models.param import Param
 
 
-# [START DAG] 实例化一个DAG
+def get_context(context):
+    return context['task_instance']
+
+
+@task
+def get_dagrun_conf(dag_run=None,):
+    """
+    Print the payload "message" passed to the DagRun conf attribute.
+    :param dag_run: The DagRun object
+    {"date":"20220101"}
+    """
+    # print(dag_run.conf)
+    return dag_run.conf
+
+
+def print_x(**context):
+    print(context["params"])
+
+
 @dag(
     default_args={'owner': 'zirui', },
-    schedule="0 17 * * 1-7",
-    start_date=pendulum.datetime(2022, 9, 1, tz="UTC"),
-    catchup=False,
-    dagrun_timeout=timedelta(minutes=60),
-    tags=['数据运维', ],
+    params={"msg": Param("Please Use Upper Table Name", type="string"),
+            "start_date": Param(20220301, type="integer", minimum=20211231, maximum=20221231),
+            "end_date": Param(20220303, type="integer", minimum=20211231, maximum=20221231),
+            "table_name": Param(
+                "ASHAREBALANCESHEET",
+                type="string",
+                minLength=5,
+                maxLength=255,
+    )},
+    start_date=datetime(2022, 2, 1),
+    schedule=None,
+    tags=['数据更新', '参数触发']
 )
-# 在DAG中定义任务
-def csc_ops_load():
+def csc_ops_update():
 
-    def get_sql_by_table(table_name: str, load_date: str) -> tuple:
-        """
-        根据表名和日期返回sql查询语句
-        :return:( connector_id, table_name, sql, )
-        """
-
-        # 查找属于何种数据源
-        import json
-        with open(DAG_PATH+'sql_files/all_table_db' + '.json') as f:  # 去数据字典文件中寻找
-            db = json.load(f)[table_name]
-
-        # 不同数据源操作
-        if db == 'wind':
-            from sql_files.wind_sql import sql_sentence
-            wind_sql_dict = {k.upper(): v.replace('\n      ', '').replace(
-                '\n', '') for k, v in sql_sentence.items()}  # 转成大写
-            return_sql = wind_sql_dict[table_name] % f"\'{load_date}\'"
-
-        elif db == 'suntime':
-            # TODO 没有写增量表，需要增加逻辑判断
-            import json
-            with open('sql_files/suntime_sql_merge' + '.json') as f:
-                suntime_sql = json.load(f)[table_name]['sql']  # 去数据字典文件中寻找
-            return_sql = suntime_sql % (
-                'zyyx.'+table_name, f"{load_date}") if suntime_sql else None
-        else:
-            raise Exception
-        return (db + '_af_connector', return_sql)
-
-    # 提取-> 从数据库按照日期提取需要的表
     @task
-    def load_sql_query(table_name: str, load_date: str):
-        # ----------------- 生成查询语句----------------- #
-        connector_id, query_sql = get_sql_by_table(table_name, load_date)
+    def get_params(params=None) -> dict:
+        # print('task获取params参数', params, params['table_name'])
+        start_date = params['start_date']
+        end_date = params['end_date']
+        # date_list = [str(date) for date in range(start_date, end_date)]
+        return {'table_name': params['table_name'], 'start_date': start_date, 'end_date': end_date, }
 
-        # ----------------- 从Airflow保存的connection获取多数据源连接----------------- #
-        from airflow.providers.common.sql.hooks.sql import BaseHook  # airflow通用数据库接口
-        sql_hook = BaseHook.get_connection(connector_id).get_hook()
+    @task
+    def check(param):
+        print(param)
+    # 任务流
+    res_value = get_params()
+    table_name = res_value['table_name']
+    start_date = res_value['start_date']
+    end_date = res_value['end_date']
+    print(end_date)
+    # date_list = [str(date) for date in range(start_date, end_date)]
+    # print(date_list)
+    # date_list = [i for i in res_value['date_list']]
+    # res = get_dagrun_conf()
 
-        # -----------------df执行sql查询,保存文件----------------- #
-        if not os.path.exists(OUTPUT_PATH + table_name):
-            os.mkdir(OUTPUT_PATH + table_name)
+    # print(f"the value is {xcomarg}")
+    # check(date_list)
+    # print(date_list)
+    # print(get_dagrun_conf())
 
-        # 防止服务器内存占用过大
-        chunk_count = 0
-        for df_chunk in sql_hook.get_pandas_df_by_chunks(query_sql, chunksize=1000):
-            if chunk_count == 0:
-                path = OUTPUT_PATH + table_name + f'/{load_date}.csv'
-                df_chunk.to_csv(path, index=False)
-                break
-            else:
-                # TODO 只保存chunksize行，如果超过chunksize行要分片保存再合并
-                break
-            chunk_count += 1
-
-    # [START main_flow]
-    def start_tasks(table_name: str):
-        load_date = (date.today()+timedelta(-1)).strftime('%Y%m%d')  # 下载昨天的数据
-        load_sql_query.override(
-            task_id='L_'+table_name, outlets=[Dataset('L_'+table_name)])(table_name, load_date)
-
-    # 多进程异步执行
-    from concurrent.futures import ThreadPoolExecutor
-    with ThreadPoolExecutor(max_workers=1) as executor:
-        _ = {executor.submit(start_tasks, table): table for table in [
-            'FIN_BALANCE_SHEET_GEN', 'ASHAREBALANCESHEET', 'ASHARECASHFLOW', 'FIN_CASH_FLOW_GEN',
-            'ASHAREINCOME', 'FIN_INCOME_GEN', 'ASHAREEODPRICES', 'QT_STK_DAILY', 'ASHAREEODDERIVATIVEINDICATOR',
-            'ASHAREPROFITNOTICE', 'FIN_PERFORMANCE_FORECAST', 'ASHAREPROFITEXPRESS', 'FIN_PERFORMANCE_EXPRESS',
-            'ASHAREDIVIDEND', 'ASHAREEXRIGHTDIVIDENDRECORD', 'BAS_STK_HISDISTRIBUTION']}
-
-    # [END main_flow]
+    # import sys
+    # sys.path.append('/home/lianghua/rtt/soft/airflow/dags/zirui_dag')
+    # from csc_ops_load import extract_sql_by_table, load_sql_query
+    # load_sql_query.expand(data_dict=extract_sql_by_table.partial(table_name=table_name).expand(
+    #     load_date=['2020202'])
+    # )
 
 
-# [END DAG]
-
-# [START dag_invocation]
-dag = csc_ops_load()
-# [END dag_invocation]
+d1 = csc_ops_update()

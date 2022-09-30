@@ -1,6 +1,7 @@
 
-
+from airflow.models import Variable
 # 格式转换
+import json
 
 
 def dict_to_json(old_dict, name):
@@ -56,3 +57,13 @@ def merge_all():
 
 
 # merge_all()
+
+def test_load_frome_json():
+    suntime_sql = json.loads(Variable.get("csc_suntime_sql"))[
+        'FIN_BALANCE_SHEET_GEN']['sql']  # 去数据字典文件中寻找
+    suntime_sql = suntime_sql % (
+        'zyyx.'+'FIN_BALANCE_SHEET_GEN', f"{'202202'}") if suntime_sql else None
+    print(suntime_sql)
+
+
+# test_load_frome_json()
