@@ -37,7 +37,43 @@ def extract_sql_by_table(table_name: str, load_date: str) -> dict:
     return {'connector_id': db + '_af_connector', 'query_sql': return_sql, 'table_name': table_name, 'load_date': load_date}
 
 
+@task
+def load_sql_query(data_dict: dict):
+    """
+        根据sql查询语句下载数据到本地
+        :return:
+        """
+    # -----------------参数传递----------------- #
+    connector_id = data_dict['connector_id']
+    query_sql = data_dict['query_sql']
+    table_name = data_dict['table_name']
+    load_date = data_dict['load_date']
+
+    # -----------------输出文件的路径----------------- #
+    LOAD_PATH = Variable.get("csc_load_path") + table_name
+
+    # ----------------- 从Airflow保存的connection获取多数据源连接----------------- #
+    from airflow.providers.common.sql.hooks.sql import BaseHook  # airflow通用数据库接口
+    sql_hook = BaseHook.get_connection(connector_id).get_hook()
+
+    # -----------------df执行sql查询,保存文件----------------- #
+    if not os.path.exists(LOAD_PATH):
+        os.mkdir(LOAD_PATH)
+
+        # 防止服务器内存占用过大
+    chunk_count = 0
+    for df_chunk in sql_hook.get_pandas_df_by_chunks(query_sql, chunksize=1000):
+        if chunk_count == 0:
+            path = LOAD_PATH + f'/{load_date}.csv'
+            df_chunk.to_csv(path, index=False)
+            break
+        else:
+            # TODO 只保存chunksize行，如果超过chunksize行要分片保存再合并
+            break
+        chunk_count += 1
 # [START DAG] 实例化一个DAG
+
+
 @dag(
     default_args={'owner': 'zirui', },
     schedule="0 17 * * 1-7",
@@ -48,42 +84,6 @@ def extract_sql_by_table(table_name: str, load_date: str) -> dict:
 )
 # 在DAG中定义任务
 def csc_ops_load():
-
-    # 提取-> 从数据库按照日期提取需要的表
-    @task
-    def load_sql_query(data_dict: dict):
-        """
-        根据sql查询语句下载数据到本地
-        :return:
-        """
-        # -----------------参数传递----------------- #
-        connector_id = data_dict['connector_id']
-        query_sql = data_dict['query_sql']
-        table_name = data_dict['table_name']
-        load_date = data_dict['load_date']
-
-        # -----------------输出文件的路径----------------- #
-        LOAD_PATH = Variable.get("csc_load_path") + table_name
-
-        # ----------------- 从Airflow保存的connection获取多数据源连接----------------- #
-        from airflow.providers.common.sql.hooks.sql import BaseHook  # airflow通用数据库接口
-        sql_hook = BaseHook.get_connection(connector_id).get_hook()
-
-        # -----------------df执行sql查询,保存文件----------------- #
-        if not os.path.exists(LOAD_PATH):
-            os.mkdir(LOAD_PATH)
-
-        # 防止服务器内存占用过大
-        chunk_count = 0
-        for df_chunk in sql_hook.get_pandas_df_by_chunks(query_sql, chunksize=1000):
-            if chunk_count == 0:
-                path = LOAD_PATH + f'/{load_date}.csv'
-                df_chunk.to_csv(path, index=False)
-                break
-            else:
-                # TODO 只保存chunksize行，如果超过chunksize行要分片保存再合并
-                break
-            chunk_count += 1
 
     # [START main_flow]
     def start_tasks(table_name: str):
@@ -120,7 +120,10 @@ dag = csc_ops_load()
 
 # kill -9 2819187
 # airflow webserver --port 8081
+# kill -9 $(lsof -i:8081 -t) 2> /dev/null
+# P@ssw0rd
+# sudo fuser - k 8081/tcp
 # airflow scheduler
 # kill $(cat /home/lianghua/rtt/soft/airflow/airflow-webserver.pid)
-# sudo lsof - i: 8080 | grep - v "PID" | awk '{print "kill -9",$2}' | sh
+# sudo lsof -i: 8081 | grep - v "PID" | awk '{print "kill -9",$2}' | sh
 # kill $(cat /home/lianghua/rtt/soft/airflow/airflow-scheduler.pid)
