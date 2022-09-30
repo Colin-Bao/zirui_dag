@@ -32,7 +32,7 @@ def get_dagrun_conf(dag_run=None,):
     )},
     start_date=datetime(2022, 2, 1),
     schedule=None,
-    tags=['数据运维', '测试用例']
+    tags=['数据更新', '手动触发']
 )
 def csc_ops_update():
     import sys

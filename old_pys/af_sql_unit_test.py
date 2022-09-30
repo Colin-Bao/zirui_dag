@@ -6,7 +6,7 @@
 # @Note      :None
 # -----------------airflow数据库接口----------------- #
 from airflow.providers.common.sql.hooks.sql import BaseHook  # 通用数据库接口
-from zirui_dag.map_table import *
+# from zirui_dag.map_table import *
 import pandas as pd
 AF_CONN = '_af_connector'
 

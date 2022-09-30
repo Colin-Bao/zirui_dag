@@ -15,8 +15,8 @@ from datetime import datetime, timedelta, date
 @task
 def extract_sql_by_table(table_name: str, load_date: str) -> dict:
     """
-        根据表名和日期返回sql查询语句
-        :return:( connector_id, return_sql, table_name, load_date)
+    根据表名和日期返回sql查询语句
+    :return:( connector_id, return_sql, table_name, load_date)
     """
     # 查找属于何种数据源
     import json
@@ -52,6 +52,10 @@ def csc_ops_load():
     # 提取-> 从数据库按照日期提取需要的表
     @task
     def load_sql_query(data_dict: dict):
+        """
+        根据sql查询语句下载数据到本地
+        :return:
+        """
         # -----------------参数传递----------------- #
         connector_id = data_dict['connector_id']
         query_sql = data_dict['query_sql']
@@ -83,6 +87,10 @@ def csc_ops_load():
 
     # [START main_flow]
     def start_tasks(table_name: str):
+        """
+        任务流控制函数，用于被多进程调用，每张表下载都是一个并行的进程
+        :return:
+        """
         # extract_sql_by_table()
         load_date = (date.today()+timedelta(-1)).strftime('%Y%m%d')  # 下载昨天的数据
         load_sql_query.override(

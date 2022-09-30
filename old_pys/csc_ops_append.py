@@ -175,7 +175,7 @@ def csc_ops_append():
 
 
 # [START dag_invocation]
-dag = csc_ops_append()
+# dag = csc_ops_append()
 # [END dag_invocation]
 
 
