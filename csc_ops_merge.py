@@ -46,7 +46,7 @@ for csc_table, tables in get_map_tables().items():  # csc_table, tables作为传
         dag_id=csc_table.lower()+"_merge",
         start_date=datetime(2022, 2, 1),
         schedule=[Dataset('L_'+i) for i in tables],
-        tags=['数据运维', '数据合并']
+        tags=['数据合并', '动态DAG']
     )
     # 动态生成合并DAG执行合并任务
     def dynamic_generated_mergedag():

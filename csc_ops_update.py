@@ -41,16 +41,20 @@ def csc_ops_update():
 
     @task
     def get_params(params=None):
-        print('task获取params参数', params)
+        print(f"params参数{{params}}")
+        # print('task获取params参数', params)
         return params
 
     # 任务流
-    params_dict = get_params()
-    table_name = params_dict['table_name']
-    load_date = [str(date) for date in range(
-        params_dict['start_date'], params_dict['start_date'])]
-    extract_sql_by_table.override(
-        task_id='U_'+table_name, outlets=[Dataset('U_'+table_name)]).partial(table_name=table_name).expand(load_date=[1, 2, 3])
+    get_params()
+    print(f"{{params}}")
+    # params_dict = get_params()
+    # print(params_dict['table_name'])
+    # table_name = params_dict['table_name']
+    # # load_date = [str(date) for date in range(
+    # #     params_dict['start_date'], params_dict['start_date'])]
+    # extract_sql_by_table.override(
+    #     task_id='U_'+table_name, outlets=[Dataset('U_'+table_name)]).partial(table_name=table_name).expand(load_date=[1, 2, 3])
 
 
 d1 = csc_ops_update()
