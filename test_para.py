@@ -32,7 +32,7 @@ from airflow.models.param import Param
     schedule=None,
     tags=['数据更新', '参数触发']
 )
-def csc_ops_update():
+def test_para():
     @task
     def get_data_list(params=None):
         date_list = [str(i) for i in range(params['start_date'], params['end_date'])]
@@ -63,4 +63,4 @@ def csc_ops_update():
     # print(get_context())
 
 
-csc_ops_update()
+test_para()
