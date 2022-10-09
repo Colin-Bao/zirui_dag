@@ -40,7 +40,7 @@ def extract_sql_by_table(table_name: str, load_date: str) -> dict:
 
 
 @task
-def load_sql_query(data_dict: dict, load_path: str = "csc_load_path"):
+def load_sql_query(data_dict: dict, load_path: str = "csc_load_path") -> dict:
     """
         根据sql查询语句下载数据到本地
         :return:
