@@ -12,6 +12,7 @@ from airflow.models import Variable
 from datetime import datetime, timedelta, date
 
 
+# TODO load 后的类型检查
 @task
 def extract_sql_by_table(table_name: str, load_date: str) -> dict:
     """
@@ -31,14 +32,15 @@ def extract_sql_by_table(table_name: str, load_date: str) -> dict:
         suntime_sql = json.loads(Variable.get("csc_suntime_sql"))[
             table_name]['sql']  # 去数据字典文件中寻找
         return_sql = suntime_sql % (
-            'zyyx.'+table_name, f"{load_date}") if suntime_sql else None
+            'zyyx.' + table_name, f"{load_date}") if suntime_sql else None
     else:
         raise Exception
-    return {'connector_id': db + '_af_connector', 'query_sql': return_sql, 'table_name': table_name, 'load_date': load_date}
+    return {'connector_id': db + '_af_connector', 'query_sql': return_sql, 'table_name': table_name,
+            'load_date': load_date}
 
 
 @task
-def load_sql_query(data_dict: dict):
+def load_sql_query(data_dict: dict, load_path: str = "csc_load_path"):
     """
         根据sql查询语句下载数据到本地
         :return:
@@ -50,7 +52,7 @@ def load_sql_query(data_dict: dict):
     load_date = data_dict['load_date']
 
     # -----------------输出文件的路径----------------- #
-    LOAD_PATH = Variable.get("csc_load_path") + table_name
+    LOAD_PATH = Variable.get(load_path) + table_name
 
     # ----------------- 从Airflow保存的connection获取多数据源连接----------------- #
     from airflow.providers.common.sql.hooks.sql import BaseHook  # airflow通用数据库接口
@@ -60,7 +62,7 @@ def load_sql_query(data_dict: dict):
     if not os.path.exists(LOAD_PATH):
         os.mkdir(LOAD_PATH)
 
-        # 防止服务器内存占用过大
+    # 防止服务器内存占用过大
     chunk_count = 0
     for df_chunk in sql_hook.get_pandas_df_by_chunks(query_sql, chunksize=1000):
         if chunk_count == 0:
@@ -71,6 +73,8 @@ def load_sql_query(data_dict: dict):
             # TODO 只保存chunksize行，如果超过chunksize行要分片保存再合并
             break
         chunk_count += 1
+
+
 # [START DAG] 实例化一个DAG
 
 
@@ -84,7 +88,6 @@ def load_sql_query(data_dict: dict):
 )
 # 在DAG中定义任务
 def csc_ops_load():
-
     # [START main_flow]
     def start_tasks(table_name: str):
         """
@@ -92,10 +95,10 @@ def csc_ops_load():
         :return:
         """
         # extract_sql_by_table()
-        load_date = (date.today()+timedelta(-1)).strftime('%Y%m%d')  # 下载昨天的数据
+        load_date = (date.today() + timedelta(-1)).strftime('%Y%m%d')  # 下载昨天的数据
         load_sql_query.override(
-            task_id='L_'+table_name, outlets=[Dataset('L_'+table_name, extra={'load_date': load_date})])(
-                extract_sql_by_table.override(task_id='E_'+table_name,)(table_name, load_date))
+            task_id='L_' + table_name, outlets=[Dataset('L_' + table_name, extra={'load_date': load_date})])(
+            extract_sql_by_table.override(task_id='E_' + table_name, )(table_name, load_date))
 
     # 多进程异步执行
     # start_tasks('FIN_BALANCE_SHEET_GEN')
@@ -107,7 +110,7 @@ def csc_ops_load():
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=1) as executor:
         _ = {executor.submit(start_tasks, table): table for table in
-             table_list}
+             ['FIN_BALANCE_SHEET_GEN', ]}
 
     # [END main_flow]
 
