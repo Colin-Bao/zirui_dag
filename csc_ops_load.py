@@ -66,9 +66,9 @@ def load_sql_query(data_dict: dict, load_path: str = "csc_load_path") -> dict:
     chunk_count = 0
     for df_chunk in sql_hook.get_pandas_df_by_chunks(query_sql, chunksize=1000):
         if chunk_count == 0:
-            path = LOAD_PATH + f'/{load_date}.csv'
-            df_chunk.to_csv(path, index=False)
-            break
+            file_path = LOAD_PATH + f'/{load_date}.csv'
+            df_chunk.to_csv(file_path, index=False)
+            return {'file_path': file_path}
         else:
             # TODO 只保存chunksize行，如果超过chunksize行要分片保存再合并
             break
