@@ -1,0 +1,376 @@
+{
+  "code": "0",
+  "fieldData": [
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "对象ID",
+      "fieldId": 221155,
+      "fieldName": "OBJECT_ID",
+      "fieldType": "VARCHAR2(100)",
+      "isPrimarykey": "N",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "Wind代码",
+      "fieldId": 221156,
+      "fieldName": "S_INFO_WINDCODE",
+      "fieldType": "VARCHAR2(40)",
+      "isPrimarykey": "Y",
+      "tableId": 9456,
+      "tableName": "Y"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "公告日期",
+      "fieldId": 221157,
+      "fieldName": "ANN_DT",
+      "fieldType": "VARCHAR2(8)",
+      "isPrimarykey": "N",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "报告期",
+      "fieldId": 221158,
+      "fieldName": "REPORT_PERIOD",
+      "fieldType": "VARCHAR2(8)",
+      "isPrimarykey": "Y",
+      "tableId": 9456,
+      "tableName": "Y"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "营业收入(元)",
+      "fieldId": 221159,
+      "fieldName": "OPER_REV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "营业利润(元)",
+      "fieldId": 221160,
+      "fieldName": "OPER_PROFIT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "利润总额(元)",
+      "fieldId": 221161,
+      "fieldName": "TOT_PROFIT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "净利润(元)",
+      "fieldId": 221162,
+      "fieldName": "NET_PROFIT_EXCL_MIN_INT_INC",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "总资产(元)",
+      "fieldId": 221163,
+      "fieldName": "TOT_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "股东权益合计(不含少数股东权益)(元)",
+      "fieldId": 221164,
+      "fieldName": "TOT_SHRHLDR_EQY_EXCL_MIN_INT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "每股收益(摊薄)(元)",
+      "fieldId": 221165,
+      "fieldName": "EPS_DILUTED",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "净资产收益率(摊薄)(%)",
+      "fieldId": 221166,
+      "fieldName": "ROE_DILUTED",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "是否审计",
+      "fieldId": 221167,
+      "fieldName": "S_ISAUDIT",
+      "fieldType": "NUMBER(5,0)",
+      "isPrimarykey": "N",
+      "remark": "1:是 0：否",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "去年同期修正后净利润",
+      "fieldId": 221168,
+      "fieldName": "YOYNET_PROFIT_EXCL_MIN_INT_INC",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "业绩简要说明",
+      "fieldId": 221169,
+      "fieldName": "BRIEF_PERFORMANCE",
+      "fieldType": "VARCHAR2(2000)",
+      "isPrimarykey": "N",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "备注",
+      "fieldId": 221170,
+      "fieldName": "MEMO",
+      "fieldType": "VARCHAR2(400)",
+      "isPrimarykey": "N",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "每股净资产",
+      "fieldId": 221171,
+      "fieldName": "S_FA_BPS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "元",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "同比增长率:营业收入",
+      "fieldId": 221172,
+      "fieldName": "S_FA_YOYSALES",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "%",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "同比增长率:营业利润",
+      "fieldId": 221173,
+      "fieldName": "S_FA_YOYOP",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "%",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "同比增长率:利润总额",
+      "fieldId": 221174,
+      "fieldName": "S_FA_YOYEBT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "%",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "同比增长率:归属母公司股东的净利润",
+      "fieldId": 221175,
+      "fieldName": "S_FA_YOYNETPROFIT_DEDUCTED",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "%",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "同比增长率:基本每股收益",
+      "fieldId": 221176,
+      "fieldName": "S_FA_YOYEPS_BASIC",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "%",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "同比增减:加权平均净资产收益率",
+      "fieldId": 221177,
+      "fieldName": "S_FA_ROE_YEARLY",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "%",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "比年初增长率:总资产",
+      "fieldId": 221178,
+      "fieldName": "S_FA_GROWTH_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "%",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "比年初增长率:归属母公司的股东权益",
+      "fieldId": 221179,
+      "fieldName": "S_FA_YOYEQUITY",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "%",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "比年初增长率:归属于母公司股东的每股净资产",
+      "fieldId": 221180,
+      "fieldName": "GROWTH_BPS_SH",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "%",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "去年同期营业收入",
+      "fieldId": 221181,
+      "fieldName": "LAST_YEAR_OPER_REV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "元",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "去年同期营业利润",
+      "fieldId": 221182,
+      "fieldName": "LAST_YEAR_OPER_PROFIT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "元",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "去年同期利润总额",
+      "fieldId": 221183,
+      "fieldName": "LAST_YEAR_TOT_PROFIT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "元",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "去年同期净利润",
+      "fieldId": 221184,
+      "fieldName": "LAST_YEAR_NET_PROFIT_EXCL_INC",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "元",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "去年同期每股收益",
+      "fieldId": 221185,
+      "fieldName": "LAST_YEAR_EPS_DILUTED",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "元",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "期初净资产",
+      "fieldId": 221186,
+      "fieldName": "S_EARLY_NET_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "元",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "期初每股净资产",
+      "fieldId": 221187,
+      "fieldName": "S_EARLY_BPS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "元",
+      "tableId": 9456,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "[内部]实际公告日期",
+      "fieldId": 221188,
+      "fieldName": "ACTUAL_ANN_DT",
+      "fieldType": "VARCHAR2(8)",
+      "isPrimarykey": "N",
+      "tableId": 9456,
+      "tableName": "N"
+    }
+  ],
+  "tableInfo": {
+    "content": "{\"TopicList\":[]}",
+    "databaseChsName": "万得",
+    "isComplete": "N",
+    "originalTableId": "9456",
+    "remark": "记录A股公司业绩快报中披露的相关财务数据",
+    "tableChsName": "中国A股业绩快报",
+    "tableId": 9456,
+    "tableName": "ASHAREPROFITEXPRESS",
+    "updateRate": "day",
+    "updateTime": "00:00;02:00;07:00;09:00;16:00;17:00;18:00;19:00;20:00;21:00;22:00;23:00"
+  },
+  "contentMap": {}
+}

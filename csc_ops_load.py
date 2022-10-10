@@ -8,11 +8,13 @@ from __future__ import annotations
 import os
 import pendulum
 from airflow.decorators import dag, task
-from airflow import DAG, Dataset
+from airflow import DAG
 from airflow.models import Variable
+from airflow.datasets import Dataset
 from datetime import datetime, timedelta, date
 
 
+# TODO load 后的类型检查
 @task
 def extract_sql_by_table(table_name: str, load_date: str) -> dict:
     """
@@ -32,18 +34,19 @@ def extract_sql_by_table(table_name: str, load_date: str) -> dict:
         suntime_sql = json.loads(Variable.get("csc_suntime_sql"))[
             table_name]['sql']  # 去数据字典文件中寻找
         return_sql = suntime_sql % (
-            'zyyx.'+table_name, f"{load_date}") if suntime_sql else None
+            'zyyx.' + table_name, f"{load_date}") if suntime_sql else None
     else:
         raise Exception
-    return {'connector_id': db + '_af_connector', 'query_sql': return_sql, 'table_name': table_name, 'load_date': load_date}
+    return {'connector_id': db + '_af_connector', 'query_sql': return_sql, 'table_name': table_name,
+            'load_date': load_date}
 
 
 @task
-def load_sql_query(data_dict: dict):
+def load_sql_query(data_dict: dict, load_path: str = "csc_load_path") -> dict:
     """
-        根据sql查询语句下载数据到本地
-        :return:
-        """
+     根据sql查询语句下载数据到本地
+    :return:
+    """
     # -----------------参数传递----------------- #
     connector_id = data_dict['connector_id']
     query_sql = data_dict['query_sql']
@@ -51,7 +54,7 @@ def load_sql_query(data_dict: dict):
     load_date = data_dict['load_date']
 
     # -----------------输出文件的路径----------------- #
-    LOAD_PATH = Variable.get("csc_load_path") + table_name
+    LOAD_PATH = Variable.get(load_path) + table_name
 
     # ----------------- 从Airflow保存的connection获取多数据源连接----------------- #
     from airflow.providers.common.sql.hooks.sql import BaseHook  # airflow通用数据库接口
@@ -61,17 +64,33 @@ def load_sql_query(data_dict: dict):
     if not os.path.exists(LOAD_PATH):
         os.mkdir(LOAD_PATH)
 
-        # 防止服务器内存占用过大
+    # 防止服务器内存占用过大
     chunk_count = 0
     for df_chunk in sql_hook.get_pandas_df_by_chunks(query_sql, chunksize=1000):
         if chunk_count == 0:
-            path = LOAD_PATH + f'/{load_date}.csv'
-            df_chunk.to_csv(path, index=False)
-            break
+            file_path = LOAD_PATH + f'/{load_date}.csv'
+            df_chunk.to_csv(file_path, index=False)
+            return {'file_path': file_path}
         else:
             # TODO 只保存chunksize行，如果超过chunksize行要分片保存再合并
             break
         chunk_count += 1
+
+
+@task
+def check_load(data_dict: dict) -> dict:
+    """
+    检查保存后的文件
+    :param data_dict:
+    :return:
+    """
+    file_path = data_dict['file_path']
+    import pandas as pd
+    check_df = pd.read_csv(file_path)
+
+    return data_dict
+
+
 # [START DAG] 实例化一个DAG
 
 
@@ -85,7 +104,6 @@ def load_sql_query(data_dict: dict):
 )
 # 在DAG中定义任务
 def csc_ops_load():
-
     # [START main_flow]
     def start_tasks(table_name: str):
         """
@@ -93,10 +111,11 @@ def csc_ops_load():
         :return:
         """
         # extract_sql_by_table()
-        load_date = (date.today()+timedelta(-1)).strftime('%Y%m%d')  # 下载昨天的数据
+        load_date = (date.today() + timedelta(-1)).strftime('%Y%m%d')  # 下载昨天的数据
         load_sql_query.override(
-            task_id='L_'+table_name, outlets=[Dataset('L_'+table_name, extra={'load_date': load_date})])(
-                extract_sql_by_table.override(task_id='E_'+table_name,)(table_name, load_date))
+            task_id='L_' + table_name, outlets=[Dataset('L_' + table_name, extra={'load_date': load_date})])(
+            extract_sql_by_table.override(task_id='E_' + table_name, )(table_name, load_date))
+        # check_load(load_return)
 
     # 多进程异步执行
     # start_tasks('FIN_BALANCE_SHEET_GEN')
@@ -107,8 +126,7 @@ def csc_ops_load():
         'ASHAREDIVIDEND', 'ASHAREEXRIGHTDIVIDENDRECORD', 'BAS_STK_HISDISTRIBUTION']
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=1) as executor:
-        _ = {executor.submit(start_tasks, table): table for table in
-             table_list}
+        _ = {executor.submit(start_tasks, table): table for table in table_list}
 
     # [END main_flow]
 

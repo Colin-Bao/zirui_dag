@@ -1,0 +1,471 @@
+{
+  "code": "0",
+  "fieldData": [
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "流水号",
+      "fieldId": 669548,
+      "fieldName": "id",
+      "fieldType": "int",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "公司代码",
+      "fieldId": 669549,
+      "fieldName": "company_code",
+      "fieldType": "varchar",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "股票代码",
+      "fieldId": 669550,
+      "fieldName": "stock_code",
+      "fieldType": "varchar",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "股票简称",
+      "fieldId": 669551,
+      "fieldName": "stock_name",
+      "fieldType": "varchar",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "1",
+      "fieldChsName": "报表类型",
+      "fieldId": 669552,
+      "fieldName": "report_type",
+      "fieldType": "int",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "报表年度",
+      "fieldId": 669553,
+      "fieldName": "report_year",
+      "fieldType": "int",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "1",
+      "fieldChsName": "报表期类型",
+      "fieldId": 669554,
+      "fieldName": "report_quarter",
+      "fieldType": "int",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "报表发布日期",
+      "fieldId": 669555,
+      "fieldName": "declare_date",
+      "fieldType": "datetime",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "经营活动产生的现金流量净额",
+      "fieldId": 669556,
+      "fieldName": "ncf_oa",
+      "fieldType": "numeric",
+      "remark": "net cash flows from operating activities",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "经营活动现金流入小计",
+      "fieldId": 669557,
+      "fieldName": "ncf_oa1",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "销售商品、提供劳务收到的现金",
+      "fieldId": 669558,
+      "fieldName": "ncf_oa11",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "收到其他与经营活动有关的现金",
+      "fieldId": 669559,
+      "fieldName": "ncf_oa12",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "收到的税费退还",
+      "fieldId": 669560,
+      "fieldName": "ncf_oa13",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "经营活动现金流出小计",
+      "fieldId": 669561,
+      "fieldName": "ncf_oa2",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "购买商品、接受劳务支付的现金",
+      "fieldId": 669562,
+      "fieldName": "ncf_oa21",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "支付给职工以及为职工支付的现金",
+      "fieldId": 669563,
+      "fieldName": "ncf_oa22",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "支付的各项税费",
+      "fieldId": 669564,
+      "fieldName": "ncf_oa23",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "支付其他与经营活动有关的现金",
+      "fieldId": 669565,
+      "fieldName": "ncf_oa24",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "投资活动产生的现金流量净额",
+      "fieldId": 669566,
+      "fieldName": "ncf_ia",
+      "fieldType": "numeric",
+      "remark": "net cash flows from investing activities",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "投资活动现金流入小计",
+      "fieldId": 669567,
+      "fieldName": "ncf_ia1",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "收回投资的资金",
+      "fieldId": 669568,
+      "fieldName": "ncf_ia11",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "取得投资收益收到的现金",
+      "fieldId": 669569,
+      "fieldName": "ncf_ia12",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "处置固定资产、无形资产和其他长期资产收回的现金净额",
+      "fieldId": 669570,
+      "fieldName": "ncf_ia13",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "处置子公司及其他营业单位收到的现金净额",
+      "fieldId": 669571,
+      "fieldName": "ncf_ia14",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "收到其他与投资活动有关的现金",
+      "fieldId": 669572,
+      "fieldName": "ncf_ia15",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "投资活动现金流出小计",
+      "fieldId": 669573,
+      "fieldName": "ncf_ia2",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "购买固定资产、无形资产和其他长期资产支付的现金",
+      "fieldId": 669574,
+      "fieldName": "ncf_ia21",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "投资支付的现金",
+      "fieldId": 669575,
+      "fieldName": "ncf_ia22",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "质押贷款净增加额",
+      "fieldId": 669576,
+      "fieldName": "ncf_ia23",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "取得子公司及其他营业单位支付的现金净额",
+      "fieldId": 669577,
+      "fieldName": "ncf_ia24",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "支付其他与投资活动有关的现金",
+      "fieldId": 669578,
+      "fieldName": "ncf_ia25",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "筹资活动产生的现金流量净额",
+      "fieldId": 669579,
+      "fieldName": "ncf_fa",
+      "fieldType": "numeric",
+      "remark": "net cash flows from financing activities",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "筹资活动现金流入小计",
+      "fieldId": 669580,
+      "fieldName": "ncf_fa1",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "吸收投资收到的资金",
+      "fieldId": 669581,
+      "fieldName": "ncf_fa11",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "其中：子公司吸收少数股东投资收到的现金",
+      "fieldId": 669582,
+      "fieldName": "ncf_fa12",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "取得借款收到的现金",
+      "fieldId": 669583,
+      "fieldName": "ncf_fa13",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "发行债券收到的现金",
+      "fieldId": 669584,
+      "fieldName": "ncf_fa14",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "收到其他与筹资活动相关的资金",
+      "fieldId": 669585,
+      "fieldName": "ncf_fa15",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "筹资活动现金流出小计",
+      "fieldId": 669586,
+      "fieldName": "ncf_fa2",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "偿还债务支付的现金",
+      "fieldId": 669587,
+      "fieldName": "ncf_fa21",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "分红、利润分配和利息支付的现金",
+      "fieldId": 669588,
+      "fieldName": "ncf_fa22",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "其中：子公司支付给少数股东的股利、利润",
+      "fieldId": 669589,
+      "fieldName": "ncf_fa23",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "支付其他与筹资活动有关的现金",
+      "fieldId": 669590,
+      "fieldName": "ncf_fa24",
+      "fieldType": "numeric",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "汇率变动对现金及现金等价物的影响",
+      "fieldId": 669591,
+      "fieldName": "gain_exch",
+      "fieldType": "numeric",
+      "remark": "effect of foreign exchange rate changes on cash and cash equivalents",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "现金及现金等价物净增额",
+      "fieldId": 669592,
+      "fieldName": "ncf",
+      "fieldType": "numeric",
+      "remark": "net increase in cash and cash equivalents",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "加：期初现金及现金等价物余额",
+      "fieldId": 669593,
+      "fieldName": "begin_cf",
+      "fieldType": "numeric",
+      "remark": "plus: cash and cash equivalents at the beginning of the period",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "期末现金及现金等价物余额",
+      "fieldId": 669594,
+      "fieldName": "end_cf",
+      "fieldType": "numeric",
+      "remark": "cash and cash equivalents at the end of the period",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "入库时间",
+      "fieldId": 669595,
+      "fieldName": "entrytime",
+      "fieldType": "varchar",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "最后更新时间",
+      "fieldId": 669596,
+      "fieldName": "updatetime",
+      "fieldType": "varchar",
+      "tableId": 112049064
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "下载标识",
+      "fieldId": 669597,
+      "fieldName": "tmstamp",
+      "fieldType": "bigint",
+      "tableId": 112049064
+    }
+  ],
+  "tableInfo": {
+    "databaseChsName": "朝阳永续",
+    "originalTableId": "62033",
+    "remark": "此表主要包含所有上市公司的合并现金流量报表数据。涉及金额的数据，单位均为人民币元。",
+    "tableChsName": "现金流量表（通用）",
+    "tableId": 112049064,
+    "tableName": "FIN_CASH_FLOW_GEN"
+  },
+  "contentMap": {}
+}

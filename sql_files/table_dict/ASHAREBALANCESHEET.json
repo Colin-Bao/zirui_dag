@@ -1,0 +1,1828 @@
+{
+  "code": "0",
+  "fieldData": [
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "对象ID",
+      "fieldId": 221875,
+      "fieldName": "OBJECT_ID",
+      "fieldType": "VARCHAR2(100)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "Wind代码",
+      "fieldId": 221876,
+      "fieldName": "S_INFO_WINDCODE",
+      "fieldType": "VARCHAR2(40)",
+      "isPrimarykey": "Y",
+      "tableId": 9466,
+      "tableName": "Y"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "Wind代码",
+      "fieldId": 221877,
+      "fieldName": "WIND_CODE",
+      "fieldType": "VARCHAR2(40)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "公告日期",
+      "fieldId": 221878,
+      "fieldName": "ANN_DT",
+      "fieldType": "VARCHAR2(8)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "报告期",
+      "fieldId": 221879,
+      "fieldName": "REPORT_PERIOD",
+      "fieldType": "VARCHAR2(8)",
+      "isPrimarykey": "Y",
+      "tableId": 9466,
+      "tableName": "Y"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "报表类型",
+      "fieldId": 221880,
+      "fieldName": "STATEMENT_TYPE",
+      "fieldType": "VARCHAR2(10)",
+      "isPrimarykey": "Y",
+      "remark": "报表类型:\n408001000:\n合并报表\n408004000:\n合并报表(调整)\n408005000:\n合并报表(更正前)\n408050000:\n合并调整(更正前)\n408006000:\n母公司报表\n408009000:\n母公司报表(调整)\n408010000:\n母公司报表(更正前)\n408060000:母公司调整(更正前)",
+      "tableId": 9466,
+      "tableName": "Y"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "货币代码",
+      "fieldId": 221881,
+      "fieldName": "CRNCY_CODE",
+      "fieldType": "VARCHAR2(10)",
+      "isPrimarykey": "N",
+      "remark": "CNY",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "货币资金",
+      "fieldId": 221882,
+      "fieldName": "MONETARY_CAP",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "交易性金融资产",
+      "fieldId": 221883,
+      "fieldName": "TRADABLE_FIN_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应收票据",
+      "fieldId": 221884,
+      "fieldName": "NOTES_RCV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应收账款",
+      "fieldId": 221885,
+      "fieldName": "ACCT_RCV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "其他应收款",
+      "fieldId": 221886,
+      "fieldName": "OTH_RCV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "预付款项",
+      "fieldId": 221887,
+      "fieldName": "PREPAY",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应收股利",
+      "fieldId": 221888,
+      "fieldName": "DVD_RCV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应收利息",
+      "fieldId": 221889,
+      "fieldName": "INT_RCV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "存货",
+      "fieldId": 221890,
+      "fieldName": "INVENTORIES",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "消耗性生物资产",
+      "fieldId": 221891,
+      "fieldName": "CONSUMPTIVE_BIO_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "待摊费用",
+      "fieldId": 221892,
+      "fieldName": "DEFERRED_EXP",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "一年内到期的非流动资产",
+      "fieldId": 221893,
+      "fieldName": "NON_CUR_ASSETS_DUE_WITHIN_1Y",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "结算备付金",
+      "fieldId": 221894,
+      "fieldName": "SETTLE_RSRV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "拆出资金",
+      "fieldId": 221895,
+      "fieldName": "LOANS_TO_OTH_BANKS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应收保费",
+      "fieldId": 221896,
+      "fieldName": "PREM_RCV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应收分保账款",
+      "fieldId": 221897,
+      "fieldName": "RCV_FROM_REINSURER",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应收分保合同准备金",
+      "fieldId": 221898,
+      "fieldName": "RCV_FROM_CEDED_INSUR_CONT_RSRV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "买入返售金融资产",
+      "fieldId": 221899,
+      "fieldName": "RED_MONETARY_CAP_FOR_SALE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "其他流动资产",
+      "fieldId": 221900,
+      "fieldName": "OTH_CUR_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "流动资产合计",
+      "fieldId": 221901,
+      "fieldName": "TOT_CUR_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "可供出售金融资产",
+      "fieldId": 221902,
+      "fieldName": "FIN_ASSETS_AVAIL_FOR_SALE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "持有至到期投资",
+      "fieldId": 221903,
+      "fieldName": "HELD_TO_MTY_INVEST",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "长期股权投资",
+      "fieldId": 221904,
+      "fieldName": "LONG_TERM_EQY_INVEST",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "投资性房地产",
+      "fieldId": 221905,
+      "fieldName": "INVEST_REAL_ESTATE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "定期存款",
+      "fieldId": 221906,
+      "fieldName": "TIME_DEPOSITS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "其他资产",
+      "fieldId": 221907,
+      "fieldName": "OTH_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "长期应收款",
+      "fieldId": 221908,
+      "fieldName": "LONG_TERM_REC",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "固定资产",
+      "fieldId": 221909,
+      "fieldName": "FIX_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "在建工程",
+      "fieldId": 221910,
+      "fieldName": "CONST_IN_PROG",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "工程物资",
+      "fieldId": 221911,
+      "fieldName": "PROJ_MATL",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "固定资产清理",
+      "fieldId": 221912,
+      "fieldName": "FIX_ASSETS_DISP",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "生产性生物资产",
+      "fieldId": 221913,
+      "fieldName": "PRODUCTIVE_BIO_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "油气资产",
+      "fieldId": 221914,
+      "fieldName": "OIL_AND_NATURAL_GAS_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "无形资产",
+      "fieldId": 221915,
+      "fieldName": "INTANG_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "开发支出",
+      "fieldId": 221916,
+      "fieldName": "R_AND_D_COSTS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "商誉",
+      "fieldId": 221917,
+      "fieldName": "GOODWILL",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "长期待摊费用",
+      "fieldId": 221918,
+      "fieldName": "LONG_TERM_DEFERRED_EXP",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "递延所得税资产",
+      "fieldId": 221919,
+      "fieldName": "DEFERRED_TAX_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "发放贷款及垫款",
+      "fieldId": 221920,
+      "fieldName": "LOANS_AND_ADV_GRANTED",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "其他非流动资产",
+      "fieldId": 221921,
+      "fieldName": "OTH_NON_CUR_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "非流动资产合计",
+      "fieldId": 221922,
+      "fieldName": "TOT_NON_CUR_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "现金及存放中央银行款项",
+      "fieldId": 221923,
+      "fieldName": "CASH_DEPOSITS_CENTRAL_BANK",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "存放同业和其它金融机构款项",
+      "fieldId": 221924,
+      "fieldName": "ASSET_DEP_OTH_BANKS_FIN_INST",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "贵金属",
+      "fieldId": 221925,
+      "fieldName": "PRECIOUS_METALS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "衍生金融资产",
+      "fieldId": 221926,
+      "fieldName": "DERIVATIVE_FIN_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "代理业务资产",
+      "fieldId": 221927,
+      "fieldName": "AGENCY_BUS_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应收代位追偿款",
+      "fieldId": 221928,
+      "fieldName": "SUBR_REC",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应收分保未到期责任准备金",
+      "fieldId": 221929,
+      "fieldName": "RCV_CEDED_UNEARNED_PREM_RSRV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应收分保未决赔款准备金",
+      "fieldId": 221930,
+      "fieldName": "RCV_CEDED_CLAIM_RSRV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应收分保寿险责任准备金",
+      "fieldId": 221931,
+      "fieldName": "RCV_CEDED_LIFE_INSUR_RSRV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应收分保长期健康险责任准备金",
+      "fieldId": 221932,
+      "fieldName": "RCV_CEDED_LT_HEALTH_INSUR_RSRV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "存出保证金",
+      "fieldId": 221933,
+      "fieldName": "MRGN_PAID",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "保户质押贷款",
+      "fieldId": 221934,
+      "fieldName": "INSURED_PLEDGE_LOAN",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "存出资本保证金",
+      "fieldId": 221935,
+      "fieldName": "CAP_MRGN_PAID",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "独立账户资产",
+      "fieldId": 221936,
+      "fieldName": "INDEPENDENT_ACCT_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "客户资金存款",
+      "fieldId": 221937,
+      "fieldName": "CLIENTS_CAP_DEPOSIT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "客户备付金",
+      "fieldId": 221938,
+      "fieldName": "CLIENTS_RSRV_SETTLE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "其中:交易席位费",
+      "fieldId": 221939,
+      "fieldName": "INCL_SEAT_FEES_EXCHANGE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应收款项类投资",
+      "fieldId": 221940,
+      "fieldName": "RCV_INVEST",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "资产总计",
+      "fieldId": 221941,
+      "fieldName": "TOT_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "短期借款",
+      "fieldId": 221942,
+      "fieldName": "ST_BORROW",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "向中央银行借款",
+      "fieldId": 221943,
+      "fieldName": "BORROW_CENTRAL_BANK",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "吸收存款及同业存放",
+      "fieldId": 221944,
+      "fieldName": "DEPOSIT_RECEIVED_IB_DEPOSITS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "拆入资金",
+      "fieldId": 221945,
+      "fieldName": "LOANS_OTH_BANKS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "交易性金融负债",
+      "fieldId": 221946,
+      "fieldName": "TRADABLE_FIN_LIAB",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应付票据",
+      "fieldId": 221947,
+      "fieldName": "NOTES_PAYABLE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应付账款",
+      "fieldId": 221948,
+      "fieldName": "ACCT_PAYABLE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "预收款项",
+      "fieldId": 221949,
+      "fieldName": "ADV_FROM_CUST",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "卖出回购金融资产款",
+      "fieldId": 221950,
+      "fieldName": "FUND_SALES_FIN_ASSETS_RP",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应付手续费及佣金",
+      "fieldId": 221951,
+      "fieldName": "HANDLING_CHARGES_COMM_PAYABLE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应付职工薪酬",
+      "fieldId": 221952,
+      "fieldName": "EMPL_BEN_PAYABLE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应交税费",
+      "fieldId": 221953,
+      "fieldName": "TAXES_SURCHARGES_PAYABLE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应付利息",
+      "fieldId": 221954,
+      "fieldName": "INT_PAYABLE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应付股利",
+      "fieldId": 221955,
+      "fieldName": "DVD_PAYABLE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "其他应付款",
+      "fieldId": 221956,
+      "fieldName": "OTH_PAYABLE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "预提费用",
+      "fieldId": 221957,
+      "fieldName": "ACC_EXP",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "递延收益",
+      "fieldId": 221958,
+      "fieldName": "DEFERRED_INC",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应付短期债券",
+      "fieldId": 221959,
+      "fieldName": "ST_BONDS_PAYABLE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应付分保账款",
+      "fieldId": 221960,
+      "fieldName": "PAYABLE_TO_REINSURER",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "保险合同准备金",
+      "fieldId": 221961,
+      "fieldName": "RSRV_INSUR_CONT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "代理买卖证券款",
+      "fieldId": 221962,
+      "fieldName": "ACTING_TRADING_SEC",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "代理承销证券款",
+      "fieldId": 221963,
+      "fieldName": "ACTING_UW_SEC",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "一年内到期的非流动负债",
+      "fieldId": 221964,
+      "fieldName": "NON_CUR_LIAB_DUE_WITHIN_1Y",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "其他流动负债",
+      "fieldId": 221965,
+      "fieldName": "OTH_CUR_LIAB",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "流动负债合计",
+      "fieldId": 221966,
+      "fieldName": "TOT_CUR_LIAB",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "长期借款",
+      "fieldId": 221967,
+      "fieldName": "LT_BORROW",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应付债券",
+      "fieldId": 221968,
+      "fieldName": "BONDS_PAYABLE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "长期应付款",
+      "fieldId": 221969,
+      "fieldName": "LT_PAYABLE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "专项应付款",
+      "fieldId": 221970,
+      "fieldName": "SPECIFIC_ITEM_PAYABLE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "预计负债",
+      "fieldId": 221971,
+      "fieldName": "PROVISIONS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "递延所得税负债",
+      "fieldId": 221972,
+      "fieldName": "DEFERRED_TAX_LIAB",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "递延收益-非流动负债",
+      "fieldId": 221973,
+      "fieldName": "DEFERRED_INC_NON_CUR_LIAB",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "其他非流动负债",
+      "fieldId": 221974,
+      "fieldName": "OTH_NON_CUR_LIAB",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "非流动负债合计",
+      "fieldId": 221975,
+      "fieldName": "TOT_NON_CUR_LIAB",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "同业和其它金融机构存放款项",
+      "fieldId": 221976,
+      "fieldName": "LIAB_DEP_OTH_BANKS_FIN_INST",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "衍生金融负债",
+      "fieldId": 221977,
+      "fieldName": "DERIVATIVE_FIN_LIAB",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "吸收存款",
+      "fieldId": 221978,
+      "fieldName": "CUST_BANK_DEP",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "代理业务负债",
+      "fieldId": 221979,
+      "fieldName": "AGENCY_BUS_LIAB",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "其他负债",
+      "fieldId": 221980,
+      "fieldName": "OTH_LIAB",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "预收保费",
+      "fieldId": 221981,
+      "fieldName": "PREM_RECEIVED_ADV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "存入保证金",
+      "fieldId": 221982,
+      "fieldName": "DEPOSIT_RECEIVED",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "保户储金及投资款",
+      "fieldId": 221983,
+      "fieldName": "INSURED_DEPOSIT_INVEST",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "未到期责任准备金",
+      "fieldId": 221984,
+      "fieldName": "UNEARNED_PREM_RSRV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "未决赔款准备金",
+      "fieldId": 221985,
+      "fieldName": "OUT_LOSS_RSRV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "寿险责任准备金",
+      "fieldId": 221986,
+      "fieldName": "LIFE_INSUR_RSRV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "长期健康险责任准备金",
+      "fieldId": 221987,
+      "fieldName": "LT_HEALTH_INSUR_V",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "独立账户负债",
+      "fieldId": 221988,
+      "fieldName": "INDEPENDENT_ACCT_LIAB",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "其中:质押借款",
+      "fieldId": 221989,
+      "fieldName": "INCL_PLEDGE_LOAN",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应付赔付款",
+      "fieldId": 221990,
+      "fieldName": "CLAIMS_PAYABLE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应付保单红利",
+      "fieldId": 221991,
+      "fieldName": "DVD_PAYABLE_INSURED",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "负债合计",
+      "fieldId": 221992,
+      "fieldName": "TOT_LIAB",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "股本",
+      "fieldId": 221993,
+      "fieldName": "CAP_STK",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "元，公布值，一般为金额",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "资本公积金",
+      "fieldId": 221994,
+      "fieldName": "CAP_RSRV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "专项储备",
+      "fieldId": 221995,
+      "fieldName": "SPECIAL_RSRV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "盈余公积金",
+      "fieldId": 221996,
+      "fieldName": "SURPLUS_RSRV",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "未分配利润",
+      "fieldId": 221997,
+      "fieldName": "UNDISTRIBUTED_PROFIT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "减:库存股",
+      "fieldId": 221998,
+      "fieldName": "LESS_TSY_STK",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "一般风险准备",
+      "fieldId": 221999,
+      "fieldName": "PROV_NOM_RISKS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "外币报表折算差额",
+      "fieldId": 222000,
+      "fieldName": "CNVD_DIFF_FOREIGN_CURR_STAT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "未确认的投资损失",
+      "fieldId": 222001,
+      "fieldName": "UNCONFIRMED_INVEST_LOSS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "少数股东权益",
+      "fieldId": 222002,
+      "fieldName": "MINORITY_INT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "股东权益合计(不含少数股东权益)",
+      "fieldId": 222003,
+      "fieldName": "TOT_SHRHLDR_EQY_EXCL_MIN_INT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "股东权益合计(含少数股东权益)",
+      "fieldId": 222004,
+      "fieldName": "TOT_SHRHLDR_EQY_INCL_MIN_INT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "负债及股东权益总计",
+      "fieldId": 222005,
+      "fieldName": "TOT_LIAB_SHRHLDR_EQY",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "公司类型代码",
+      "fieldId": 222006,
+      "fieldName": "COMP_TYPE_CODE",
+      "fieldType": "VARCHAR2(2)",
+      "isPrimarykey": "N",
+      "remark": "1非金融类\n2银行\n3保险\n4证券",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "实际公告日期",
+      "fieldId": 222007,
+      "fieldName": "ACTUAL_ANN_DT",
+      "fieldType": "VARCHAR2(8)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "流动资产差额(特殊报表科目)",
+      "fieldId": 222008,
+      "fieldName": "SPE_CUR_ASSETS_DIFF",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "流动资产差额(合计平衡项目)",
+      "fieldId": 222009,
+      "fieldName": "TOT_CUR_ASSETS_DIFF",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "非流动资产差额(特殊报表科目)",
+      "fieldId": 222010,
+      "fieldName": "SPE_NON_CUR_ASSETS_DIFF",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "非流动资产差额(合计平衡项目)",
+      "fieldId": 222011,
+      "fieldName": "TOT_NON_CUR_ASSETS_DIFF",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "资产差额(特殊报表科目)",
+      "fieldId": 222012,
+      "fieldName": "SPE_BAL_ASSETS_DIFF",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "资产差额(合计平衡项目)",
+      "fieldId": 222013,
+      "fieldName": "TOT_BAL_ASSETS_DIFF",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "流动负债差额(特殊报表科目)",
+      "fieldId": 222014,
+      "fieldName": "SPE_CUR_LIAB_DIFF",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "流动负债差额(合计平衡项目)",
+      "fieldId": 222015,
+      "fieldName": "TOT_CUR_LIAB_DIFF",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "非流动负债差额(特殊报表科目)",
+      "fieldId": 222016,
+      "fieldName": "SPE_NON_CUR_LIAB_DIFF",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "非流动负债差额(合计平衡项目)",
+      "fieldId": 222017,
+      "fieldName": "TOT_NON_CUR_LIAB_DIFF",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "负债差额(特殊报表科目)",
+      "fieldId": 222018,
+      "fieldName": "SPE_BAL_LIAB_DIFF",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "负债差额(合计平衡项目)",
+      "fieldId": 222019,
+      "fieldName": "TOT_BAL_LIAB_DIFF",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "股东权益差额(特殊报表科目)",
+      "fieldId": 222020,
+      "fieldName": "SPE_BAL_SHRHLDR_EQY_DIFF",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "股东权益差额(合计平衡项目)",
+      "fieldId": 222021,
+      "fieldName": "TOT_BAL_SHRHLDR_EQY_DIFF",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "负债及股东权益差额(特殊报表项目)",
+      "fieldId": 222022,
+      "fieldName": "SPE_BAL_LIAB_EQY_DIFF",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "负债及股东权益差额(合计平衡项目)",
+      "fieldId": 222023,
+      "fieldName": "TOT_BAL_LIAB_EQY_DIFF",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "长期应付职工薪酬",
+      "fieldId": 222024,
+      "fieldName": "LT_PAYROLL_PAYABLE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "其他综合收益",
+      "fieldId": 222025,
+      "fieldName": "OTHER_COMP_INCOME",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "其他权益工具",
+      "fieldId": 222026,
+      "fieldName": "OTHER_EQUITY_TOOLS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "其他权益工具:优先股",
+      "fieldId": 222027,
+      "fieldName": "OTHER_EQUITY_TOOLS_P_SHR",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "融出资金",
+      "fieldId": 222028,
+      "fieldName": "LENDING_FUNDS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应收款项",
+      "fieldId": 222029,
+      "fieldName": "ACCOUNTS_RECEIVABLE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应付短期融资款",
+      "fieldId": 222030,
+      "fieldName": "ST_FINANCING_PAYABLE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应付款项",
+      "fieldId": 222031,
+      "fieldName": "PAYABLES",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "公司ID",
+      "fieldId": 222032,
+      "fieldName": "S_INFO_COMPCODE",
+      "fieldType": "VARCHAR2(10)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "期末总股本",
+      "fieldId": 222033,
+      "fieldName": "TOT_SHR",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "单位：股",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "持有待售的资产",
+      "fieldId": 222034,
+      "fieldName": "HFS_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "持有待售的负债",
+      "fieldId": 222035,
+      "fieldName": "HFS_SALES",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "以摊余成本计量的金融资产",
+      "fieldId": 222036,
+      "fieldName": "FIN_ASSETS_COST_SHARING",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "以公允价值计量且其变动计入其他综合收益的金融资产",
+      "fieldId": 222037,
+      "fieldName": "FIN_ASSETS_FAIR_VALUE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "合同资产",
+      "fieldId": 222038,
+      "fieldName": "CONTRACTUAL_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "元",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "合同负债",
+      "fieldId": 222039,
+      "fieldName": "CONTRACT_LIABILITIES",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "元",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应收票据及应收账款",
+      "fieldId": 222040,
+      "fieldName": "ACCOUNTS_RECEIVABLE_BILL",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应付票据及应付账款",
+      "fieldId": 222041,
+      "fieldName": "ACCOUNTS_PAYABLE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "其他应收款(合计)（元）",
+      "fieldId": 222042,
+      "fieldName": "OTH_RCV_TOT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "固定资产(合计)(元)",
+      "fieldId": 222043,
+      "fieldName": "STM_BS_TOT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "在建工程(合计)(元)",
+      "fieldId": 222044,
+      "fieldName": "CONST_IN_PROG_TOT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "其他应付款(合计)(元)",
+      "fieldId": 222045,
+      "fieldName": "OTH_PAYABLE_TOT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "长期应付款(合计)(元)",
+      "fieldId": 222046,
+      "fieldName": "LT_PAYABLE_TOT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "债权投资(元)",
+      "fieldId": 222047,
+      "fieldName": "DEBT_INVESTMENT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "其他债权投资(元)",
+      "fieldId": 222048,
+      "fieldName": "OTHER_DEBT_INVESTMENT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "其他权益工具投资(元)",
+      "fieldId": 222049,
+      "fieldName": "OTHER_EQUITY_INVESTMENT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "其他非流动金融资产(元)",
+      "fieldId": 222050,
+      "fieldName": "OTHER_ILLIQUIDFINANCIAL_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "其他权益工具:永续债(元)",
+      "fieldId": 222051,
+      "fieldName": "OTHER_SUSTAINABLE_BOND",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "应收款项融资",
+      "fieldId": 222052,
+      "fieldName": "RECEIVABLES_FINANCING",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "使用权资产",
+      "fieldId": 222053,
+      "fieldName": "RIGHT_USE_ASSETS",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "租赁负债",
+      "fieldId": 222054,
+      "fieldName": "LEASE_LIAB",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9466,
+      "tableName": "N"
+    }
+  ],
+  "tableInfo": {
+    "content": "{\"TopicList\":[{\"Content\": \"<p><font face=\"宋体\"></font><font face=\"宋体\">ANN_DT&nbsp;&nbsp; 公告日期 ：指定期报告公布的日期<br>ACTUAL_ANN_DT&nbsp;&nbsp; 实际公告日期：指出了更正公告的日期 </font></p><p><font face=\"宋体\">ANN_DT&gt;ACTUAL_ANN_DT原因：<font color=\"#1f497d\">【案例：601169.SH 20070630】</font></font></p><font face=\"宋体\"><p style=\"margin: 0cm 0cm 0pt;\" class=\"MsoNormal\"><span style=\\\"color: rgb(31, 73, 125); font-family: \"Calibri\",\"sans-serif\"; font-size: 10.5pt;\\\" lang=\"EN-US\"><span style=\"mso-spacerun: yes;\">&nbsp;</span>07</span><span style=\"color: rgb(31, 73, 125); font-size: 10.5pt;\">年新旧准则替换，我们会把</span><span style=\\\"color: rgb(31, 73, 125); font-family: \"Calibri\",\"sans-serif\"; font-size: 10.5pt;\\\" lang=\"EN-US\">20080630</span><span style=\"color: rgb(31, 73, 125); font-size: 10.5pt;\">中报公布的新准则数据</span><span style=\\\"color: rgb(31, 73, 125); font-family: \"Calibri\",\"sans-serif\"; font-size: 10.5pt;\\\" lang=\"EN-US\">20070630</span><span style=\"color: rgb(31, 73, 125); font-size: 10.5pt;\">调整数复制出来，替换成</span><span style=\\\"color: rgb(31, 73, 125); font-family: \"Calibri\",\"sans-serif\"; font-size: 10.5pt;\\\" lang=\"EN-US\">20070630</span><span style=\"color: rgb(31, 73, 125); font-size: 10.5pt;\">当年公布的旧准则数据。</span></p><p style=\"margin: 0cm 0cm 0pt;\" class=\"MsoNormal\"><span style=\"color: rgb(31, 73, 125); font-size: 10.5pt;\">用</span><span style=\\\"color: rgb(31, 73, 125); font-family: \"Calibri\",\"sans-serif\"; font-size: 10.5pt;\\\" lang=\"EN-US\">ACTUAL_ANN_DT</span><span style=\"color: rgb(31, 73, 125); font-size: 10.5pt;\">来记录旧准则公布的时间，</span><span style=\\\"color: rgb(31, 73, 125); font-family: \"Calibri\",\"sans-serif\"; font-size: 10.5pt;\\\" lang=\"EN-US\">ANN_DT</span><span style=\"color: rgb(31, 73, 125); font-size: 10.5pt;\">是新准则公布的时间。这时的</span><span style=\\\"color: rgb(31, 73, 125); font-family: \"Calibri\",\"sans-serif\"; font-size: 10.5pt;\\\" lang=\"EN-US\">ANN_DT</span><span style=\"color: rgb(31, 73, 125); font-size: 10.5pt;\">是大于</span><span style=\\\"color: rgb(31, 73, 125); font-family: \"Calibri\",\"sans-serif\"; font-size: 10.5pt;\\\" lang=\"EN-US\">ACTUAL_ANN_DT</span><span style=\"color: rgb(31, 73, 125); font-size: 10.5pt;\">的。除去这种情况</span><span style=\\\"color: rgb(31, 73, 125); font-family: \"Calibri\",\"sans-serif\"; font-size: 10.5pt;\\\" lang=\"EN-US\">ANN_DT</span><span style=\"color: rgb(31, 73, 125); font-size: 10.5pt;\">是记录正确的公告日期。</span><span style=\\\"color: rgb(31, 73, 125); font-family: \"Calibri\",\"sans-serif\"; font-size: 10.5pt;\\\" lang=\"EN-US\"><?xml:namespace prefix = o ns = \"urn:schemas-microsoft-com:office:office\" /><o:p></o:p></span></p><p></p></font><p></p><p><font face=\"宋体\"></font>&nbsp;</p>\", \"Name\": \"ANN_DT与ACTUAL_ANN_DT的区别\", \"FileName\": \"\", \"FileID\": \"\"}, {\"Content\": \"<p><font face=\"宋体\"></font></p><font face=\"宋体\"> </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\"> </font><font face=\"宋体\"> </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\"> </font><font face=\"宋体\"> </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\"> </font><font face=\"宋体\"> </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\"> </font><font face=\"宋体\"> </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\"> </font><font face=\"宋体\"> </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\"> </font><font face=\"宋体\"> </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\"> </font><font face=\"宋体\"> </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\"> </font><font face=\"宋体\"> </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\"> </font><font face=\"宋体\"></font><table width=\"883\" class=\"MsoNormalTable\" style=\"margin: auto auto auto -1.15pt; width: 662pt; border-collapse: collapse; mso-yfti-tbllook: 1184; mso-padding-alt: 0cm 0cm 0cm 0cm;\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"><tbody><tr style=\"height: 13.5pt; mso-yfti-irow: 0; mso-yfti-firstrow: yes;\"><td width=\"44\" style=\"background: yellow; padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 33pt; height: 13.5pt;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><b><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">序号<span lang=\"EN-US\"><!--?xml:namespace prefix = o ns = \"urn:schemas-microsoft-com:office:office\" /--><o:p></o:p></span></span></b></p><font face=\"宋体\">  </font></td><td width=\"75\" style=\"background: yellow; border-width: 1pt 1pt 1pt 0px; border-style: solid solid solid none; border-color: windowtext windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 56pt; height: 13.5pt;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><b><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">字典值<span lang=\"EN-US\"><o:p></o:p></span></span></b></p><font face=\"宋体\">  </font></td><td width=\"116\" style=\"background: yellow; border-width: 1pt 1pt 1pt 0px; border-style: solid solid solid none; border-color: windowtext windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 87pt; height: 13.5pt;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><b><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">字典名称<span lang=\"EN-US\"><o:p></o:p></span></span></b></p><font face=\"宋体\">  </font></td><td width=\"648\" style=\"background: yellow; border-width: 1pt 1pt 1pt 0px; border-style: solid solid solid none; border-color: windowtext windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 486pt; height: 13.5pt;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><b><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">备注<span lang=\"EN-US\"><o:p></o:p></span></span></b></p><font face=\"宋体\">  </font></td></tr><tr style=\"height: 13.5pt; mso-yfti-irow: 1;\"><td width=\"44\" style=\"border-width: 0px 1pt 1pt; border-style: none solid solid; border-color: rgb(0, 0, 0) windowtext windowtext; padding: 0cm 5.4pt; width: 33pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">1<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"75\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 56pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">408001000<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"116\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 87pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">合并报表<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\">  </font></td><td width=\"648\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 486pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">涵盖母公司的财务报表数据，为最新报表<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\">  </font></td></tr><tr style=\"height: 13.5pt; mso-yfti-irow: 2;\"><td width=\"44\" style=\"border-width: 0px 1pt 1pt; border-style: none solid solid; border-color: rgb(0, 0, 0) windowtext windowtext; padding: 0cm 5.4pt; width: 33pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">2<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"75\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 56pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">408004000<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"116\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 87pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">合并报表<span lang=\"EN-US\">(</span>调整<span lang=\"EN-US\">)<o:p></o:p></span></span></p><font face=\"宋体\">  </font></td><td width=\"648\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 486pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">本年度公布上年同期的财务报表数据，报告期为上年度<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\">  </font></td></tr><tr style=\"height: 13.5pt; mso-yfti-irow: 3;\"><td width=\"44\" style=\"border-width: 0px 1pt 1pt; border-style: none solid solid; border-color: rgb(0, 0, 0) windowtext windowtext; padding: 0cm 5.4pt; width: 33pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">3<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"75\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 56pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">408005000<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"116\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 87pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">合并报表<span lang=\"EN-US\">(</span>更正前<span lang=\"EN-US\">)<o:p></o:p></span></span></p><font face=\"宋体\">  </font></td><td width=\"648\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 486pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">即出更正公告后，把合并报表的记录修改为合并报表<span lang=\"EN-US\">(</span>更正前<span lang=\"EN-US\">)</span>；复制原来的记录，更正后报表类型改为合并报表<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\">  </font></td></tr><tr style=\"height: 22.5pt; mso-yfti-irow: 4;\"><td width=\"44\" style=\"border-width: 0px 1pt 1pt; border-style: none solid solid; border-color: rgb(0, 0, 0) windowtext windowtext; padding: 0cm 5.4pt; width: 33pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">4<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"75\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 56pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">408050000<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"116\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 87pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">合并调整<span lang=\"EN-US\">(</span>更正前<span lang=\"EN-US\">)<o:p></o:p></span></span></p><font face=\"宋体\">  </font></td><td width=\"648\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 486pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">即出更正公告后，把合并报表（调整）的记录修改为合并调整<span lang=\"EN-US\">(</span>更正前<span lang=\"EN-US\">)</span>；复制原来的记录，更正后报表类型改为合并报表<span lang=\"EN-US\">(</span>调整<span lang=\"EN-US\">)<o:p></o:p></span></span></p><font face=\"宋体\">  </font></td></tr><tr style=\"height: 13.5pt; mso-yfti-irow: 5;\"><td width=\"44\" style=\"border-width: 0px 1pt 1pt; border-style: none solid solid; border-color: rgb(0, 0, 0) windowtext windowtext; padding: 0cm 5.4pt; width: 33pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">5<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"75\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 56pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">408006000<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"116\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 87pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">母公司报表<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\">  </font></td><td width=\"648\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 486pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">该公司母公司的财务报表数据<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\">  </font></td></tr><tr style=\"height: 22.5pt; mso-yfti-irow: 6;\"><td width=\"44\" style=\"border-width: 0px 1pt 1pt; border-style: none solid solid; border-color: rgb(0, 0, 0) windowtext windowtext; padding: 0cm 5.4pt; width: 33pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">6<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"75\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 56pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">408009000<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"116\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 87pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">母公司报表<span lang=\"EN-US\">(</span>调整<span lang=\"EN-US\">)<o:p></o:p></span></span></p><font face=\"宋体\">  </font></td><td width=\"648\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 486pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">该公司母公司的本年度公布上年同期的财务报表数据<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\">  </font></td></tr><tr style=\"height: 22.5pt; mso-yfti-irow: 7;\"><td width=\"44\" style=\"border-width: 0px 1pt 1pt; border-style: none solid solid; border-color: rgb(0, 0, 0) windowtext windowtext; padding: 0cm 5.4pt; width: 33pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">7<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"75\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 56pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">408010000<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"116\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 87pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">母公司报表<span lang=\"EN-US\">(</span>更正前<span lang=\"EN-US\">)<o:p></o:p></span></span></p><font face=\"宋体\">  </font></td><td width=\"648\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 486pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">之前上市公司已披露财务报表数据，但是由于某些特定原因导致出错，未调整之前的原始财务报表数据。<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\">  </font></td></tr><tr style=\"height: 22.5pt; mso-yfti-irow: 8; mso-yfti-lastrow: yes;\"><td width=\"44\" style=\"border-width: 0px 1pt 1pt; border-style: none solid solid; border-color: rgb(0, 0, 0) windowtext windowtext; padding: 0cm 5.4pt; width: 33pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">8<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"75\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 56pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">408060000<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"116\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 87pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">母公司调整<span lang=\"EN-US\">(</span>更正前<span lang=\"EN-US\">)<o:p></o:p></span></span></p><font face=\"宋体\">  </font></td><td width=\"648\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 486pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">该公司母公司的本年度公布上年同期的财务报表数据，但是由于某些特定原因导致出错，未调整之前的原始财务报表数据。<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\">  </font></td></tr></tbody></table><p><font face=\"宋体\"></font></p>\", \"Name\": \"报表类型\", \"FileName\": \"\", \"FileID\": \"\"}]}",
+    "databaseChsName": "万得",
+    "isComplete": "N",
+    "originalTableId": "9466",
+    "remark": "记录A股公司的资产负债表，根据2007年1月1日以后实施的会计准则编制",
+    "tableChsName": "中国A股资产负债表",
+    "tableId": 9466,
+    "tableName": "ASHAREBALANCESHEET",
+    "updateRate": "day",
+    "updateTime": "05:00;08:30;10:00;11:30;12:30;14:00;15:30;17:00;18:00;20:00;21:30;23:00"
+  },
+  "contentMap": {
+    "ANN_DT与ACTUAL_ANN_DT的区别": "<p><font face=\"宋体\"></font><font face=\"宋体\">ANN_DT&nbsp;&nbsp; 公告日期 ：指定期报告公布的日期<br>ACTUAL_ANN_DT&nbsp;&nbsp; 实际公告日期：指出了更正公告的日期 </font></p><p><font face=\"宋体\">ANN_DT&gt;ACTUAL_ANN_DT原因：<font color=\"#1f497d\">【案例：601169.SH 20070630】</font></font></p><font face=\"宋体\"><p style=\"margin: 0cm 0cm 0pt;\" class=\"MsoNormal\"><span style=\\\"color: rgb(31, 73, 125); font-family: \"Calibri\",\"sans-serif\"; font-size: 10.5pt;\\\" lang=\"EN-US\"><span style=\"mso-spacerun: yes;\">&nbsp;</span>07</span><span style=\"color: rgb(31, 73, 125); font-size: 10.5pt;\">年新旧准则替换，我们会把</span><span style=\\\"color: rgb(31, 73, 125); font-family: \"Calibri\",\"sans-serif\"; font-size: 10.5pt;\\\" lang=\"EN-US\">20080630</span><span style=\"color: rgb(31, 73, 125); font-size: 10.5pt;\">中报公布的新准则数据</span><span style=\\\"color: rgb(31, 73, 125); font-family: \"Calibri\",\"sans-serif\"; font-size: 10.5pt;\\\" lang=\"EN-US\">20070630</span><span style=\"color: rgb(31, 73, 125); font-size: 10.5pt;\">调整数复制出来，替换成</span><span style=\\\"color: rgb(31, 73, 125); font-family: \"Calibri\",\"sans-serif\"; font-size: 10.5pt;\\\" lang=\"EN-US\">20070630</span><span style=\"color: rgb(31, 73, 125); font-size: 10.5pt;\">当年公布的旧准则数据。</span></p><p style=\"margin: 0cm 0cm 0pt;\" class=\"MsoNormal\"><span style=\"color: rgb(31, 73, 125); font-size: 10.5pt;\">用</span><span style=\\\"color: rgb(31, 73, 125); font-family: \"Calibri\",\"sans-serif\"; font-size: 10.5pt;\\\" lang=\"EN-US\">ACTUAL_ANN_DT</span><span style=\"color: rgb(31, 73, 125); font-size: 10.5pt;\">来记录旧准则公布的时间，</span><span style=\\\"color: rgb(31, 73, 125); font-family: \"Calibri\",\"sans-serif\"; font-size: 10.5pt;\\\" lang=\"EN-US\">ANN_DT</span><span style=\"color: rgb(31, 73, 125); font-size: 10.5pt;\">是新准则公布的时间。这时的</span><span style=\\\"color: rgb(31, 73, 125); font-family: \"Calibri\",\"sans-serif\"; font-size: 10.5pt;\\\" lang=\"EN-US\">ANN_DT</span><span style=\"color: rgb(31, 73, 125); font-size: 10.5pt;\">是大于</span><span style=\\\"color: rgb(31, 73, 125); font-family: \"Calibri\",\"sans-serif\"; font-size: 10.5pt;\\\" lang=\"EN-US\">ACTUAL_ANN_DT</span><span style=\"color: rgb(31, 73, 125); font-size: 10.5pt;\">的。除去这种情况</span><span style=\\\"color: rgb(31, 73, 125); font-family: \"Calibri\",\"sans-serif\"; font-size: 10.5pt;\\\" lang=\"EN-US\">ANN_DT</span><span style=\"color: rgb(31, 73, 125); font-size: 10.5pt;\">是记录正确的公告日期。</span><span style=\\\"color: rgb(31, 73, 125); font-family: \"Calibri\",\"sans-serif\"; font-size: 10.5pt;\\\" lang=\"EN-US\"><?xml:namespace prefix = o ns = \"urn:schemas-microsoft-com:office:office\" /><o:p></o:p></span></p><p></p></font><p></p><p><font face=\"宋体\"></font>&nbsp;</p>",
+    "报表类型": "<p><font face=\"宋体\"></font></p><font face=\"宋体\"> </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\"> </font><font face=\"宋体\"> </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\"> </font><font face=\"宋体\"> </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\"> </font><font face=\"宋体\"> </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\"> </font><font face=\"宋体\"> </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\"> </font><font face=\"宋体\"> </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\"> </font><font face=\"宋体\"> </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\"> </font><font face=\"宋体\"> </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\"> </font><font face=\"宋体\"> </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\">  </font><font face=\"宋体\"> </font><font face=\"宋体\"></font><table width=\"883\" class=\"MsoNormalTable\" style=\"margin: auto auto auto -1.15pt; width: 662pt; border-collapse: collapse; mso-yfti-tbllook: 1184; mso-padding-alt: 0cm 0cm 0cm 0cm;\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\"><tbody><tr style=\"height: 13.5pt; mso-yfti-irow: 0; mso-yfti-firstrow: yes;\"><td width=\"44\" style=\"background: yellow; padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 33pt; height: 13.5pt;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><b><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">序号<span lang=\"EN-US\"><!--?xml:namespace prefix = o ns = \"urn:schemas-microsoft-com:office:office\" /--><o:p></o:p></span></span></b></p><font face=\"宋体\">  </font></td><td width=\"75\" style=\"background: yellow; border-width: 1pt 1pt 1pt 0px; border-style: solid solid solid none; border-color: windowtext windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 56pt; height: 13.5pt;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><b><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">字典值<span lang=\"EN-US\"><o:p></o:p></span></span></b></p><font face=\"宋体\">  </font></td><td width=\"116\" style=\"background: yellow; border-width: 1pt 1pt 1pt 0px; border-style: solid solid solid none; border-color: windowtext windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 87pt; height: 13.5pt;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><b><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">字典名称<span lang=\"EN-US\"><o:p></o:p></span></span></b></p><font face=\"宋体\">  </font></td><td width=\"648\" style=\"background: yellow; border-width: 1pt 1pt 1pt 0px; border-style: solid solid solid none; border-color: windowtext windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 486pt; height: 13.5pt;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><b><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">备注<span lang=\"EN-US\"><o:p></o:p></span></span></b></p><font face=\"宋体\">  </font></td></tr><tr style=\"height: 13.5pt; mso-yfti-irow: 1;\"><td width=\"44\" style=\"border-width: 0px 1pt 1pt; border-style: none solid solid; border-color: rgb(0, 0, 0) windowtext windowtext; padding: 0cm 5.4pt; width: 33pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">1<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"75\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 56pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">408001000<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"116\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 87pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">合并报表<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\">  </font></td><td width=\"648\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 486pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">涵盖母公司的财务报表数据，为最新报表<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\">  </font></td></tr><tr style=\"height: 13.5pt; mso-yfti-irow: 2;\"><td width=\"44\" style=\"border-width: 0px 1pt 1pt; border-style: none solid solid; border-color: rgb(0, 0, 0) windowtext windowtext; padding: 0cm 5.4pt; width: 33pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">2<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"75\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 56pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">408004000<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"116\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 87pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">合并报表<span lang=\"EN-US\">(</span>调整<span lang=\"EN-US\">)<o:p></o:p></span></span></p><font face=\"宋体\">  </font></td><td width=\"648\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 486pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">本年度公布上年同期的财务报表数据，报告期为上年度<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\">  </font></td></tr><tr style=\"height: 13.5pt; mso-yfti-irow: 3;\"><td width=\"44\" style=\"border-width: 0px 1pt 1pt; border-style: none solid solid; border-color: rgb(0, 0, 0) windowtext windowtext; padding: 0cm 5.4pt; width: 33pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">3<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"75\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 56pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">408005000<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"116\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 87pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">合并报表<span lang=\"EN-US\">(</span>更正前<span lang=\"EN-US\">)<o:p></o:p></span></span></p><font face=\"宋体\">  </font></td><td width=\"648\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 486pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">即出更正公告后，把合并报表的记录修改为合并报表<span lang=\"EN-US\">(</span>更正前<span lang=\"EN-US\">)</span>；复制原来的记录，更正后报表类型改为合并报表<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\">  </font></td></tr><tr style=\"height: 22.5pt; mso-yfti-irow: 4;\"><td width=\"44\" style=\"border-width: 0px 1pt 1pt; border-style: none solid solid; border-color: rgb(0, 0, 0) windowtext windowtext; padding: 0cm 5.4pt; width: 33pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">4<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"75\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 56pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">408050000<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"116\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 87pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">合并调整<span lang=\"EN-US\">(</span>更正前<span lang=\"EN-US\">)<o:p></o:p></span></span></p><font face=\"宋体\">  </font></td><td width=\"648\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 486pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">即出更正公告后，把合并报表（调整）的记录修改为合并调整<span lang=\"EN-US\">(</span>更正前<span lang=\"EN-US\">)</span>；复制原来的记录，更正后报表类型改为合并报表<span lang=\"EN-US\">(</span>调整<span lang=\"EN-US\">)<o:p></o:p></span></span></p><font face=\"宋体\">  </font></td></tr><tr style=\"height: 13.5pt; mso-yfti-irow: 5;\"><td width=\"44\" style=\"border-width: 0px 1pt 1pt; border-style: none solid solid; border-color: rgb(0, 0, 0) windowtext windowtext; padding: 0cm 5.4pt; width: 33pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">5<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"75\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 56pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">408006000<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"116\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 87pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">母公司报表<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\">  </font></td><td width=\"648\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 486pt; height: 13.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">该公司母公司的财务报表数据<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\">  </font></td></tr><tr style=\"height: 22.5pt; mso-yfti-irow: 6;\"><td width=\"44\" style=\"border-width: 0px 1pt 1pt; border-style: none solid solid; border-color: rgb(0, 0, 0) windowtext windowtext; padding: 0cm 5.4pt; width: 33pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">6<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"75\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 56pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">408009000<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"116\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 87pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">母公司报表<span lang=\"EN-US\">(</span>调整<span lang=\"EN-US\">)<o:p></o:p></span></span></p><font face=\"宋体\">  </font></td><td width=\"648\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 486pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">该公司母公司的本年度公布上年同期的财务报表数据<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\">  </font></td></tr><tr style=\"height: 22.5pt; mso-yfti-irow: 7;\"><td width=\"44\" style=\"border-width: 0px 1pt 1pt; border-style: none solid solid; border-color: rgb(0, 0, 0) windowtext windowtext; padding: 0cm 5.4pt; width: 33pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">7<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"75\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 56pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">408010000<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"116\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 87pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">母公司报表<span lang=\"EN-US\">(</span>更正前<span lang=\"EN-US\">)<o:p></o:p></span></span></p><font face=\"宋体\">  </font></td><td width=\"648\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 486pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">之前上市公司已披露财务报表数据，但是由于某些特定原因导致出错，未调整之前的原始财务报表数据。<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\">  </font></td></tr><tr style=\"height: 22.5pt; mso-yfti-irow: 8; mso-yfti-lastrow: yes;\"><td width=\"44\" style=\"border-width: 0px 1pt 1pt; border-style: none solid solid; border-color: rgb(0, 0, 0) windowtext windowtext; padding: 0cm 5.4pt; width: 33pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">8<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"75\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 56pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"right\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: right;\"><span lang=\"EN-US\" style=\"color: black; font-family: 宋体; font-size: 9pt;\">408060000<o:p></o:p></span></p><font face=\"宋体\">  </font></td><td width=\"116\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 87pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">母公司调整<span lang=\"EN-US\">(</span>更正前<span lang=\"EN-US\">)<o:p></o:p></span></span></p><font face=\"宋体\">  </font></td><td width=\"648\" style=\"border-width: 0px 1pt 1pt 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0) windowtext windowtext rgb(0, 0, 0); padding: 0cm 5.4pt; width: 486pt; height: 22.5pt; background-color: transparent;\"><font face=\"宋体\">  </font><p align=\"left\" class=\"MsoNormal\" style=\"margin: 0cm 0cm 0pt; text-align: left;\"><span style=\"color: black; font-family: 宋体; font-size: 9pt;\">该公司母公司的本年度公布上年同期的财务报表数据，但是由于某些特定原因导致出错，未调整之前的原始财务报表数据。<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\">  </font></td></tr></tbody></table><p><font face=\"宋体\"></font></p>"
+  }
+}

@@ -1,0 +1,860 @@
+{
+  "code": "0",
+  "fieldData": [
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "流水号",
+      "fieldId": 669799,
+      "fieldName": "id",
+      "fieldType": "int",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "公司代码",
+      "fieldId": 669800,
+      "fieldName": "company_code",
+      "fieldType": "varchar",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "股票代码",
+      "fieldId": 669801,
+      "fieldName": "stock_code",
+      "fieldType": "varchar",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "股票简称",
+      "fieldId": 669802,
+      "fieldName": "stock_name",
+      "fieldType": "varchar",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "1",
+      "fieldChsName": "报表类型",
+      "fieldId": 669803,
+      "fieldName": "report_type",
+      "fieldType": "int",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "报表年度",
+      "fieldId": 669804,
+      "fieldName": "report_year",
+      "fieldType": "int",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "1",
+      "fieldChsName": "报表期类型",
+      "fieldId": 669805,
+      "fieldName": "report_quarter",
+      "fieldType": "int",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "报表发布日期",
+      "fieldId": 669806,
+      "fieldName": "declare_date",
+      "fieldType": "datetime",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "货币资金",
+      "fieldId": 669807,
+      "fieldName": "ta_ca1",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "交易性金融资产",
+      "fieldId": 669808,
+      "fieldName": "ta_ca2",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "应收票据",
+      "fieldId": 669809,
+      "fieldName": "ta_ca3",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "应收账款",
+      "fieldId": 669810,
+      "fieldName": "ta_ca4",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "预付款项",
+      "fieldId": 669811,
+      "fieldName": "ta_ca5",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "其他应收款",
+      "fieldId": 669812,
+      "fieldName": "ta_ca6",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "应收利息",
+      "fieldId": 669813,
+      "fieldName": "ta_ca7",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "应收股利",
+      "fieldId": 669814,
+      "fieldName": "ta_ca8",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "买入返售金融资产",
+      "fieldId": 669815,
+      "fieldName": "ta_ca9",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "存货",
+      "fieldId": 669816,
+      "fieldName": "ta_ca10",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "划分为持有待售的资产",
+      "fieldId": 669817,
+      "fieldName": "ta_ca11",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "一年内到期的非流动资产",
+      "fieldId": 669818,
+      "fieldName": "ta_ca12",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "其他流动资产",
+      "fieldId": 669819,
+      "fieldName": "ta_ca13",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "流动资产合计",
+      "fieldId": 669820,
+      "fieldName": "ta_ca",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "可供出售金融资产",
+      "fieldId": 669821,
+      "fieldName": "ta_nca1",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "持有至到期投资",
+      "fieldId": 669822,
+      "fieldName": "ta_nca2",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "长期应收款",
+      "fieldId": 669823,
+      "fieldName": "ta_nca3",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "长期股权投资",
+      "fieldId": 669824,
+      "fieldName": "ta_nca4",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "投资性房地产",
+      "fieldId": 669825,
+      "fieldName": "ta_nca5",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "固定资产",
+      "fieldId": 669826,
+      "fieldName": "ta_nca6",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "在建工程",
+      "fieldId": 669827,
+      "fieldName": "ta_nca7",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "工程物资",
+      "fieldId": 669828,
+      "fieldName": "ta_nca8",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "固定资产清理",
+      "fieldId": 669829,
+      "fieldName": "ta_nca9",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "生产性生物资产",
+      "fieldId": 669830,
+      "fieldName": "ta_nca10",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "油气资产",
+      "fieldId": 669831,
+      "fieldName": "ta_nca11",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "无形资产",
+      "fieldId": 669832,
+      "fieldName": "ta_nca12",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "开发支出",
+      "fieldId": 669833,
+      "fieldName": "ta_nca13",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "商誉",
+      "fieldId": 669834,
+      "fieldName": "ta_nca14",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "长期待摊费用",
+      "fieldId": 669835,
+      "fieldName": "ta_nca15",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "递延所得税资产",
+      "fieldId": 669836,
+      "fieldName": "ta_nca16",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "其他非流动资产",
+      "fieldId": 669837,
+      "fieldName": "ta_nca17",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "非流动资产合计",
+      "fieldId": 669838,
+      "fieldName": "ta_nca",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "资产总计",
+      "fieldId": 669839,
+      "fieldName": "ta",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "短期借款",
+      "fieldId": 669840,
+      "fieldName": "tl_cl1",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "交易性金融负债",
+      "fieldId": 669841,
+      "fieldName": "tl_cl2",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "衍生金融负债",
+      "fieldId": 669842,
+      "fieldName": "tl_cl3",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "应付票据",
+      "fieldId": 669843,
+      "fieldName": "tl_cl4",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "应付账款",
+      "fieldId": 669844,
+      "fieldName": "tl_cl5",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "预收款项",
+      "fieldId": 669845,
+      "fieldName": "tl_cl6",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "卖出回购金融资产款",
+      "fieldId": 669846,
+      "fieldName": "tl_cl7",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "应付手续费及佣金",
+      "fieldId": 669847,
+      "fieldName": "tl_cl8",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "应付职工薪酬",
+      "fieldId": 669848,
+      "fieldName": "tl_cl9",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "应交税费",
+      "fieldId": 669849,
+      "fieldName": "tl_cl10",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "应付利息",
+      "fieldId": 669850,
+      "fieldName": "tl_cl11",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "应付股利",
+      "fieldId": 669851,
+      "fieldName": "tl_cl12",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "其他应付款",
+      "fieldId": 669852,
+      "fieldName": "tl_cl13",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "划分为持有待售的负债",
+      "fieldId": 669853,
+      "fieldName": "tl_cl14",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "一年内到期的非流动负债",
+      "fieldId": 669854,
+      "fieldName": "tl_cl15",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "其他流动负债",
+      "fieldId": 669855,
+      "fieldName": "tl_cl16",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "流动负债合计",
+      "fieldId": 669856,
+      "fieldName": "tl_cl",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "长期借款",
+      "fieldId": 669857,
+      "fieldName": "tl_ncl1",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "应付债券",
+      "fieldId": 669858,
+      "fieldName": "tl_ncl2",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "其中：优先股",
+      "fieldId": 669859,
+      "fieldName": "tl_ncl3",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "其中：永续债",
+      "fieldId": 669860,
+      "fieldName": "tl_ncl4",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "长期应付款",
+      "fieldId": 669861,
+      "fieldName": "tl_ncl5",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "长期应付职工薪酬",
+      "fieldId": 669862,
+      "fieldName": "tl_ncl6",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "专项应付款",
+      "fieldId": 669863,
+      "fieldName": "tl_ncl7",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "预计非流动负债",
+      "fieldId": 669864,
+      "fieldName": "tl_ncl8",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "长期递延收益",
+      "fieldId": 669865,
+      "fieldName": "tl_ncl9",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "递延所得税负债",
+      "fieldId": 669866,
+      "fieldName": "tl_ncl10",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "其他非流动负债",
+      "fieldId": 669867,
+      "fieldName": "tl_ncl11",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "非流动负债合计",
+      "fieldId": 669868,
+      "fieldName": "tl_ncl",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "负债合计",
+      "fieldId": 669869,
+      "fieldName": "tl",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "实收资本（或股本）",
+      "fieldId": 669870,
+      "fieldName": "tse_pa1",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "其他权益工具",
+      "fieldId": 669871,
+      "fieldName": "tse_pa2",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "其中：优先股",
+      "fieldId": 669872,
+      "fieldName": "tse_pa3",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "其中：永续债",
+      "fieldId": 669873,
+      "fieldName": "tse_pa4",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "资本公积",
+      "fieldId": 669874,
+      "fieldName": "tse_pa5",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "专项储备",
+      "fieldId": 669875,
+      "fieldName": "tse_pa6",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "盈余公积",
+      "fieldId": 669876,
+      "fieldName": "tse_pa7",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "未分配利润",
+      "fieldId": 669877,
+      "fieldName": "tse_pa8",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "减：库存股",
+      "fieldId": 669878,
+      "fieldName": "tse_pa9",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "一般风险准备",
+      "fieldId": 669879,
+      "fieldName": "tse_pa10",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "其他综合收益",
+      "fieldId": 669880,
+      "fieldName": "tse_pa11",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "归属于母公司所有者权益（或股东权益）合计",
+      "fieldId": 669881,
+      "fieldName": "tse_parent",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "少数股东权益",
+      "fieldId": 669882,
+      "fieldName": "tse_monority",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "所有者权益（或股东权益）合计",
+      "fieldId": 669883,
+      "fieldName": "tse",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "负债和所有者（或股东权益）合计",
+      "fieldId": 669884,
+      "fieldName": "tlse",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "入库时间",
+      "fieldId": 669885,
+      "fieldName": "entrytime",
+      "fieldType": "datetime",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "最后更新时间",
+      "fieldId": 669886,
+      "fieldName": "updatetime",
+      "fieldType": "datetime",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "下载标识",
+      "fieldId": 669887,
+      "fieldName": "tmstamp",
+      "fieldType": "bigint",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "应收票据及应收账款",
+      "fieldId": 669888,
+      "fieldName": "ta_ca14",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "合同资产",
+      "fieldId": 669889,
+      "fieldName": "ta_ca16",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "应付票据及应付账款",
+      "fieldId": 669890,
+      "fieldName": "tl_cl17",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "合同负债",
+      "fieldId": 669891,
+      "fieldName": "tl_cl18",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "一年内的递延收益",
+      "fieldId": 669892,
+      "fieldName": "tl_cl19",
+      "fieldType": "numeric",
+      "tableId": 112049068
+    }
+  ],
+  "tableInfo": {
+    "databaseChsName": "朝阳永续",
+    "originalTableId": "62029",
+    "remark": "此表主要包含所有上市公司的合并资产负债报表数据。涉及金额的数据，单位均为人民币元。",
+    "tableChsName": "资产负债表（通用）",
+    "tableId": 112049068,
+    "tableName": "FIN_BALANCE_SHEET_GEN"
+  },
+  "contentMap": {}
+}
