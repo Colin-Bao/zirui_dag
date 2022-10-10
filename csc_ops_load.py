@@ -7,8 +7,9 @@
 import os
 import pendulum
 from airflow.decorators import dag, task
-from airflow import DAG, Dataset
+from airflow import DAG
 from airflow.models import Variable
+from airflow.datasets import Dataset
 from datetime import datetime, timedelta, date
 
 
