@@ -1,0 +1,148 @@
+{
+  "code": "0",
+  "fieldData": [
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "对象ID",
+      "fieldId": 220113,
+      "fieldName": "OBJECT_ID",
+      "fieldType": "VARCHAR2(100)",
+      "isPrimarykey": "N",
+      "tableId": 9379,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "Wind代码",
+      "fieldId": 220114,
+      "fieldName": "S_INFO_WINDCODE",
+      "fieldType": "VARCHAR2(40)",
+      "isPrimarykey": "Y",
+      "tableId": 9379,
+      "tableName": "Y"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "除权除息日",
+      "fieldId": 220115,
+      "fieldName": "EX_DATE",
+      "fieldType": "VARCHAR2(8)",
+      "isPrimarykey": "Y",
+      "tableId": 9379,
+      "tableName": "Y"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "除权类型",
+      "fieldId": 220116,
+      "fieldName": "EX_TYPE",
+      "fieldType": "VARCHAR2(40)",
+      "isPrimarykey": "N",
+      "tableId": 9379,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "除权说明",
+      "fieldId": 220117,
+      "fieldName": "EX_DESCRIPTION",
+      "fieldType": "VARCHAR2(100)",
+      "isPrimarykey": "N",
+      "tableId": 9379,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "派息比例",
+      "fieldId": 220118,
+      "fieldName": "CASH_DIVIDEND_RATIO",
+      "fieldType": "NUMBER(15,4)",
+      "isPrimarykey": "N",
+      "tableId": 9379,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "送股比例",
+      "fieldId": 220119,
+      "fieldName": "BONUS_SHARE_RATIO",
+      "fieldType": "NUMBER(15,4)",
+      "isPrimarykey": "N",
+      "tableId": 9379,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "配股比例",
+      "fieldId": 220120,
+      "fieldName": "RIGHTSISSUE_RATIO",
+      "fieldType": "NUMBER(15,4)",
+      "isPrimarykey": "N",
+      "tableId": 9379,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "配股价格",
+      "fieldId": 220121,
+      "fieldName": "RIGHTSISSUE_PRICE",
+      "fieldType": "NUMBER(15,4)",
+      "isPrimarykey": "N",
+      "tableId": 9379,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "转增比例",
+      "fieldId": 220122,
+      "fieldName": "CONVERSED_RATIO",
+      "fieldType": "NUMBER(15,4)",
+      "isPrimarykey": "N",
+      "tableId": 9379,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "增发价格",
+      "fieldId": 220123,
+      "fieldName": "SEO_PRICE",
+      "fieldType": "NUMBER(15,4)",
+      "isPrimarykey": "N",
+      "tableId": 9379,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "增发比例",
+      "fieldId": 220124,
+      "fieldName": "SEO_RATIO",
+      "fieldType": "NUMBER(15,4)",
+      "isPrimarykey": "N",
+      "tableId": 9379,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "缩减比例",
+      "fieldId": 220125,
+      "fieldName": "CONSOLIDATE_SPLIT_RATIO",
+      "fieldType": "NUMBER(20,6)",
+      "isPrimarykey": "N",
+      "tableId": 9379,
+      "tableName": "N"
+    }
+  ],
+  "tableInfo": {
+    "content": "{\"TopicList\":[]}",
+    "databaseChsName": "万得",
+    "isComplete": "N",
+    "originalTableId": "9379",
+    "remark": "记录A股发行、配股、增发、分红等信息",
+    "tableChsName": "中国A股除权除息记录",
+    "tableId": 9379,
+    "tableName": "ASHAREEXRIGHTDIVIDENDRECORD",
+    "updateRate": "day",
+    "updateTime": "06:00;16:00;20:00"
+  },
+  "contentMap": {}
+}

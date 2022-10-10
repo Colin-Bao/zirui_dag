@@ -1,0 +1,253 @@
+{
+  "code": "0",
+  "fieldData": [
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "流水号",
+      "fieldId": 668535,
+      "fieldName": "id",
+      "fieldType": "bigint",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "交易日期",
+      "fieldId": 668536,
+      "fieldName": "trade_date",
+      "fieldType": "date",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "1",
+      "fieldChsName": "市场代码",
+      "fieldId": 668537,
+      "fieldName": "exchange",
+      "fieldType": "varchar",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "股票代码",
+      "fieldId": 668538,
+      "fieldName": "stock_code",
+      "fieldType": "varchar",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "股票简称",
+      "fieldId": 668539,
+      "fieldName": "stock_name",
+      "fieldType": "varchar",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "总市值",
+      "fieldId": 668540,
+      "fieldName": "tcap",
+      "fieldType": "numeric",
+      "remark": "单位：万元",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "流通市值",
+      "fieldId": 668541,
+      "fieldName": "mcap",
+      "fieldType": "numeric",
+      "remark": "单位：万元",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "成交量",
+      "fieldId": 668542,
+      "fieldName": "volume",
+      "fieldType": "numeric",
+      "remark": "单位：股",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "成交金额",
+      "fieldId": 668543,
+      "fieldName": "amount",
+      "fieldType": "numeric",
+      "remark": "单位：元",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "成交笔数",
+      "fieldId": 668544,
+      "fieldName": "deals",
+      "fieldType": "numeric",
+      "remark": "（暂不可用）\n单位：笔",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "换手率",
+      "fieldId": 668545,
+      "fieldName": "turnover_rate",
+      "fieldType": "numeric",
+      "remark": "%",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "涨跌幅",
+      "fieldId": 668546,
+      "fieldName": "change_rate",
+      "fieldType": "numeric",
+      "remark": "%",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "振幅",
+      "fieldId": 668547,
+      "fieldName": "amplitude",
+      "fieldType": "numeric",
+      "remark": "%",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "最高价",
+      "fieldId": 668548,
+      "fieldName": "high",
+      "fieldType": "numeric",
+      "remark": "单位：元",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "最低价",
+      "fieldId": 668549,
+      "fieldName": "low",
+      "fieldType": "numeric",
+      "remark": "单位：元",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "开盘价",
+      "fieldId": 668550,
+      "fieldName": "topen",
+      "fieldType": "numeric",
+      "remark": "单位：元",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "收盘价",
+      "fieldId": 668551,
+      "fieldName": "tclose",
+      "fieldType": "numeric",
+      "remark": "单位：元",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "前收盘价",
+      "fieldId": 668552,
+      "fieldName": "lclose",
+      "fieldType": "numeric",
+      "remark": "单位：元",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "均价",
+      "fieldId": 668553,
+      "fieldName": "average",
+      "fieldType": "numeric",
+      "remark": "单位：元",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "后复权系数",
+      "fieldId": 668554,
+      "fieldName": "matiply_ratio",
+      "fieldType": "numeric",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "连乘系数",
+      "fieldId": 668555,
+      "fieldName": "backward_adjratio",
+      "fieldType": "numeric",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "1",
+      "fieldChsName": "是否有效",
+      "fieldId": 668556,
+      "fieldName": "is_valid",
+      "fieldType": "int",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "入库时间",
+      "fieldId": 668557,
+      "fieldName": "entrytime",
+      "fieldType": "datetime",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "最后更新时间",
+      "fieldId": 668558,
+      "fieldName": "updatetime",
+      "fieldType": "datetime",
+      "tableId": 112049037
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "下载标识",
+      "fieldId": 668559,
+      "fieldName": "tmstamp",
+      "fieldType": "bigint",
+      "tableId": 112049037
+    }
+  ],
+  "tableInfo": {
+    "databaseChsName": "朝阳永续",
+    "originalTableId": "62060",
+    "remark": "该表包含A股日频历史交易行情和复权情况等信息。",
+    "tableChsName": "股票历史行情（日频）",
+    "tableId": 112049037,
+    "tableName": "QT_STK_DAILY"
+  },
+  "contentMap": {}
+}

@@ -1,0 +1,347 @@
+{
+  "code": "0",
+  "fieldData": [
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "流水号",
+      "fieldId": 670172,
+      "fieldName": "id",
+      "fieldType": "int",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "公司代码",
+      "fieldId": 670173,
+      "fieldName": "company_code",
+      "fieldType": "varchar",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "股票代码",
+      "fieldId": 670174,
+      "fieldName": "stock_code",
+      "fieldType": "varchar",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "股票简称",
+      "fieldId": 670175,
+      "fieldName": "stock_name",
+      "fieldType": "varchar",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "1",
+      "fieldChsName": "公告类型",
+      "fieldId": 670176,
+      "fieldName": "announce_type",
+      "fieldType": "int",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "预测年度",
+      "fieldId": 670177,
+      "fieldName": "report_year",
+      "fieldType": "int",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "1",
+      "fieldChsName": "预测周期",
+      "fieldId": 670178,
+      "fieldName": "report_period",
+      "fieldType": "int",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "公告日期",
+      "fieldId": 670179,
+      "fieldName": "declare_date",
+      "fieldType": "date",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "营业收入上限",
+      "fieldId": 670180,
+      "fieldName": "tor_ceiling",
+      "fieldType": "numeric",
+      "remark": "单位：万元",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "营业收入下限",
+      "fieldId": 670181,
+      "fieldName": "tor_floor",
+      "fieldType": "numeric",
+      "remark": "单位：万元",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "营业收入增长幅度上限",
+      "fieldId": 670182,
+      "fieldName": "tor_rate_ceiling",
+      "fieldType": "float",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "营业收入增长幅度下限",
+      "fieldId": 670183,
+      "fieldName": "tor_rate_floor",
+      "fieldType": "float",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "营业收入简述",
+      "fieldId": 670184,
+      "fieldName": "tor_description",
+      "fieldType": "varchar",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "主营业务利润上限",
+      "fieldId": 670185,
+      "fieldName": "op_ceiling",
+      "fieldType": "numeric",
+      "remark": "单位：万元",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "主营业务利润下限",
+      "fieldId": 670186,
+      "fieldName": "op_floor",
+      "fieldType": "numeric",
+      "remark": "单位：万元",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "主营业务利润增长幅度上限",
+      "fieldId": 670187,
+      "fieldName": "op_rate_ceiling",
+      "fieldType": "float",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "主营业务利润增长幅度下限",
+      "fieldId": 670188,
+      "fieldName": "op_rate_floor",
+      "fieldType": "float",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "主营业务利润简述",
+      "fieldId": 670189,
+      "fieldName": "op_description",
+      "fieldType": "varchar",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "净利润上限",
+      "fieldId": 670190,
+      "fieldName": "np_ceiling",
+      "fieldType": "numeric",
+      "remark": "单位：万元",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "净利润下限",
+      "fieldId": 670191,
+      "fieldName": "np_floor",
+      "fieldType": "numeric",
+      "remark": "单位：万元",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "净利润增长幅度上限",
+      "fieldId": 670192,
+      "fieldName": "np_rate_ceiling",
+      "fieldType": "float",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "净利润增长幅度下限",
+      "fieldId": 670193,
+      "fieldName": "np_rate_floor",
+      "fieldType": "float",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "1",
+      "fieldChsName": "净利润类型",
+      "fieldId": 670194,
+      "fieldName": "np_type",
+      "fieldType": "int",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "净利润简述",
+      "fieldId": 670195,
+      "fieldName": "np_description",
+      "fieldType": "varchar",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "EPS上限",
+      "fieldId": 670196,
+      "fieldName": "eps_ceiling",
+      "fieldType": "numeric",
+      "remark": "单位：元",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "EPS下限",
+      "fieldId": 670197,
+      "fieldName": "eps_floor",
+      "fieldType": "numeric",
+      "remark": "单位：元",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "EPS增长幅度上限",
+      "fieldId": 670198,
+      "fieldName": "eps_rate_ceiling",
+      "fieldType": "float",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "EPS增长幅度下限",
+      "fieldId": 670199,
+      "fieldName": "eps_rate_floor",
+      "fieldType": "float",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "1",
+      "fieldChsName": "EPS类型",
+      "fieldId": 670200,
+      "fieldName": "eps_type",
+      "fieldType": "int",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "EPS简述",
+      "fieldId": 670201,
+      "fieldName": "eps_description",
+      "fieldType": "varchar",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "业绩变动原因",
+      "fieldId": 670202,
+      "fieldName": "chg_reason",
+      "fieldType": "varchar",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "序列",
+      "fieldId": 670203,
+      "fieldName": "sequence",
+      "fieldType": "varchar",
+      "remark": "用于生成唯一索引，无实际意义",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "1",
+      "fieldChsName": "是否有效",
+      "fieldId": 670204,
+      "fieldName": "is_valid",
+      "fieldType": "int",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "入库时间",
+      "fieldId": 670205,
+      "fieldName": "entrytime",
+      "fieldType": "datetime",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "最后更新时间",
+      "fieldId": 670206,
+      "fieldName": "updatetime",
+      "fieldType": "datetime",
+      "tableId": 112049074
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "下载标识",
+      "fieldId": 670207,
+      "fieldName": "tmstamp",
+      "fieldType": "bigint",
+      "tableId": 112049074
+    }
+  ],
+  "tableInfo": {
+    "databaseChsName": "朝阳永续",
+    "originalTableId": "62023",
+    "remark": "旨在追踪上市公司业绩预告情况。",
+    "tableChsName": "业绩预告表",
+    "tableId": 112049074,
+    "tableName": "FIN_PERFORMANCE_FORECAST"
+  },
+  "contentMap": {}
+}

@@ -1,0 +1,662 @@
+{
+  "code": "0",
+  "fieldData": [
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "流水号",
+      "fieldId": 670066,
+      "fieldName": "id",
+      "fieldType": "int",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "公司代码",
+      "fieldId": 670067,
+      "fieldName": "company_code",
+      "fieldType": "varchar",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "股票代码",
+      "fieldId": 670068,
+      "fieldName": "stock_code",
+      "fieldType": "varchar",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "股票简称",
+      "fieldId": 670069,
+      "fieldName": "stock_name",
+      "fieldType": "varchar",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "1",
+      "fieldChsName": "报表类型",
+      "fieldId": 670070,
+      "fieldName": "report_type",
+      "fieldType": "int",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "报表年度",
+      "fieldId": 670071,
+      "fieldName": "report_year",
+      "fieldType": "int",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "1",
+      "fieldChsName": "报表期类型",
+      "fieldId": 670072,
+      "fieldName": "report_quarter",
+      "fieldType": "int",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "报表发布日期",
+      "fieldId": 670073,
+      "fieldName": "declare_date",
+      "fieldType": "datetime",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "一、营业总收入",
+      "fieldId": 670074,
+      "fieldName": "tor",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "其中：营业收入",
+      "fieldId": 670075,
+      "fieldName": "tor1",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "利息收入",
+      "fieldId": 670076,
+      "fieldName": "tor2",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "已赚保费",
+      "fieldId": 670077,
+      "fieldName": "tor3",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "手续费及佣金收入",
+      "fieldId": 670078,
+      "fieldName": "tor4",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "二、营业总成本",
+      "fieldId": 670079,
+      "fieldName": "toc",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "其中：营业成本",
+      "fieldId": 670080,
+      "fieldName": "toc1",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "利息支出",
+      "fieldId": 670081,
+      "fieldName": "toc2",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "手续费及佣金支出",
+      "fieldId": 670082,
+      "fieldName": "toc3",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "退保金",
+      "fieldId": 670083,
+      "fieldName": "toc4",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "赔付支出净额",
+      "fieldId": 670084,
+      "fieldName": "toc5",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "提取保险合同准备金净额",
+      "fieldId": 670085,
+      "fieldName": "toc6",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "保单红利支出",
+      "fieldId": 670086,
+      "fieldName": "toc7",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "分保费用",
+      "fieldId": 670087,
+      "fieldName": "toc8",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "营业税金及附加",
+      "fieldId": 670088,
+      "fieldName": "toc9",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "销售费用",
+      "fieldId": 670089,
+      "fieldName": "toc10",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "管理费用",
+      "fieldId": 670090,
+      "fieldName": "toc11",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "财务费用",
+      "fieldId": 670091,
+      "fieldName": "toc12",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "资产减值损失",
+      "fieldId": 670092,
+      "fieldName": "toc13",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "加：公允价值变动收益（损失以“－”号填列）",
+      "fieldId": 670093,
+      "fieldName": "gain_fv",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "投资收益（损失以“－”号填列）",
+      "fieldId": 670094,
+      "fieldName": "inve_income",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "其中：对联营企业和合营企业的投资收益",
+      "fieldId": 670095,
+      "fieldName": "inve_income_joint",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "汇兑收益（损失以“－”号填列）",
+      "fieldId": 670096,
+      "fieldName": "gain_exch",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "三、营业利润（亏损以“－”号填列）",
+      "fieldId": 670097,
+      "fieldName": "op",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "加：营业外收入",
+      "fieldId": 670098,
+      "fieldName": "non_op",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "其中：非流动资产处置利得",
+      "fieldId": 670099,
+      "fieldName": "gain_non_ca",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "减：营业外支出",
+      "fieldId": 670100,
+      "fieldName": "non_oe",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "其中：非流动资产处置损失",
+      "fieldId": 670101,
+      "fieldName": "loss_non_ca",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "四、利润总额（亏损总额以“－”号填列）",
+      "fieldId": 670102,
+      "fieldName": "tp",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "减：所得税费用",
+      "fieldId": 670103,
+      "fieldName": "ite",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "五、净利润（净亏损以“－”号填列）",
+      "fieldId": 670104,
+      "fieldName": "np",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "归属于母公司所有者的净利润",
+      "fieldId": 670105,
+      "fieldName": "np_shareholder",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "少数股东损益",
+      "fieldId": 670106,
+      "fieldName": "np_minority",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "六、其他综合收益的税后净额",
+      "fieldId": 670107,
+      "fieldName": "other_np",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "归属母公司所有者的其他综合收益的税后净额",
+      "fieldId": 670108,
+      "fieldName": "other_np1",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "（一）以后不能重分类进损益的其他综合收益",
+      "fieldId": 670109,
+      "fieldName": "other_np11",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "1.重新计量设定受益计划净负债或净资产的变动",
+      "fieldId": 670110,
+      "fieldName": "other_np111",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "2.权益法下在被投资单位不能重分类进损益的其他综合收益中享有的份额",
+      "fieldId": 670111,
+      "fieldName": "other_np112",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "（二）以后将重分类进损益的其他综合收益",
+      "fieldId": 670112,
+      "fieldName": "other_np12",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "1.权益法下在被投资单位以后将重分类进损益的其他综合收益中享有的份额",
+      "fieldId": 670113,
+      "fieldName": "other_np121",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "2.可供出售金融资产公允价值变动损益",
+      "fieldId": 670114,
+      "fieldName": "other_np122",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "3.持有至到期投资重分类为可供出售金融资产损益",
+      "fieldId": 670115,
+      "fieldName": "other_np123",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "4.现金流量套期损益的有效部分",
+      "fieldId": 670116,
+      "fieldName": "other_np124",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "5.外币财务报表折算差额",
+      "fieldId": 670117,
+      "fieldName": "other_np125",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "6.其他",
+      "fieldId": 670118,
+      "fieldName": "other_np126",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "归属于少数股东的其他综合收益的税后净额",
+      "fieldId": 670119,
+      "fieldName": "other_np2",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "七、综合收益总额",
+      "fieldId": 670120,
+      "fieldName": "tci",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "归属于母公司所有者的综合收益总额",
+      "fieldId": 670121,
+      "fieldName": "tci_parent",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "归属于少数股东的综合收益总额",
+      "fieldId": 670122,
+      "fieldName": "tci_monority",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "（一）基本每股收益(元/股)",
+      "fieldId": 670123,
+      "fieldName": "bas_eps",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "（二）稀释每股收益(元/股)",
+      "fieldId": 670124,
+      "fieldName": "dil_eps",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "入库时间",
+      "fieldId": 670125,
+      "fieldName": "entrytime",
+      "fieldType": "datetime",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "最后更新时间",
+      "fieldId": 670126,
+      "fieldName": "updatetime",
+      "fieldType": "datetime",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "下载标识",
+      "fieldId": 670127,
+      "fieldName": "tmstamp",
+      "fieldType": "bigint",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "研发费用",
+      "fieldId": 670128,
+      "fieldName": "toc14",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "利息费用",
+      "fieldId": 670129,
+      "fieldName": "toc14_1",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "利息收入<营业成本>",
+      "fieldId": 670130,
+      "fieldName": "toc14_2",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "其他收益",
+      "fieldId": 670131,
+      "fieldName": "gain_other",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "净敞口套期收益",
+      "fieldId": 670132,
+      "fieldName": "gain_net_eh",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "信用减值损失",
+      "fieldId": 670133,
+      "fieldName": "loss_credit",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "资产减值损失<营业利润>",
+      "fieldId": 670134,
+      "fieldName": "loss_ta",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "资产处置收益",
+      "fieldId": 670135,
+      "fieldName": "gain_ta",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "持续经营净利润",
+      "fieldId": 670136,
+      "fieldName": "np_continuous",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "终止经营净利润",
+      "fieldId": 670137,
+      "fieldName": "np_termination",
+      "fieldType": "numeric",
+      "tableId": 112049072
+    }
+  ],
+  "tableInfo": {
+    "databaseChsName": "朝阳永续",
+    "originalTableId": "62025",
+    "remark": "此表主要包含所有上市公司的合并利润报表数据。涉及金额的数据，单位均为人民币元。",
+    "tableChsName": "利润表（通用）",
+    "tableId": 112049072,
+    "tableName": "FIN_INCOME_GEN"
+  },
+  "contentMap": {}
+}

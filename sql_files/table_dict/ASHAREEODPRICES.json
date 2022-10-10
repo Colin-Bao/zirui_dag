@@ -1,0 +1,258 @@
+{
+  "code": "0",
+  "fieldData": [
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "对象ID",
+      "fieldId": 220146,
+      "fieldName": "OBJECT_ID",
+      "fieldType": "VARCHAR2(100)",
+      "isPrimarykey": "N",
+      "tableId": 9383,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "Wind代码",
+      "fieldId": 220147,
+      "fieldName": "S_INFO_WINDCODE",
+      "fieldType": "VARCHAR2(40)",
+      "isPrimarykey": "Y",
+      "tableId": 9383,
+      "tableName": "Y"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "交易日期",
+      "fieldId": 220148,
+      "fieldName": "TRADE_DT",
+      "fieldType": "VARCHAR2(8)",
+      "isPrimarykey": "Y",
+      "tableId": 9383,
+      "tableName": "Y"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "货币代码",
+      "fieldId": 220149,
+      "fieldName": "CRNCY_CODE",
+      "fieldType": "VARCHAR2(10)",
+      "isPrimarykey": "N",
+      "tableId": 9383,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "昨收盘价(元)",
+      "fieldId": 220150,
+      "fieldName": "S_DQ_PRECLOSE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "数据保留2位小数",
+      "tableId": 9383,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "开盘价(元)",
+      "fieldId": 220151,
+      "fieldName": "S_DQ_OPEN",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "数据保留2位小数",
+      "tableId": 9383,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "最高价(元)",
+      "fieldId": 220152,
+      "fieldName": "S_DQ_HIGH",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "数据保留2位小数",
+      "tableId": 9383,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "最低价(元)",
+      "fieldId": 220153,
+      "fieldName": "S_DQ_LOW",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "数据保留2位小数",
+      "tableId": 9383,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "收盘价(元)",
+      "fieldId": 220154,
+      "fieldName": "S_DQ_CLOSE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "数据保留2位小数",
+      "tableId": 9383,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "涨跌(元)",
+      "fieldId": 220155,
+      "fieldName": "S_DQ_CHANGE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "直接采用收盘价计算。",
+      "tableId": 9383,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "涨跌幅(%)",
+      "fieldId": 220156,
+      "fieldName": "S_DQ_PCTCHANGE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "直接采用收盘价计算。",
+      "tableId": 9383,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "成交量(手)",
+      "fieldId": 220157,
+      "fieldName": "S_DQ_VOLUME",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9383,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "成交金额(千元)",
+      "fieldId": 220158,
+      "fieldName": "S_DQ_AMOUNT",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "tableId": 9383,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "复权昨收盘价(元)",
+      "fieldId": 220159,
+      "fieldName": "S_DQ_ADJPRECLOSE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "昨收盘价*复权因子",
+      "tableId": 9383,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "复权开盘价(元)",
+      "fieldId": 220160,
+      "fieldName": "S_DQ_ADJOPEN",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "开盘价*复权因子",
+      "tableId": 9383,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "复权最高价(元)",
+      "fieldId": 220161,
+      "fieldName": "S_DQ_ADJHIGH",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "最高价*复权因子",
+      "tableId": 9383,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "复权最低价(元)",
+      "fieldId": 220162,
+      "fieldName": "S_DQ_ADJLOW",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "最低价*复权因子",
+      "tableId": 9383,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "复权收盘价(元)",
+      "fieldId": 220163,
+      "fieldName": "S_DQ_ADJCLOSE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "收盘价*复权因子",
+      "tableId": 9383,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "复权因子",
+      "fieldId": 220164,
+      "fieldName": "S_DQ_ADJFACTOR",
+      "fieldType": "NUMBER(20,6)",
+      "isPrimarykey": "N",
+      "remark": "初始值为1；当日复权因子=前一交易日收盘价/当日昨收盘价*前一交易日复权因子。",
+      "tableId": 9383,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "均价(VWAP)",
+      "fieldId": 220165,
+      "fieldName": "S_DQ_AVGPRICE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "N",
+      "remark": "成交金额/成交量",
+      "tableId": 9383,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "交易状态",
+      "fieldId": 220166,
+      "fieldName": "S_DQ_TRADESTATUS",
+      "fieldType": "VARCHAR2(10)",
+      "isPrimarykey": "N",
+      "remark": "附注\n-1:交易\n-2:待核查\n0:停牌\nXD:除息\nXR:除权\nDR:除权除息\nN:上市首日",
+      "tableId": 9383,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "交易状态代码",
+      "fieldId": 220167,
+      "fieldName": "S_DQ_TRADESTATUSCODE",
+      "fieldType": "NUMBER(5,0)",
+      "isPrimarykey": "N",
+      "tableId": 9383,
+      "tableName": "N"
+    }
+  ],
+  "tableInfo": {
+    "content": "{\"TopicList\":[{\"Content\": \"1、如果股票在某期间段暂停上市（参考AShareST），则日行情表中不记录该期间段的相关收盘价等记录（例如：000545.SZ在2012年停牌过程中的价格没有记录)。\", \"Name\": \"AShareEODPrices-常见问题\", \"FileName\": None, \"FileID\": None}, {\"Content\": \"<P style=\"MARGIN: 0cm 0cm 0pt\" class=MsoNormal><B style=\"mso-bidi-font-weight: normal\"><SPAN style=\"FONT-FAMILY: 黑体; FONT-SIZE: 12pt; mso-ascii-font-family: Arial\"></SPAN></B><B style=\"mso-bidi-font-weight: normal\"><SPAN style=\"FONT-SIZE: 12pt; mso-fareast-font-family: 黑体\" lang=EN-US></SPAN></B>&nbsp;</P><TABLE style=\"MARGIN: auto auto auto 4.65pt; WIDTH: 278pt; BORDER-COLLAPSE: collapse; mso-yfti-tbllook: 1184; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt\" class=MsoNormalTable border=0 cellSpacing=0 cellPadding=0 width=371><TBODY><TR style=\"HEIGHT: 14.25pt; mso-yfti-irow: 0; mso-yfti-firstrow: yes\"><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: windowtext 1pt solid; PADDING-BOTTOM: 0cm; PADDING-LEFT: 5.4pt; WIDTH: 54pt; PADDING-RIGHT: 5.4pt; BACKGROUND: yellow; HEIGHT: 14.25pt; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=72><P style=\"LINE-HEIGHT: 150%; MARGIN: 0cm 0cm 0pt; mso-pagination: widow-orphan\" class=MsoNormal><B><SPAN style=\"LINE-HEIGHT: 150%; FONT-FAMILY: 宋体; COLOR: black; mso-bidi-font-size: 10.5pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt\">序号<SPAN lang=EN-US><?xml:namespace prefix = o ns = \"urn:schemas-microsoft-com:office:office\" /><o:p></o:p></SPAN></SPAN></B></P></TD><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: #000000; PADDING-BOTTOM: 0cm; PADDING-LEFT: 5.4pt; WIDTH: 111pt; PADDING-RIGHT: 5.4pt; BACKGROUND: yellow; HEIGHT: 14.25pt; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=148><P style=\"LINE-HEIGHT: 150%; MARGIN: 0cm 0cm 0pt; mso-pagination: widow-orphan\" class=MsoNormal><B><SPAN style=\"LINE-HEIGHT: 150%; FONT-FAMILY: 宋体; COLOR: black; mso-bidi-font-size: 10.5pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt\">字典值<SPAN lang=EN-US><o:p></o:p></SPAN></SPAN></B></P></TD><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: #000000; PADDING-BOTTOM: 0cm; PADDING-LEFT: 5.4pt; WIDTH: 113pt; PADDING-RIGHT: 5.4pt; BACKGROUND: yellow; HEIGHT: 14.25pt; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=151><P style=\"LINE-HEIGHT: 150%; MARGIN: 0cm 0cm 0pt; mso-pagination: widow-orphan\" class=MsoNormal><B><SPAN style=\"LINE-HEIGHT: 150%; FONT-FAMILY: 宋体; COLOR: black; mso-bidi-font-size: 10.5pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt\">字典名称<SPAN lang=EN-US><o:p></o:p></SPAN></SPAN></B></P></TD></TR><TR style=\"HEIGHT: 14.25pt; mso-yfti-irow: 1\"><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: windowtext 1pt solid; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 54pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=72><P style=\"LINE-HEIGHT: 150%; MARGIN: 0cm 0cm 0pt; mso-pagination: widow-orphan\" class=MsoNormal><SPAN style=\"LINE-HEIGHT: 150%; FONT-FAMILY: 宋体; COLOR: black; mso-bidi-font-size: 10.5pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt\" lang=EN-US>1<o:p></o:p></SPAN></P></TD><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: #000000; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 111pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" width=148><P style=\"MARGIN: 0cm 0cm 0pt\" class=MsoNormal><SPAN style=\"FONT-SIZE: 10pt; mso-bidi-font-family: Arial\" lang=EN-US>DR<o:p></o:p></SPAN></P></TD><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: #000000; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 113pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=151><P style=\"MARGIN: 0cm 0cm 0pt\" class=MsoNormal><SPAN style=\"FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial\">除权除息</SPAN><SPAN lang=EN-US><o:p></o:p></SPAN></P></TD></TR><TR style=\"HEIGHT: 14.25pt; mso-yfti-irow: 2\"><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: windowtext 1pt solid; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 54pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=72><P style=\"LINE-HEIGHT: 150%; MARGIN: 0cm 0cm 0pt; mso-pagination: widow-orphan\" class=MsoNormal><SPAN style=\"LINE-HEIGHT: 150%; FONT-FAMILY: 宋体; COLOR: black; mso-bidi-font-size: 10.5pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt\" lang=EN-US>2<o:p></o:p></SPAN></P></TD><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: #000000; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 111pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" width=148><P style=\"MARGIN: 0cm 0cm 0pt\" class=MsoNormal><SPAN style=\"FONT-SIZE: 10pt; mso-bidi-font-family: Arial\" lang=EN-US>N<o:p></o:p></SPAN></P></TD><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: #000000; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 113pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=151><P style=\"MARGIN: 0cm 0cm 0pt\" class=MsoNormal><SPAN style=\"FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial\">新股</SPAN><SPAN lang=EN-US><o:p></o:p></SPAN></P></TD></TR><TR style=\"HEIGHT: 14.25pt; mso-yfti-irow: 3\"><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: windowtext 1pt solid; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 54pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=72><P style=\"LINE-HEIGHT: 150%; MARGIN: 0cm 0cm 0pt; mso-pagination: widow-orphan\" class=MsoNormal><SPAN style=\"LINE-HEIGHT: 150%; FONT-FAMILY: 宋体; COLOR: black; mso-bidi-font-size: 10.5pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt\" lang=EN-US>3<o:p></o:p></SPAN></P></TD><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: #000000; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 111pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" width=148><P style=\"MARGIN: 0cm 0cm 0pt\" class=MsoNormal><SPAN style=\"FONT-SIZE: 10pt; mso-bidi-font-family: Arial\" lang=EN-US>XD<o:p></o:p></SPAN></P></TD><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: #000000; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 113pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=151><P style=\"MARGIN: 0cm 0cm 0pt\" class=MsoNormal><SPAN style=\"FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial\">除息</SPAN><SPAN lang=EN-US><o:p></o:p></SPAN></P></TD></TR><TR style=\"HEIGHT: 14.25pt; mso-yfti-irow: 4; mso-yfti-lastrow: yes\"><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: windowtext 1pt solid; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 54pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=72><P style=\"LINE-HEIGHT: 150%; MARGIN: 0cm 0cm 0pt; mso-pagination: widow-orphan\" class=MsoNormal><SPAN style=\"LINE-HEIGHT: 150%; FONT-FAMILY: 宋体; COLOR: black; mso-bidi-font-size: 10.5pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt\" lang=EN-US>4<o:p></o:p></SPAN></P></TD><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: #000000; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 111pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" width=148><P style=\"MARGIN: 0cm 0cm 0pt\" class=MsoNormal><SPAN style=\"FONT-SIZE: 10pt; mso-bidi-font-family: Arial\" lang=EN-US>XR<o:p></o:p></SPAN></P></TD><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: #000000; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 113pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=151><P style=\"MARGIN: 0cm 0cm 0pt\" class=MsoNormal><SPAN style=\"FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial\">除权</SPAN><SPAN lang=EN-US><o:p></o:p></SPAN></P></TD></TR></TBODY></TABLE>\", \"Name\": \"交易状态代码\", \"FileName\": None, \"FileID\": None}, {\"Content\": \"<span style=\"color: red; font-family: 宋体; font-size: 11pt; mso-bidi-font-family: 宋体; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\" lang=\"EN-US\">T</span><span style=\"color: red; font-family: 宋体; font-size: 11pt; mso-bidi-font-family: 宋体; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\">日复权因子<span lang=\"EN-US\"> =(T-1</span>日收盘价<span lang=\"EN-US\">)</span>÷<span lang=\"EN-US\">(T</span>日昨收盘价<span lang=\"EN-US\">)</span>×<span lang=\"EN-US\"> (T-1</span>日复权因子<span lang=\"EN-US\">)</span>。<span lang=\"EN-US\"><br>T</span>日后复权收盘价<span lang=\"EN-US\"> = (T</span>日最新价<span lang=\"EN-US\">)</span>×<span lang=\"EN-US\">(T</span>日复权因子<span lang=\"EN-US\">)<br>T</span>日前复权收盘价<span lang=\"EN-US\"> =(T</span>日复权收盘价<span lang=\"EN-US\">) </span>÷<span lang=\"EN-US\">(</span>最新复权因子<span lang=\"EN-US\">)</span></span>\", \"Name\": \"前复权，后复权，复权因子的算法\", \"FileName\": None, \"FileID\": None}, {\"Content\": \"<br>\", \"Name\": \"代码对应\", \"FileName\": \"货币代码对应表.xlsx\", \"FileID\": \"48d6a81f-7f29-404c-b200-6194b98c7708\"}]}",
+    "databaseChsName": "万得",
+    "isComplete": "N",
+    "originalTableId": "9383",
+    "remark": "记录沪深交易所自营业以来A股日行情数据",
+    "tableChsName": "中国A股日行情",
+    "tableId": 9383,
+    "tableName": "ASHAREEODPRICES",
+    "updateRate": "day",
+    "updateTime": "02:30;03:00;03:30;04:00;04:30;05:00;05:30;06:00;15:16;15:30;16:00;16:30"
+  },
+  "contentMap": {
+    "交易状态代码": "<P style=\"MARGIN: 0cm 0cm 0pt\" class=MsoNormal><B style=\"mso-bidi-font-weight: normal\"><SPAN style=\"FONT-FAMILY: 黑体; FONT-SIZE: 12pt; mso-ascii-font-family: Arial\"></SPAN></B><B style=\"mso-bidi-font-weight: normal\"><SPAN style=\"FONT-SIZE: 12pt; mso-fareast-font-family: 黑体\" lang=EN-US></SPAN></B>&nbsp;</P><TABLE style=\"MARGIN: auto auto auto 4.65pt; WIDTH: 278pt; BORDER-COLLAPSE: collapse; mso-yfti-tbllook: 1184; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt\" class=MsoNormalTable border=0 cellSpacing=0 cellPadding=0 width=371><TBODY><TR style=\"HEIGHT: 14.25pt; mso-yfti-irow: 0; mso-yfti-firstrow: yes\"><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: windowtext 1pt solid; PADDING-BOTTOM: 0cm; PADDING-LEFT: 5.4pt; WIDTH: 54pt; PADDING-RIGHT: 5.4pt; BACKGROUND: yellow; HEIGHT: 14.25pt; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=72><P style=\"LINE-HEIGHT: 150%; MARGIN: 0cm 0cm 0pt; mso-pagination: widow-orphan\" class=MsoNormal><B><SPAN style=\"LINE-HEIGHT: 150%; FONT-FAMILY: 宋体; COLOR: black; mso-bidi-font-size: 10.5pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt\">序号<SPAN lang=EN-US><?xml:namespace prefix = o ns = \"urn:schemas-microsoft-com:office:office\" /><o:p></o:p></SPAN></SPAN></B></P></TD><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: #000000; PADDING-BOTTOM: 0cm; PADDING-LEFT: 5.4pt; WIDTH: 111pt; PADDING-RIGHT: 5.4pt; BACKGROUND: yellow; HEIGHT: 14.25pt; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=148><P style=\"LINE-HEIGHT: 150%; MARGIN: 0cm 0cm 0pt; mso-pagination: widow-orphan\" class=MsoNormal><B><SPAN style=\"LINE-HEIGHT: 150%; FONT-FAMILY: 宋体; COLOR: black; mso-bidi-font-size: 10.5pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt\">字典值<SPAN lang=EN-US><o:p></o:p></SPAN></SPAN></B></P></TD><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: #000000; PADDING-BOTTOM: 0cm; PADDING-LEFT: 5.4pt; WIDTH: 113pt; PADDING-RIGHT: 5.4pt; BACKGROUND: yellow; HEIGHT: 14.25pt; BORDER-TOP: windowtext 1pt solid; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=151><P style=\"LINE-HEIGHT: 150%; MARGIN: 0cm 0cm 0pt; mso-pagination: widow-orphan\" class=MsoNormal><B><SPAN style=\"LINE-HEIGHT: 150%; FONT-FAMILY: 宋体; COLOR: black; mso-bidi-font-size: 10.5pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt\">字典名称<SPAN lang=EN-US><o:p></o:p></SPAN></SPAN></B></P></TD></TR><TR style=\"HEIGHT: 14.25pt; mso-yfti-irow: 1\"><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: windowtext 1pt solid; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 54pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=72><P style=\"LINE-HEIGHT: 150%; MARGIN: 0cm 0cm 0pt; mso-pagination: widow-orphan\" class=MsoNormal><SPAN style=\"LINE-HEIGHT: 150%; FONT-FAMILY: 宋体; COLOR: black; mso-bidi-font-size: 10.5pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt\" lang=EN-US>1<o:p></o:p></SPAN></P></TD><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: #000000; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 111pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" width=148><P style=\"MARGIN: 0cm 0cm 0pt\" class=MsoNormal><SPAN style=\"FONT-SIZE: 10pt; mso-bidi-font-family: Arial\" lang=EN-US>DR<o:p></o:p></SPAN></P></TD><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: #000000; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 113pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=151><P style=\"MARGIN: 0cm 0cm 0pt\" class=MsoNormal><SPAN style=\"FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial\">除权除息</SPAN><SPAN lang=EN-US><o:p></o:p></SPAN></P></TD></TR><TR style=\"HEIGHT: 14.25pt; mso-yfti-irow: 2\"><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: windowtext 1pt solid; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 54pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=72><P style=\"LINE-HEIGHT: 150%; MARGIN: 0cm 0cm 0pt; mso-pagination: widow-orphan\" class=MsoNormal><SPAN style=\"LINE-HEIGHT: 150%; FONT-FAMILY: 宋体; COLOR: black; mso-bidi-font-size: 10.5pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt\" lang=EN-US>2<o:p></o:p></SPAN></P></TD><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: #000000; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 111pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" width=148><P style=\"MARGIN: 0cm 0cm 0pt\" class=MsoNormal><SPAN style=\"FONT-SIZE: 10pt; mso-bidi-font-family: Arial\" lang=EN-US>N<o:p></o:p></SPAN></P></TD><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: #000000; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 113pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=151><P style=\"MARGIN: 0cm 0cm 0pt\" class=MsoNormal><SPAN style=\"FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial\">新股</SPAN><SPAN lang=EN-US><o:p></o:p></SPAN></P></TD></TR><TR style=\"HEIGHT: 14.25pt; mso-yfti-irow: 3\"><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: windowtext 1pt solid; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 54pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=72><P style=\"LINE-HEIGHT: 150%; MARGIN: 0cm 0cm 0pt; mso-pagination: widow-orphan\" class=MsoNormal><SPAN style=\"LINE-HEIGHT: 150%; FONT-FAMILY: 宋体; COLOR: black; mso-bidi-font-size: 10.5pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt\" lang=EN-US>3<o:p></o:p></SPAN></P></TD><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: #000000; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 111pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" width=148><P style=\"MARGIN: 0cm 0cm 0pt\" class=MsoNormal><SPAN style=\"FONT-SIZE: 10pt; mso-bidi-font-family: Arial\" lang=EN-US>XD<o:p></o:p></SPAN></P></TD><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: #000000; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 113pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=151><P style=\"MARGIN: 0cm 0cm 0pt\" class=MsoNormal><SPAN style=\"FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial\">除息</SPAN><SPAN lang=EN-US><o:p></o:p></SPAN></P></TD></TR><TR style=\"HEIGHT: 14.25pt; mso-yfti-irow: 4; mso-yfti-lastrow: yes\"><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: windowtext 1pt solid; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 54pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=72><P style=\"LINE-HEIGHT: 150%; MARGIN: 0cm 0cm 0pt; mso-pagination: widow-orphan\" class=MsoNormal><SPAN style=\"LINE-HEIGHT: 150%; FONT-FAMILY: 宋体; COLOR: black; mso-bidi-font-size: 10.5pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt\" lang=EN-US>4<o:p></o:p></SPAN></P></TD><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: #000000; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 111pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" width=148><P style=\"MARGIN: 0cm 0cm 0pt\" class=MsoNormal><SPAN style=\"FONT-SIZE: 10pt; mso-bidi-font-family: Arial\" lang=EN-US>XR<o:p></o:p></SPAN></P></TD><TD style=\"BORDER-BOTTOM: windowtext 1pt solid; BORDER-LEFT: #000000; PADDING-BOTTOM: 0cm; BACKGROUND-COLOR: transparent; PADDING-LEFT: 5.4pt; WIDTH: 113pt; PADDING-RIGHT: 5.4pt; HEIGHT: 14.25pt; BORDER-TOP: #000000; BORDER-RIGHT: windowtext 1pt solid; PADDING-TOP: 0cm\" vAlign=top width=151><P style=\"MARGIN: 0cm 0cm 0pt\" class=MsoNormal><SPAN style=\"FONT-FAMILY: 宋体; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial\">除权</SPAN><SPAN lang=EN-US><o:p></o:p></SPAN></P></TD></TR></TBODY></TABLE>",
+    "代码对应": "<br>",
+    "AShareEODPrices-常见问题": "1、如果股票在某期间段暂停上市（参考AShareST），则日行情表中不记录该期间段的相关收盘价等记录（例如：000545.SZ在2012年停牌过程中的价格没有记录)。",
+    "前复权，后复权，复权因子的算法": "<span style=\"color: red; font-family: 宋体; font-size: 11pt; mso-bidi-font-family: 宋体; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\" lang=\"EN-US\">T</span><span style=\"color: red; font-family: 宋体; font-size: 11pt; mso-bidi-font-family: 宋体; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA;\">日复权因子<span lang=\"EN-US\"> =(T-1</span>日收盘价<span lang=\"EN-US\">)</span>÷<span lang=\"EN-US\">(T</span>日昨收盘价<span lang=\"EN-US\">)</span>×<span lang=\"EN-US\"> (T-1</span>日复权因子<span lang=\"EN-US\">)</span>。<span lang=\"EN-US\"><br>T</span>日后复权收盘价<span lang=\"EN-US\"> = (T</span>日最新价<span lang=\"EN-US\">)</span>×<span lang=\"EN-US\">(T</span>日复权因子<span lang=\"EN-US\">)<br>T</span>日前复权收盘价<span lang=\"EN-US\"> =(T</span>日复权收盘价<span lang=\"EN-US\">) </span>÷<span lang=\"EN-US\">(</span>最新复权因子<span lang=\"EN-US\">)</span></span>"
+  }
+}

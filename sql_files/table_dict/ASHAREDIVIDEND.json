@@ -1,0 +1,294 @@
+{
+  "code": "0",
+  "fieldData": [
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "对象ID",
+      "fieldId": 222779,
+      "fieldName": "OBJECT_ID",
+      "fieldType": "VARCHAR2(100)",
+      "isPrimarykey": "N",
+      "tableId": 9496,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "Wind代码",
+      "fieldId": 222780,
+      "fieldName": "WIND_CODE",
+      "fieldType": "VARCHAR2(40)",
+      "isPrimarykey": "N",
+      "tableId": 9496,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "Wind代码",
+      "fieldId": 222781,
+      "fieldName": "S_INFO_WINDCODE",
+      "fieldType": "VARCHAR2(40)",
+      "isPrimarykey": "Y",
+      "tableId": 9496,
+      "tableName": "Y"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "方案进度",
+      "fieldId": 222782,
+      "fieldName": "S_DIV_PROGRESS",
+      "fieldType": "VARCHAR2(10)",
+      "isPrimarykey": "N",
+      "remark": "1.董事会预案\n2.股东大会通过\n3.实施\n4.未通过\n12.停止实施\n17.股东提议\n19.董事会预案预披露\n分红实施进程：股东提议--董事会预案--股东大会--实施",
+      "tableId": 9496,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "每股送转",
+      "fieldId": 222783,
+      "fieldName": "STK_DVD_PER_SH",
+      "fieldType": "NUMBER(20,8)",
+      "isPrimarykey": "N",
+      "tableId": 9496,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "每股派息(税前)(元)",
+      "fieldId": 222784,
+      "fieldName": "CASH_DVD_PER_SH_PRE_TAX",
+      "fieldType": "NUMBER(24,8)",
+      "isPrimarykey": "N",
+      "tableId": 9496,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "每股派息(税后)(元)",
+      "fieldId": 222785,
+      "fieldName": "CASH_DVD_PER_SH_AFTER_TAX",
+      "fieldType": "NUMBER(24,8)",
+      "isPrimarykey": "N",
+      "tableId": 9496,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "股权登记日",
+      "fieldId": 222786,
+      "fieldName": "EQY_RECORD_DT",
+      "fieldType": "VARCHAR2(8)",
+      "isPrimarykey": "Y",
+      "tableId": 9496,
+      "tableName": "Y"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "除权除息日",
+      "fieldId": 222787,
+      "fieldName": "EX_DT",
+      "fieldType": "VARCHAR2(8)",
+      "isPrimarykey": "N",
+      "tableId": 9496,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "派息日",
+      "fieldId": 222788,
+      "fieldName": "DVD_PAYOUT_DT",
+      "fieldType": "VARCHAR2(8)",
+      "isPrimarykey": "N",
+      "tableId": 9496,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "红股上市日",
+      "fieldId": 222789,
+      "fieldName": "LISTING_DT_OF_DVD_SHR",
+      "fieldType": "VARCHAR2(8)",
+      "isPrimarykey": "N",
+      "tableId": 9496,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "预案公告日",
+      "fieldId": 222790,
+      "fieldName": "S_DIV_PRELANDATE",
+      "fieldType": "VARCHAR2(8)",
+      "isPrimarykey": "Y",
+      "remark": "董事会预案公告日期",
+      "tableId": 9496,
+      "tableName": "Y"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "股东大会公告日",
+      "fieldId": 222791,
+      "fieldName": "S_DIV_SMTGDATE",
+      "fieldType": "VARCHAR2(8)",
+      "isPrimarykey": "N",
+      "tableId": 9496,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "分红实施公告日",
+      "fieldId": 222792,
+      "fieldName": "DVD_ANN_DT",
+      "fieldType": "VARCHAR2(8)",
+      "isPrimarykey": "N",
+      "tableId": 9496,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "基准日期",
+      "fieldId": 222793,
+      "fieldName": "S_DIV_BASEDATE",
+      "fieldType": "VARCHAR2(8)",
+      "isPrimarykey": "N",
+      "tableId": 9496,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "基准股本(万股)",
+      "fieldId": 222794,
+      "fieldName": "S_DIV_BASESHARE",
+      "fieldType": "NUMBER(20,4)",
+      "isPrimarykey": "Y",
+      "tableId": 9496,
+      "tableName": "Y"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "货币代码",
+      "fieldId": 222795,
+      "fieldName": "CRNCY_CODE",
+      "fieldType": "VARCHAR2(10)",
+      "isPrimarykey": "N",
+      "tableId": 9496,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "最新公告日期",
+      "fieldId": 222796,
+      "fieldName": "ANN_DT",
+      "fieldType": "VARCHAR2(8)",
+      "isPrimarykey": "Y",
+      "tableId": 9496,
+      "tableName": "Y"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "方案是否变更",
+      "fieldId": 222797,
+      "fieldName": "IS_CHANGED",
+      "fieldType": "NUMBER(5,0)",
+      "isPrimarykey": "N",
+      "remark": "为1时代表变更过，否则为未变更",
+      "tableId": 9496,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "分红年度",
+      "fieldId": 222798,
+      "fieldName": "REPORT_PERIOD",
+      "fieldType": "VARCHAR2(8)",
+      "isPrimarykey": "Y",
+      "tableId": 9496,
+      "tableName": "Y"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "方案变更说明",
+      "fieldId": 222799,
+      "fieldName": "S_DIV_CHANGE",
+      "fieldType": "VARCHAR2(500)",
+      "isPrimarykey": "N",
+      "tableId": 9496,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "每股送股比例",
+      "fieldId": 222800,
+      "fieldName": "S_DIV_BONUSRATE",
+      "fieldType": "NUMBER(20,8)",
+      "isPrimarykey": "N",
+      "tableId": 9496,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "每股转增比例",
+      "fieldId": 222801,
+      "fieldName": "S_DIV_CONVERSEDRATE",
+      "fieldType": "NUMBER(20,8)",
+      "isPrimarykey": "N",
+      "tableId": 9496,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "备注",
+      "fieldId": 222802,
+      "fieldName": "MEMO",
+      "fieldType": "VARCHAR2(200)",
+      "isPrimarykey": "N",
+      "tableId": 9496,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "预案预披露公告日",
+      "fieldId": 222803,
+      "fieldName": "S_DIV_PREANNDT",
+      "fieldType": "VARCHAR2(8)",
+      "isPrimarykey": "N",
+      "remark": "股东提议的公告日期",
+      "tableId": 9496,
+      "tableName": "N"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "分红对象",
+      "fieldId": 222804,
+      "fieldName": "S_DIV_OBJECT",
+      "fieldType": "VARCHAR2(100)",
+      "isPrimarykey": "Y",
+      "tableId": 9496,
+      "tableName": "Y"
+    },
+    {
+      "databaseChsName": "万得",
+      "fieldChsName": "是否不分转",
+      "fieldId": 222805,
+      "fieldName": "IS_TRANSFER",
+      "fieldType": "NUMBER(1,0)",
+      "isPrimarykey": "N",
+      "tableId": 9496,
+      "tableName": "N"
+    }
+  ],
+  "tableInfo": {
+    "content": "{\"TopicList\":[{\"Content\": \"<font face=\"宋体\"></font><p style=\"margin: 0cm 0cm 0pt; text-align: left; mso-pagination: widow-orphan;\" class=\"MsoNormal\" align=\"left\"><b style=\"mso-bidi-font-weight: normal;\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\" lang=\"EN-US\">1</span></b><b style=\"mso-bidi-font-weight: normal;\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\">、<span lang=\"EN-US\">Q</span>：<span lang=\"EN-US\">AShareDividend </span>中分红年度，要么是年中的<span lang=\"EN-US\">XXXX</span>年<span lang=\"EN-US\">6</span>月<span lang=\"EN-US\">30</span>日，要么是年终<span lang=\"EN-US\">XXXX</span>年<span lang=\"EN-US\">12</span>月<span lang=\"EN-US\">31</span>日，怎么又其他日期的呢？<span lang=\"EN-US\"><?xml:namespace prefix = o ns = \"urn:schemas-microsoft-com:office:office\" /><o:p></o:p></span></span></b></p><font face=\"宋体\"></font><p style=\"margin: 0cm 0cm 0pt; text-align: left; mso-pagination: widow-orphan;\" class=\"MsoNormal\" align=\"left\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\" lang=\"EN-US\">A</span><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\">：那种是其他承诺分红的，比如山东地矿的，业绩承诺未达标，然后送股的分红这种不是正常的报告期分红，还有股改承诺分红，但是状态是已实施状态；</span><span style=\\\"background: yellow; font-family: \"Verdana\",\"sans-serif\"; font-size: 10pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-highlight: yellow;\\\" lang=\"EN-US\"><o:p></o:p></span></p><font face=\"宋体\"></font><p style=\"margin: 0cm 0cm 0pt;\" class=\"MsoNormal\"><span lang=\"EN-US\"><o:p><font face=\"Calibri\">&nbsp;</font></o:p></span></p><font face=\"宋体\"></font><p style=\"margin: 0cm 0cm 0pt; text-align: left;\" class=\"MsoNormal\" align=\"left\"><b style=\"mso-bidi-font-weight: normal;\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\" lang=\"EN-US\">2</span></b><b style=\"mso-bidi-font-weight: normal;\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\">、<span lang=\"EN-US\">Q:AShareDividend(</span>中国<span lang=\"EN-US\">A</span>股分红<span lang=\"EN-US\">)</span>、<span lang=\"EN-US\">AShareRightIssue(</span>中国<span lang=\"EN-US\">A</span>股配股<span lang=\"EN-US\">)</span>、<span lang=\"EN-US\">AShareEXRightDividendRecord(</span>中国<span lang=\"EN-US\">A</span>股除权除息记录<span lang=\"EN-US\">)</span>，这三张表何时会有数据写入<span lang=\"EN-US\">,</span>是否只要有<span lang=\"EN-US\">\"</span>分红配股<span lang=\"EN-US\">\"</span>的预案提出就会有相应数据入库？分红和配股表的记录和除权除息记录表有何关系？分红配股表中的<span lang=\"EN-US\">OPDATE/OPMODE(</span>值为<span lang=\"EN-US\">0,1) </span>代表什么意思？<span lang=\"EN-US\"><o:p></o:p></span></span></b></p><font face=\"宋体\"></font><p style=\"margin: 0cm 0cm 0pt; text-align: left;\" class=\"MsoNormal\" align=\"left\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\" lang=\"EN-US\"><span style=\"mso-spacerun: yes;\">&nbsp;&nbsp; </span>A</span><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\">：分红、配股在预案的时候就加工，除权除夕记录是实际发生的时候才有记录；<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\"></font><p style=\"margin: 0cm 0cm 0pt; text-align: left;\" class=\"MsoNormal\" align=\"left\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\" lang=\"EN-US\"><span style=\"mso-spacerun: yes;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\">除权除息记录是分红和配股表实际发生的时候的事件汇总<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\"></font><p style=\"margin: 0cm 0cm 0pt; text-align: left;\" class=\"MsoNormal\" align=\"left\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\" lang=\"EN-US\"><span style=\"mso-spacerun: yes;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\">分红及配股表是否有效可以参考‘<span lang=\"EN-US\">S_DIV_PROGRESS<span style=\"mso-spacerun: yes;\">&nbsp; </span></span>方案进度’<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\"></font><p style=\"margin: 0cm 0cm 0pt; text-align: left;\" class=\"MsoNormal\" align=\"left\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\" lang=\"EN-US\"><span style=\"mso-spacerun: yes;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>0</span><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\">表示新增，<span lang=\"EN-US\">1</span>表示修改，<span lang=\"EN-US\">2</span>表示删除</span></p><p style=\"margin: 0cm 0cm 0pt; text-align: left;\" class=\"MsoNormal\" align=\"left\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\"></span>&nbsp;</p><p style=\"margin: 0cm 0cm 0pt; text-align: left;\" class=\"MsoNormal\" align=\"left\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\"><strong>3、请问在表AShareDividend(中国A股分红)当中，怎么看到哪天持有或者时间段持有才能享受分红，也就是说看哪个字段。</strong><br>可以参考股权登记日。<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\"></font>\", \"Name\": \"AShareDividend-常见问题\", \"FileName\": \"\", \"FileID\": \"\"}]}",
+    "databaseChsName": "万得",
+    "isComplete": "N",
+    "originalTableId": "9496",
+    "remark": "记录A股分红的全程记录，从董事会预案开始，历经股东大会通过（或否决）、实施、缴款，直到红股上市流通",
+    "tableChsName": "中国A股分红",
+    "tableId": 9496,
+    "tableName": "ASHAREDIVIDEND",
+    "updateRate": "day",
+    "updateTime": "02:00;09:30;10:30;16:30;17:00;18:30;19:30;20:30;21:30;22:30"
+  },
+  "contentMap": {
+    "AShareDividend-常见问题": "<font face=\"宋体\"></font><p style=\"margin: 0cm 0cm 0pt; text-align: left; mso-pagination: widow-orphan;\" class=\"MsoNormal\" align=\"left\"><b style=\"mso-bidi-font-weight: normal;\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\" lang=\"EN-US\">1</span></b><b style=\"mso-bidi-font-weight: normal;\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\">、<span lang=\"EN-US\">Q</span>：<span lang=\"EN-US\">AShareDividend </span>中分红年度，要么是年中的<span lang=\"EN-US\">XXXX</span>年<span lang=\"EN-US\">6</span>月<span lang=\"EN-US\">30</span>日，要么是年终<span lang=\"EN-US\">XXXX</span>年<span lang=\"EN-US\">12</span>月<span lang=\"EN-US\">31</span>日，怎么又其他日期的呢？<span lang=\"EN-US\"><?xml:namespace prefix = o ns = \"urn:schemas-microsoft-com:office:office\" /><o:p></o:p></span></span></b></p><font face=\"宋体\"></font><p style=\"margin: 0cm 0cm 0pt; text-align: left; mso-pagination: widow-orphan;\" class=\"MsoNormal\" align=\"left\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\" lang=\"EN-US\">A</span><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\">：那种是其他承诺分红的，比如山东地矿的，业绩承诺未达标，然后送股的分红这种不是正常的报告期分红，还有股改承诺分红，但是状态是已实施状态；</span><span style=\\\"background: yellow; font-family: \"Verdana\",\"sans-serif\"; font-size: 10pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-highlight: yellow;\\\" lang=\"EN-US\"><o:p></o:p></span></p><font face=\"宋体\"></font><p style=\"margin: 0cm 0cm 0pt;\" class=\"MsoNormal\"><span lang=\"EN-US\"><o:p><font face=\"Calibri\">&nbsp;</font></o:p></span></p><font face=\"宋体\"></font><p style=\"margin: 0cm 0cm 0pt; text-align: left;\" class=\"MsoNormal\" align=\"left\"><b style=\"mso-bidi-font-weight: normal;\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\" lang=\"EN-US\">2</span></b><b style=\"mso-bidi-font-weight: normal;\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\">、<span lang=\"EN-US\">Q:AShareDividend(</span>中国<span lang=\"EN-US\">A</span>股分红<span lang=\"EN-US\">)</span>、<span lang=\"EN-US\">AShareRightIssue(</span>中国<span lang=\"EN-US\">A</span>股配股<span lang=\"EN-US\">)</span>、<span lang=\"EN-US\">AShareEXRightDividendRecord(</span>中国<span lang=\"EN-US\">A</span>股除权除息记录<span lang=\"EN-US\">)</span>，这三张表何时会有数据写入<span lang=\"EN-US\">,</span>是否只要有<span lang=\"EN-US\">\"</span>分红配股<span lang=\"EN-US\">\"</span>的预案提出就会有相应数据入库？分红和配股表的记录和除权除息记录表有何关系？分红配股表中的<span lang=\"EN-US\">OPDATE/OPMODE(</span>值为<span lang=\"EN-US\">0,1) </span>代表什么意思？<span lang=\"EN-US\"><o:p></o:p></span></span></b></p><font face=\"宋体\"></font><p style=\"margin: 0cm 0cm 0pt; text-align: left;\" class=\"MsoNormal\" align=\"left\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\" lang=\"EN-US\"><span style=\"mso-spacerun: yes;\">&nbsp;&nbsp; </span>A</span><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\">：分红、配股在预案的时候就加工，除权除夕记录是实际发生的时候才有记录；<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\"></font><p style=\"margin: 0cm 0cm 0pt; text-align: left;\" class=\"MsoNormal\" align=\"left\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\" lang=\"EN-US\"><span style=\"mso-spacerun: yes;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\">除权除息记录是分红和配股表实际发生的时候的事件汇总<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\"></font><p style=\"margin: 0cm 0cm 0pt; text-align: left;\" class=\"MsoNormal\" align=\"left\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\" lang=\"EN-US\"><span style=\"mso-spacerun: yes;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\">分红及配股表是否有效可以参考‘<span lang=\"EN-US\">S_DIV_PROGRESS<span style=\"mso-spacerun: yes;\">&nbsp; </span></span>方案进度’<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\"></font><p style=\"margin: 0cm 0cm 0pt; text-align: left;\" class=\"MsoNormal\" align=\"left\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\" lang=\"EN-US\"><span style=\"mso-spacerun: yes;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>0</span><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\">表示新增，<span lang=\"EN-US\">1</span>表示修改，<span lang=\"EN-US\">2</span>表示删除</span></p><p style=\"margin: 0cm 0cm 0pt; text-align: left;\" class=\"MsoNormal\" align=\"left\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\"></span>&nbsp;</p><p style=\"margin: 0cm 0cm 0pt; text-align: left;\" class=\"MsoNormal\" align=\"left\"><span style=\"font-family: 宋体; font-size: 12pt; mso-bidi-font-family: 宋体; mso-font-kerning: 0pt; mso-fareast-font-family: 宋体; mso-fareast-theme-font: minor-fareast;\"><strong>3、请问在表AShareDividend(中国A股分红)当中，怎么看到哪天持有或者时间段持有才能享受分红，也就是说看哪个字段。</strong><br>可以参考股权登记日。<span lang=\"EN-US\"><o:p></o:p></span></span></p><font face=\"宋体\"></font>"
+  }
+}

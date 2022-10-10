@@ -42,9 +42,9 @@ def extract_sql_by_table(table_name: str, load_date: str) -> dict:
 @task
 def load_sql_query(data_dict: dict, load_path: str = "csc_load_path") -> dict:
     """
-        根据sql查询语句下载数据到本地
-        :return:
-        """
+     根据sql查询语句下载数据到本地
+    :return:
+    """
     # -----------------参数传递----------------- #
     connector_id = data_dict['connector_id']
     query_sql = data_dict['query_sql']
@@ -75,6 +75,20 @@ def load_sql_query(data_dict: dict, load_path: str = "csc_load_path") -> dict:
         chunk_count += 1
 
 
+@task
+def check_load(data_dict: dict) -> dict:
+    """
+    检查保存后的文件
+    :param data_dict:
+    :return:
+    """
+    file_path = data_dict['file_path']
+    import pandas as pd
+    check_df = pd.read_csv(file_path)
+
+    return data_dict
+
+
 # [START DAG] 实例化一个DAG
 
 
@@ -99,6 +113,7 @@ def csc_ops_load():
         load_sql_query.override(
             task_id='L_' + table_name, outlets=[Dataset('L_' + table_name, extra={'load_date': load_date})])(
             extract_sql_by_table.override(task_id='E_' + table_name, )(table_name, load_date))
+        # check_load(load_return)
 
     # 多进程异步执行
     # start_tasks('FIN_BALANCE_SHEET_GEN')
@@ -109,8 +124,7 @@ def csc_ops_load():
         'ASHAREDIVIDEND', 'ASHAREEXRIGHTDIVIDENDRECORD', 'BAS_STK_HISDISTRIBUTION']
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=1) as executor:
-        _ = {executor.submit(start_tasks, table): table for table in
-             ['FIN_BALANCE_SHEET_GEN', ]}
+        _ = {executor.submit(start_tasks, table): table for table in table_list}
 
     # [END main_flow]
 

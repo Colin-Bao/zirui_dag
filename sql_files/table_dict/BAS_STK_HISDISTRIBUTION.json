@@ -1,0 +1,422 @@
+{
+  "code": "0",
+  "fieldData": [
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "流水号",
+      "fieldId": 667663,
+      "fieldName": "id",
+      "fieldType": "bigint",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "公司代码",
+      "fieldId": 667664,
+      "fieldName": "company_code",
+      "fieldType": "varchar",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "股票代码",
+      "fieldId": 667665,
+      "fieldName": "stock_code",
+      "fieldType": "varchar",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "股票简称",
+      "fieldId": 667666,
+      "fieldName": "stock_name",
+      "fieldType": "varchar",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "公告日期",
+      "fieldId": 667667,
+      "fieldName": "declare_date",
+      "fieldType": "date",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "年度",
+      "fieldId": 667668,
+      "fieldName": "distri_year",
+      "fieldType": "int",
+      "remark": "distribution year",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "1",
+      "fieldChsName": "权益日期类型",
+      "fieldId": 667669,
+      "fieldName": "distridate_type",
+      "fieldType": "varchar",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "1",
+      "fieldChsName": "权益类型",
+      "fieldId": 667670,
+      "fieldName": "distri_type",
+      "fieldType": "varchar",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "1",
+      "fieldChsName": "发放对象类型",
+      "fieldId": 667671,
+      "fieldName": "object_type",
+      "fieldType": "varchar",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "发放对象",
+      "fieldId": 667672,
+      "fieldName": "object_desc",
+      "fieldType": "varchar",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "1",
+      "fieldChsName": "方案类型",
+      "fieldId": 667673,
+      "fieldName": "scheme_type",
+      "fieldType": "varchar",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "分配编号",
+      "fieldId": 667674,
+      "fieldName": "spedistri_number",
+      "fieldType": "int",
+      "remark": "special distribution number\n仅针对权益类型为配股和权益日期类型为特别分配的情况，按时间先后编号递增",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "股本基准日",
+      "fieldId": 667675,
+      "fieldName": "capbase_date",
+      "fieldType": "date",
+      "remark": "capital base date",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "股本基数",
+      "fieldId": 667676,
+      "fieldName": "cap_base",
+      "fieldType": "numeric",
+      "remark": "capital base\n单位：万股",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "股权登记日",
+      "fieldId": 667677,
+      "fieldName": "right_recorddate",
+      "fieldType": "date",
+      "remark": "right recorded date",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "除权除息日",
+      "fieldId": 667678,
+      "fieldName": "xr_xd_date",
+      "fieldType": "date",
+      "remark": "exclude right and exclude dividend date",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "最后交易日",
+      "fieldId": 667679,
+      "fieldName": "last_tradedate",
+      "fieldType": "date",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "税前红利上限",
+      "fieldId": 667680,
+      "fieldName": "beftax_maxcashdiv",
+      "fieldType": "numeric",
+      "remark": "当税前红利为具体金额归入税前红利上限每10股\n单位：元",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "税前红利下限",
+      "fieldId": 667681,
+      "fieldName": "beftax_mincashdiv",
+      "fieldType": "numeric",
+      "remark": "每10股\n单位：元",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "税后红利",
+      "fieldId": 667682,
+      "fieldName": "aftax_cashdiv",
+      "fieldType": "numeric",
+      "remark": "每10股\n单位：元",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "QFII税后红利",
+      "fieldId": 667683,
+      "fieldName": "aftax_cashdiv_QFII",
+      "fieldType": "numeric",
+      "remark": "每10股\n单位：元",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "现金红利发放起始日",
+      "fieldId": 667684,
+      "fieldName": "cashdiv_startdate",
+      "fieldType": "date",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "现金红利发放截止日",
+      "fieldId": 667685,
+      "fieldName": "cashdiv_enddate",
+      "fieldType": "date",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "配股比例",
+      "fieldId": 667686,
+      "fieldName": "allot_ratio",
+      "fieldType": "numeric",
+      "remark": "每10股配股比例\nallotment ratio",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "配股价",
+      "fieldId": 667687,
+      "fieldName": "allot_price",
+      "fieldType": "numeric",
+      "remark": "allotment price",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "送股比例",
+      "fieldId": 667688,
+      "fieldName": "stockdiv_ratio",
+      "fieldType": "numeric",
+      "remark": "每10股送股比例\n单位：股",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "转增比例",
+      "fieldId": 667689,
+      "fieldName": "trans_ratio",
+      "fieldType": "numeric",
+      "remark": "每10股转增比例\n单位：股",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "盈余公积金转增比例",
+      "fieldId": 667690,
+      "fieldName": "suprsv_transratio",
+      "fieldType": "numeric",
+      "remark": "每10股转增比例\n单位：股",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "资本公积金转增比例",
+      "fieldId": 667691,
+      "fieldName": "caprsv_transratio",
+      "fieldType": "numeric",
+      "remark": "每10股转增比例\n单位：股",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "赠股比例",
+      "fieldId": 667692,
+      "fieldName": "bonus_ratio",
+      "fieldType": "numeric",
+      "remark": "每10股增股比例\n单位：股",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "股份到帐日",
+      "fieldId": 667693,
+      "fieldName": "stock_arrdate",
+      "fieldType": "date",
+      "remark": "stock distribution arriving date",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "上市日期",
+      "fieldId": 667694,
+      "fieldName": "list_date",
+      "fieldType": "date",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "拆合缩比例",
+      "fieldId": 667695,
+      "fieldName": "change_ratio",
+      "fieldType": "numeric",
+      "remark": "每股拆股、合股或缩股比例\n单位：股",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "回购起始日",
+      "fieldId": 667696,
+      "fieldName": "buyback_startdate",
+      "fieldType": "date",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "回购截止日",
+      "fieldId": 667697,
+      "fieldName": "buyback_enddate",
+      "fieldType": "date",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "股改资产置换日",
+      "fieldId": 667698,
+      "fieldName": "ass_replacedate",
+      "fieldType": "date",
+      "remark": "assets replacing date",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "股东大会决议公告日",
+      "fieldId": 667699,
+      "fieldName": "bdresol_declaredate",
+      "fieldType": "date",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "1",
+      "fieldChsName": "是否最新方案",
+      "fieldId": 667700,
+      "fieldName": "is_newest",
+      "fieldType": "int",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "权息说明",
+      "fieldId": 667701,
+      "fieldName": "rd_desc",
+      "fieldType": "varchar(max)",
+      "remark": "right and dividend descriptions",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "1",
+      "fieldChsName": "是否有效",
+      "fieldId": 667702,
+      "fieldName": "is_valid",
+      "fieldType": "int",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "入库时间",
+      "fieldId": 667703,
+      "fieldName": "entrytime",
+      "fieldType": "datetime",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "最后更新时间",
+      "fieldId": 667704,
+      "fieldName": "updatetime",
+      "fieldType": "datetime",
+      "tableId": 112048993
+    },
+    {
+      "databaseChsName": "朝阳永续",
+      "enumMap": "0",
+      "fieldChsName": "下载标识",
+      "fieldId": 667705,
+      "fieldName": "tmstamp",
+      "fieldType": "bigint",
+      "tableId": 112048993
+    }
+  ],
+  "tableInfo": {
+    "databaseChsName": "朝阳永续",
+    "originalTableId": "62102",
+    "remark": "该表包含A股利润分配、股票拆合缩股、股权分置改革相关的信息。",
+    "tableChsName": "股票分配历史表",
+    "tableId": 112048993,
+    "tableName": "BAS_STK_HISDISTRIBUTION"
+  },
+  "contentMap": {}
+}
