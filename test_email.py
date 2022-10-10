@@ -34,27 +34,26 @@ def success_func():
 )
 def email_dag():
     @task
-    def get_info(msg):
-        return msg
+    def get_info(msg) -> dict[str, str]:
+        return {'subject': 'Airflow Alert', 'html_content': f""" <h3>Email Test</h3> {msg}"""}
 
-    @task
-    def send_info(msg):
+    def send_email(data_dict: dict):
+        """
+        发送邮件
+        """
         from airflow.operators.email import EmailOperator
-        email = EmailOperator(
-            task_id='send_email',
-            to='to@gmail.com',
-            subject='Airflow Alert',
-            html_content=""" <h3>Email Test</h3> """,
-            dag=dag
+        EmailOperator(
+            task_id='send_info',
+            to='523393445@qq.com',
+            subject=data_dict['subject'],
+            html_content=data_dict['html_content'],
         )
-        print(msg)
 
-    send_info(get_info('ok'))
+    send_email(get_info('ok'))
 
 
 # # send_email(to='523393445@qq.com', subject='ok', html_content='s')
 # # conn = BaseHook.get_connection('sendgrid_default')
 # # sendgrid_client = sendgrid.SendGridAPIClient(api_key=conn.password)
-
 # # print(sendgrid_client)
-# email_dag()
+email_dag()

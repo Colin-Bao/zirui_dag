@@ -14,7 +14,28 @@ from airflow.datasets import Dataset
 from datetime import datetime, timedelta, date
 
 
-# TODO load 后的类型检查
+@task
+def send_info(data_dict: dict):
+    """
+    发送邮件
+    """
+    # 解析load的内容
+    table_name = data_dict['table_name']
+    query_sql = data_dict['query_sql']
+    email_content = {'subject': 'Airflow 警告',
+                     'html_content':
+                     f""" 
+                     <h3>{table_name} 是空的</h3> 
+                     详细SQL语法为:{query_sql}
+                     """}
+
+    # 发送邮件
+    from airflow.utils.email import send_email
+    send_email(to=['523393445@qq.com', '821538716@qq.com'],
+               subject=email_content['subject'],
+               html_content=email_content['html_content'],)
+
+
 @task
 def extract_sql_by_table(table_name: str, load_date: str) -> dict:
     """
@@ -68,9 +89,9 @@ def load_sql_query(data_dict: dict, load_path: str = "csc_load_path") -> dict:
     chunk_count = 0
     for df_chunk in sql_hook.get_pandas_df_by_chunks(query_sql, chunksize=1000):
         if chunk_count == 0:
-            file_path = LOAD_PATH + f'/{load_date}.csv'
-            df_chunk.to_csv(file_path, index=False)
-            return {'file_path': file_path}
+            table_path = LOAD_PATH + f'/{load_date}.csv'
+            df_chunk.to_csv(table_path, index=False)
+            return {'table_path': table_path, 'table_name': table_name, 'table_empty': df_chunk.empty, 'query_sql': query_sql}
         else:
             # TODO 只保存chunksize行，如果超过chunksize行要分片保存再合并
             break
@@ -80,13 +101,34 @@ def load_sql_query(data_dict: dict, load_path: str = "csc_load_path") -> dict:
 @task
 def check_load(data_dict: dict) -> dict:
     """
-    检查保存后的文件
+    检查保存后的文件,并输出字段类型与含义
     :param data_dict:
     :return:
     """
-    file_path = data_dict['file_path']
+    # 传参数
+    table_path = data_dict['table_path']
+    table_name = data_dict['table_name']
+
+    # 文件目录
+    DICT_DATA_PATH = Variable.get('csc_data_dict_path') + table_name+'.csv'
+    LOAD_TYPE_PATH = Variable.get('csc_load_path') + table_name+'/' + table_path.split(
+        '/')[-1].split('.')[0]+'_type.csv'
+
+    # 读取load的文件
     import pandas as pd
-    check_df = pd.read_csv(file_path)
+    df_check = pd.read_csv(table_path)
+    df_info = pd.DataFrame(
+        {"column": df_check.columns,
+         "null_ratio": df_check.isnull().sum() / df_check.count(),
+         "type": df_check.dtypes})
+
+    # 读取字典文件
+    df_dict = pd.read_csv(DICT_DATA_PATH)
+
+    # 合并
+    df_merge = pd.merge(df_info, df_dict, how='left',
+                        left_on='column', right_on='fieldName')
+    df_merge.to_csv(LOAD_TYPE_PATH, index=False)
 
     return data_dict
 
@@ -110,15 +152,24 @@ def csc_ops_load():
         任务流控制函数，用于被多进程调用，每张表下载都是一个并行的进程
         :return:
         """
-        # extract_sql_by_table()
-        load_date = (date.today() + timedelta(-1)).strftime('%Y%m%d')  # 下载昨天的数据
-        load_sql_query.override(
+
+        # 下载昨天的数据
+        load_date = (date.today() + timedelta(-1)
+                     ).strftime('%Y%m%d')
+        # ETL
+        load_return = load_sql_query.override(
             task_id='L_' + table_name, outlets=[Dataset('L_' + table_name, extra={'load_date': load_date})])(
             extract_sql_by_table.override(task_id='E_' + table_name, )(table_name, load_date))
-        # check_load(load_return)
+
+        # 根据load的结果是否为空，进行告警或者下一步动作
+        if load_return['table_empty']:
+            send_info(load_return)
+
+        else:
+            check_load(load_return)
 
     # 多进程异步执行
-    # start_tasks('FIN_BALANCE_SHEET_GEN')
+    test_list = ['ASHAREBALANCESHEET']
     table_list = [
         'FIN_BALANCE_SHEET_GEN', 'ASHAREBALANCESHEET', 'ASHARECASHFLOW', 'FIN_CASH_FLOW_GEN',
         'ASHAREINCOME', 'FIN_INCOME_GEN', 'ASHAREEODPRICES', 'QT_STK_DAILY', 'ASHAREEODDERIVATIVEINDICATOR',

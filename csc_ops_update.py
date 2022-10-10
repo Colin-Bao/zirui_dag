@@ -17,17 +17,22 @@ from airflow.models.param import Param
                 items={"type": "string"},
                 minLength=1,
                 maxLength=10,
-            ),
-            "update_mode": Param("overwrite", enum=["overwrite", "other"])
-            },
+    ),
+        "update_mode": Param("overwrite", enum=["overwrite", "other"])
+    },
     start_date=datetime(2022, 2, 1),
     schedule=None,
     tags=['数据更新', '参数触发']
 )
 def csc_ops_update():
+
     @task
     def get_data_list(params=None):
-        date_list = [str(i) for i in range(params['start_date'], params['end_date'] + 1)]
+        """
+        从传入的开始和截止日期生成序列
+        """
+        date_list = [str(i) for i in range(
+            params['start_date'], params['end_date'] + 1)]
         return date_list
 
     @task
