@@ -1,11 +1,12 @@
 import os
-import pendulum
+# import pendulum
 from airflow.decorators import dag, task
-from airflow import DAG
+
+from airflow import DAG, Dataset
 from airflow.models import Variable
-from datetime import datetime, timedelta, date
+from datetime import datetime, date
 from airflow.models.xcom import XCom
-from airflow.datasets import Dataset
+
 
 from airflow.models import TaskInstance
 
@@ -17,8 +18,7 @@ from airflow.models import TaskInstance
     tags=['数据运维', '测试用例']
 )
 def dag_info():
-
-    @task(outlets=[Dataset('task_info', extra={'extra': 'extra_info'})])
+    @task
     def task_info(msg):
         print(msg)
         return {'msg': msg}
@@ -33,7 +33,7 @@ def get_context(context):
 @dag(
     default_args={'owner': 'zirui', },
     start_date=datetime(2022, 2, 1),
-    schedule=[Dataset('task_info')],
+    schedule=None,
     tags=['数据运维', '测试用例']
 )
 def dag_get():

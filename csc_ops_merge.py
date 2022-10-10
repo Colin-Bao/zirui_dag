@@ -3,7 +3,7 @@
 # @Note      :新的合并算法
 import pendulum
 from datetime import datetime, timedelta
-from airflow import DAG, Dataset
+from airflow import Dataset
 from airflow.decorators import dag, task
 from airflow.models import Variable
 from datetime import datetime, timedelta, date

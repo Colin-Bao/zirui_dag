@@ -1,10 +1,8 @@
 import os
 import pendulum
 from airflow.decorators import dag, task
-from airflow import DAG
 from airflow.models import Variable
 from datetime import datetime, timedelta, date
-from airflow.datasets import Dataset
 from airflow.models.param import Param
 
 

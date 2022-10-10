@@ -4,6 +4,7 @@
 # @Time      :2022/9/7 15:16
 # @Author    :Colin
 # @Note      :None
+from __future__ import annotations
 import os
 import pendulum
 from airflow.decorators import dag, task
@@ -121,7 +122,9 @@ dag = csc_ops_load()
 # kill -9 2819187
 # airflow webserver --port 8081
 # kill -9 $(lsof -i:8081 -t) 2> /dev/null
+# kill -9 $(lsof -i:8793 -t) 2> /dev/null
 # P@ssw0rd
+# sudo fuser - k 8793/tcp
 # sudo fuser - k 8081/tcp
 # airflow scheduler
 # kill $(cat /home/lianghua/rtt/soft/airflow/airflow-webserver.pid)
