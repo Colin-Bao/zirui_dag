@@ -137,7 +137,11 @@ def check_load(data_dict: dict) -> dict:
 
 
 @dag(
-    default_args={'owner': 'zirui', },
+    default_args={'owner': 'zirui',
+                  'email': ['523393445@qq.com'],
+                  'email_on_failure': True,
+                  'email_on_retry': True,
+                  'retries': 1, },
     schedule="0 17 * * 1-7",
     start_date=pendulum.datetime(2022, 9, 1, tz="UTC"),
     catchup=False,
@@ -177,7 +181,8 @@ def csc_ops_load():
         'ASHAREDIVIDEND', 'ASHAREEXRIGHTDIVIDENDRECORD', 'BAS_STK_HISDISTRIBUTION']
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=1) as executor:
-        _ = {executor.submit(start_tasks, table): table for table in table_list}
+        _ = {executor.submit(start_tasks, table)
+                             : table for table in table_list}
 
     # [END main_flow]
 

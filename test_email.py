@@ -56,4 +56,4 @@ def email_dag():
 # # conn = BaseHook.get_connection('sendgrid_default')
 # # sendgrid_client = sendgrid.SendGridAPIClient(api_key=conn.password)
 # # print(sendgrid_client)
-email_dag()
+# email_dag()

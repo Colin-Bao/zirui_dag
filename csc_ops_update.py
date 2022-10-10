@@ -10,7 +10,7 @@ from airflow.models.param import Param
     default_args={'owner': 'zirui', },
     params={"msg": Param("Please Use Upper Table Name", type="string"),
             "start_date": Param(20220301, type="integer", minimum=20211231, maximum=20221231),
-            "end_date": Param(20220304, type="integer", minimum=20211231, maximum=20221231),
+            "end_date": Param(20220302, type="integer", minimum=20211231, maximum=20221231),
             "table_list": Param(
                 ["ASHAREBALANCESHEET", "FIN_BALANCE_SHEET_GEN"],
                 type="array",
@@ -27,7 +27,7 @@ from airflow.models.param import Param
 def csc_ops_update():
 
     @task
-    def get_data_list(params=None):
+    def get_data_list(params=None) -> list:
         """
         从传入的开始和截止日期生成序列
         """
@@ -36,11 +36,10 @@ def csc_ops_update():
         return date_list
 
     @task
-    def get_table_list(params=None):
+    def get_table_list(params=None) -> list:
         return params['table_list']
 
     # 任务流
-
     import sys
     sys.path.append('/home/lianghua/rtt/soft/airflow/dags/zirui_dag')
     from csc_ops_load import extract_sql_by_table, load_sql_query
@@ -49,4 +48,4 @@ def csc_ops_update():
                           )
 
 
-d1 = csc_ops_update()
+csc_ops_update()

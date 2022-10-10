@@ -46,7 +46,7 @@ def merge_dict(table_name: str, table_path: str):
 
 
 # merge_dict('ASHAREBALANCESHEET',
-        #    '/home/lianghua/rtt/soft/airflow/dags/zirui_dag/output/load/ASHAREBALANCESHEET/20220929.csv')
+    #    '/home/lianghua/rtt/soft/airflow/dags/zirui_dag/output/load/ASHAREBALANCESHEET/20220929.csv')
 
-df=pd.DataFrame(columns=['1','2'])
-print(df.empty)
+# df=pd.DataFrame(columns=['1','2'])
+# print(df.empty)
