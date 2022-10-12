@@ -16,3 +16,4 @@ ___  ___ |  / _  /   _  __/ _  / / /_/ /_ |/ |/ /
 [[34m2022-10-12 10:46:28,433[0m] {[34mscheduler_job.py:[0m1369} INFO[0m - Resetting orphaned tasks for active dag runs[0m
 [[34m2022-10-12 10:46:28,435[0m] {[34msettings.py:[0m58} INFO[0m - Configured default timezone Timezone('UTC')[0m
 [[34m2022-10-12 10:46:28,450[0m] {[34mscheduler_job.py:[0m1392} INFO[0m - Marked 1 SchedulerJob instances as failed[0m
+[[34m2022-10-12 10:51:28,484[0m] {[34mscheduler_job.py:[0m1369} INFO[0m - Resetting orphaned tasks for active dag runs[0m
