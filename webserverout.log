@@ -5995,3 +5995,4 @@ nohup: ignoring input
 [2022-10-12 14:03:38 +0800] [704693] [INFO] Handling signal: ttou
 [2022-10-12 14:03:38 +0800] [1843598] [INFO] Worker exiting (pid: 1843598)
 127.0.0.1 - - [12/Oct/2022:14:06:23 +0800] "GET /static/pin_32.png HTTP/1.1" 200 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36 Edg/106.0.1370.42"
+127.0.0.1 - - [12/Oct/2022:14:58:50 +0800] "GET /static/pin_32.png HTTP/1.1" 200 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36 Edg/106.0.1370.42"

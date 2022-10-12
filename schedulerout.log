@@ -7508,3 +7508,75 @@ sqlalchemy.exc.OperationalError: (mysql.connector.errors.OperationalError) 2013 
 [[34m2022-10-12 14:16:29,782[0m] {[34mscheduler_job.py:[0m1369} INFO[0m - Resetting orphaned tasks for active dag runs[0m
 [[34m2022-10-12 14:21:29,811[0m] {[34mscheduler_job.py:[0m1369} INFO[0m - Resetting orphaned tasks for active dag runs[0m
 [[34m2022-10-12 14:26:29,840[0m] {[34mscheduler_job.py:[0m1369} INFO[0m - Resetting orphaned tasks for active dag runs[0m
+Process ForkProcess-63:
+Traceback (most recent call last):
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/mysql/connector/connection_cext.py", line 555, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Lost connection to MySQL server during query
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1900, in _execute_context
+    self.dialect.do_execute(
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/mysql/connector/cursor_cext.py", line 276, in execute
+    result = self._cnx.cmd_query(
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/mysql/connector/connection_cext.py", line 563, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.OperationalError: 2013 (HY000): Lost connection to MySQL server during query
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/dag_processing/manager.py", line 257, in _run_processor_manager
+    processor_manager.start()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/dag_processing/manager.py", line 489, in start
+    return self._run_parsing_loop()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/dag_processing/manager.py", line 603, in _run_parsing_loop
+    DagWarning.purge_inactive_dag_warnings()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/utils/session.py", line 75, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/models/dagwarning.py", line 82, in purge_inactive_dag_warnings
+    query.delete(synchronize_session=False)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/orm/query.py", line 3213, in delete
+    result = self.session.execute(
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1712, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1705, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 333, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1572, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1943, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2124, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1900, in _execute_context
+    self.dialect.do_execute(
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/mysql/connector/cursor_cext.py", line 276, in execute
+    result = self._cnx.cmd_query(
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/mysql/connector/connection_cext.py", line 563, in cmd_query
+    raise get_mysql_exception(
+sqlalchemy.exc.OperationalError: (mysql.connector.errors.OperationalError) 2013 (HY000): Lost connection to MySQL server during query
+[SQL: DELETE FROM dag_warning USING dag_warning, dag WHERE dag_warning.dag_id = dag.dag_id AND dag.is_active = false]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[[34m2022-10-12 14:30:58,073[0m] {[34mmanager.py:[0m288} WARNING[0m - DagFileProcessorManager (PID=2132065) exited with exit code 1 - re-launching[0m
+[[34m2022-10-12 14:30:58,077[0m] {[34mmanager.py:[0m163} INFO[0m - Launched DagFileProcessorManager with pid: 2602729[0m
+[[34m2022-10-12 14:30:58,081[0m] {[34msettings.py:[0m58} INFO[0m - Configured default timezone Timezone('UTC')[0m
+[[34m2022-10-12 14:31:29,867[0m] {[34mscheduler_job.py:[0m1369} INFO[0m - Resetting orphaned tasks for active dag runs[0m
+[[34m2022-10-12 14:36:29,895[0m] {[34mscheduler_job.py:[0m1369} INFO[0m - Resetting orphaned tasks for active dag runs[0m
+[[34m2022-10-12 14:41:29,922[0m] {[34mscheduler_job.py:[0m1369} INFO[0m - Resetting orphaned tasks for active dag runs[0m
+[[34m2022-10-12 14:46:29,957[0m] {[34mscheduler_job.py:[0m1369} INFO[0m - Resetting orphaned tasks for active dag runs[0m
+[[34m2022-10-12 14:51:29,984[0m] {[34mscheduler_job.py:[0m1369} INFO[0m - Resetting orphaned tasks for active dag runs[0m
+[[34m2022-10-12 14:56:30,013[0m] {[34mscheduler_job.py:[0m1369} INFO[0m - Resetting orphaned tasks for active dag runs[0m
