@@ -1,4 +1,5 @@
 # import sendgrid
+from datetime import datetime
 from airflow.hooks.base import BaseHook
 import os
 import pendulum
@@ -57,3 +58,4 @@ def email_dag():
 # # sendgrid_client = sendgrid.SendGridAPIClient(api_key=conn.password)
 # # print(sendgrid_client)
 # email_dag()
+print(datetime.now().hour)

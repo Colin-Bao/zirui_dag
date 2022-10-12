@@ -10,7 +10,7 @@ import pendulum
 from airflow.decorators import dag, task
 from airflow.models import Variable
 from airflow.datasets import Dataset
-from datetime import timedelta, date
+from datetime import timedelta, date,time
 
 
 @task
@@ -153,7 +153,7 @@ def send_info(xcom_dict: dict):
                   'email_on_retry': True,
                   #   'retries': 1,
                   "retry_delay": timedelta(minutes=1), },
-    schedule="0 17 * * 1-7",
+    schedule="0/30 17,22 * * 1-7",
     start_date=pendulum.datetime(2022, 9, 1, tz="UTC"),
     catchup=False,
     dagrun_timeout=timedelta(minutes=60),
