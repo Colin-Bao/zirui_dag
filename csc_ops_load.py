@@ -30,7 +30,7 @@ def send_info(data_dict: dict):
 
     # 发送邮件
     from airflow.utils.email import send_email
-    send_email(to=['523393445@qq.com', '821538716@qq.com'],
+    send_email(to=['523393445@qq.com'],
                subject=email_content['subject'],
                html_content=email_content['html_content'],)
 
@@ -137,10 +137,11 @@ def check_load(data_dict: dict) -> dict:
 
 @dag(
     default_args={'owner': 'zirui',
-                  'email': ['523393445@qq.com'],
+                  'email': ['523393445@qq.com', ],  # '821538716@qq.com'
                   'email_on_failure': True,
                   'email_on_retry': True,
-                  'retries': 1, },
+                  'retries': 1,
+                  "retry_delay": timedelta(minutes=5), },
     schedule="0 17 * * 1-7",
     start_date=pendulum.datetime(2022, 9, 1, tz="UTC"),
     catchup=False,
