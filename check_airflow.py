@@ -34,15 +34,20 @@ def check_process(Process):
         cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     logging.info(res)
 
+   
+
     # 获取返回值
     if res.stdout.read().decode('utf-8').strip() == '0':
         subject = '[AirFlow警告] 进程 %s 宕机' % Process
         msg = ['%s 已停止运行,请检查,日志文件详见schedulerout.log' % Process]
         logging.warning(msg)
         # 重新启动
-        re_start_cmd='nohup airflow scheduler > log/schedulerout.log 2>&1 &'
+        re_start_cmd = 'sh /home/lianghua/rtt/soft/airflow/dags/zirui_dag/sh_files/restart_scheduler.sh'
+        logging.warning(f'正在重新启动:{re_start_cmd}')
         subprocess.Popen(
-            re_start_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        re_start_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        raise Exception('重新启动')
+      
 
     else:
         subject = '[AirFlow警告] 进程 %s 运行正常' % Process
