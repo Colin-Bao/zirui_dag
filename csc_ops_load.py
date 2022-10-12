@@ -181,8 +181,7 @@ def csc_ops_load():
         'ASHAREDIVIDEND', 'ASHAREEXRIGHTDIVIDENDRECORD', 'BAS_STK_HISDISTRIBUTION']
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=1) as executor:
-        _ = {executor.submit(start_tasks, table)
-                             : table for table in table_list}
+        _ = {executor.submit(start_tasks, table)             : table for table in table_list}
 
     # [END main_flow]
 
@@ -201,6 +200,9 @@ dag = csc_ops_load()
 # sudo fuser - k 8793/tcp
 # sudo fuser - k 8081/tcp
 # airflow scheduler
+# nohup airflow scheduler > schedulerout.log 2>&1 &
+# nohup airflow webserver --port 8081 2>&1 &
 # kill $(cat /home/lianghua/rtt/soft/airflow/airflow-webserver.pid)
 # sudo lsof -i: 8081 | grep - v "PID" | awk '{print "kill -9",$2}' | sh
 # kill $(cat /home/lianghua/rtt/soft/airflow/airflow-scheduler.pid)
+# ps -ef|egrep 'scheduler|airflow-webserver'|grep -v grep|awk '{print $2}'|xargs kill -9

@@ -1,0 +1,17 @@
+nohup: ignoring input
+  ____________       _____________
+ ____    |__( )_________  __/__  /________      __
+____  /| |_  /__  ___/_  /_ __  /_  __ \_ | /| / /
+___  ___ |  / _  /   _  __/ _  / / /_/ /_ |/ |/ /
+ _/_/  |_/_/  /_/    /_/    /_/  \____/____/|__/
+[2022-10-12 09:40:30 +0800] [195029] [INFO] Starting gunicorn 20.1.0
+[[34m2022-10-12 09:40:30,814[0m] {[34mscheduler_job.py:[0m701} INFO[0m - Starting the scheduler[0m
+[2022-10-12 09:40:30 +0800] [195029] [INFO] Listening at: http://[::]:8793 (195029)
+[2022-10-12 09:40:30 +0800] [195029] [INFO] Using worker: sync
+[[34m2022-10-12 09:40:30,815[0m] {[34mscheduler_job.py:[0m706} INFO[0m - Processing each file at most -1 times[0m
+[2022-10-12 09:40:30 +0800] [195030] [INFO] Booting worker with pid: 195030
+[[34m2022-10-12 09:40:30,819[0m] {[34mexecutor_loader.py:[0m107} INFO[0m - Loaded executor: LocalExecutor[0m
+[2022-10-12 09:40:30 +0800] [195041] [INFO] Booting worker with pid: 195041
+[[34m2022-10-12 09:40:30,889[0m] {[34mmanager.py:[0m163} INFO[0m - Launched DagFileProcessorManager with pid: 195168[0m
+[[34m2022-10-12 09:40:30,890[0m] {[34mscheduler_job.py:[0m1369} INFO[0m - Resetting orphaned tasks for active dag runs[0m
+[[34m2022-10-12 09:40:30,892[0m] {[34msettings.py:[0m58} INFO[0m - Configured default timezone Timezone('UTC')[0m
