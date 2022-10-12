@@ -62,8 +62,6 @@ def check_process(Process):
         logging.info(f'已发送邮件:{SEND_TO} {subject} {msg}')
 
     
-    
-
 
 if __name__ == '__main__':
     # check_process('scheduler')
