@@ -10,7 +10,7 @@ import pendulum
 from airflow.decorators import dag, task
 from airflow.models import Variable
 from airflow.datasets import Dataset
-from datetime import timedelta, date,time
+from datetime import timedelta, date, datetime
 
 
 @task
@@ -121,9 +121,14 @@ def send_info(xcom_dict: dict):
     """
     # 解析load的内容
     table_empty = xcom_dict['table_empty']
+    # 跳过非空值
     if not table_empty:
         # TODO 如果不为空的处理
         return
+    # 跳过时间段
+    if datetime.now().hour != 7:
+        return
+
     table_name = xcom_dict['table_name']
     query_sql = xcom_dict['query_sql']
 
@@ -153,8 +158,8 @@ def send_info(xcom_dict: dict):
                   'email_on_retry': True,
                   #   'retries': 1,
                   "retry_delay": timedelta(minutes=1), },
-    schedule="0/30 17,22 * * 1-7",
-    start_date=pendulum.datetime(2022, 9, 1, tz="UTC"),
+    schedule="0/30 1-6 * * 1-7",
+    start_date=pendulum.datetime(2022, 9, 1, tz="Asia/Shanghai"),
     catchup=False,
     dagrun_timeout=timedelta(minutes=60),
     tags=['数据加载'],
@@ -189,7 +194,8 @@ def csc_ops_load():
         'ASHAREDIVIDEND', 'ASHAREEXRIGHTDIVIDENDRECORD', 'BAS_STK_HISDISTRIBUTION']
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=1) as executor:
-        _ = {executor.submit(start_tasks, table)             : table for table in table_list}
+        _ = {executor.submit(start_tasks, table)
+                             : table for table in table_list}
 
     # [END main_flow]
 
