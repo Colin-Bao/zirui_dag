@@ -4,14 +4,13 @@
 # @Time      :2022/9/7 15:16
 # @Author    :Colin
 # @Note      :None
-from __future__ import annotations
+
 import os
 import pendulum
 from airflow.decorators import dag, task
-from airflow import DAG
 from airflow.models import Variable
 from airflow.datasets import Dataset
-from datetime import datetime, timedelta, date
+from datetime import timedelta, date
 
 
 @task
@@ -87,7 +86,7 @@ def load_sql_query(data_dict: dict, load_path: str = "csc_load_path") -> dict:
 
     # 防止服务器内存占用过大
     chunk_count = 0
-    for df_chunk in sql_hook.get_pandas_df_by_chunks(query_sql, chunksize=1000):
+    for df_chunk in sql_hook.get_pandas_df_by_chunks(query_sql, chunksize=10000):
         if chunk_count == 0:
             table_path = LOAD_PATH + f'/{load_date}.csv'
             df_chunk.to_csv(table_path, index=False)
@@ -181,7 +180,8 @@ def csc_ops_load():
         'ASHAREDIVIDEND', 'ASHAREEXRIGHTDIVIDENDRECORD', 'BAS_STK_HISDISTRIBUTION']
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=1) as executor:
-        _ = {executor.submit(start_tasks, table): table for table in table_list}
+        _ = {executor.submit(start_tasks, table)
+                             : table for table in table_list}
 
     # [END main_flow]
 
