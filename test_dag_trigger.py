@@ -37,8 +37,8 @@ def start_dag():
 @task
 def print_value(value):
     """Empty function"""
-    # conf = {"message": "Hello World"},
-    log.info("The knights of Ni", value, )
+    conf = {"message": "Hello World"},
+    # log.info("The knights of Ni", value, )
 
 
 @task
