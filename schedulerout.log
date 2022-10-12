@@ -2777,3 +2777,190 @@ sqlalchemy.exc.OperationalError: (mysql.connector.errors.OperationalError) 2013 
 [2022-10-12 13:02:13 +0800] [707815] [WARNING] Worker with pid 707877 was terminated due to signal 1
 [2022-10-12 13:02:13 +0800] [1843595] [INFO] Booting worker with pid: 1843595
 [2022-10-12 13:02:13 +0800] [1843601] [INFO] Booting worker with pid: 1843601
+[2022-10-12T13:06:06.459+0800] {base.py:781} ERROR - Exception during reset or similar
+Traceback (most recent call last):
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/utils/session.py", line 35, in create_session
+    yield session
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/utils/session.py", line 75, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/models/dagwarning.py", line 83, in purge_inactive_dag_warnings
+    session.commit()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1451, in commit
+    self._transaction.commit(_to_root=self.future)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 836, in commit
+    trans.commit()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2459, in commit
+    self._do_commit()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2649, in _do_commit
+    self._connection_commit_impl()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2620, in _connection_commit_impl
+    self.connection._commit_impl()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1091, in _commit_impl
+    self._handle_dbapi_exception(e, None, None, None, None)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2128, in _handle_dbapi_exception
+    util.raise_(exc_info[1], with_traceback=exc_info[2])
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1089, in _commit_impl
+    self.engine.dialect.do_commit(self.connection)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 686, in do_commit
+    dbapi_connection.commit()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/mysql/connector/connection_cext.py", line 444, in commit
+    self._cmysql.commit()
+_mysql_connector.MySQLInterfaceError: Lost connection to MySQL server during query
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/pool/base.py", line 753, in _finalize_fairy
+    fairy._reset(pool)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/pool/base.py", line 1004, in _reset
+    pool._dialect.do_rollback(self)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 683, in do_rollback
+    dbapi_connection.rollback()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/mysql/connector/connection_cext.py", line 450, in rollback
+    self._cmysql.rollback()
+_mysql_connector.MySQLInterfaceError: Lost connection to MySQL server during query
+Process ForkProcess-61:
+Traceback (most recent call last):
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/dag_processing/manager.py", line 257, in _run_processor_manager
+    processor_manager.start()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/dag_processing/manager.py", line 489, in start
+    return self._run_parsing_loop()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/dag_processing/manager.py", line 603, in _run_parsing_loop
+    DagWarning.purge_inactive_dag_warnings()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/utils/session.py", line 75, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/models/dagwarning.py", line 83, in purge_inactive_dag_warnings
+    session.commit()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1451, in commit
+    self._transaction.commit(_to_root=self.future)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 836, in commit
+    trans.commit()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2459, in commit
+    self._do_commit()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2649, in _do_commit
+    self._connection_commit_impl()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2620, in _connection_commit_impl
+    self.connection._commit_impl()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1091, in _commit_impl
+    self._handle_dbapi_exception(e, None, None, None, None)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2128, in _handle_dbapi_exception
+    util.raise_(exc_info[1], with_traceback=exc_info[2])
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1089, in _commit_impl
+    self.engine.dialect.do_commit(self.connection)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 686, in do_commit
+    dbapi_connection.commit()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/mysql/connector/connection_cext.py", line 444, in commit
+    self._cmysql.commit()
+_mysql_connector.MySQLInterfaceError: Lost connection to MySQL server during query
+[[34m2022-10-12 13:06:07,390[0m] {[34mmanager.py:[0m288} WARNING[0m - DagFileProcessorManager (PID=1601619) exited with exit code 1 - re-launching[0m
+[[34m2022-10-12 13:06:07,394[0m] {[34mmanager.py:[0m163} INFO[0m - Launched DagFileProcessorManager with pid: 1881523[0m
+[[34m2022-10-12 13:06:07,398[0m] {[34msettings.py:[0m58} INFO[0m - Configured default timezone Timezone('UTC')[0m
+[[34m2022-10-12 13:06:29,287[0m] {[34mscheduler_job.py:[0m1369} INFO[0m - Resetting orphaned tasks for active dag runs[0m
+[[34m2022-10-12 13:08:52,338[0m] {[34mscheduler_job.py:[0m347} INFO[0m - 2 tasks up for execution:
+	<TaskInstance: csc_ops_update.get_data_list manual__2022-10-12T05:08:51.271196+00:00 [scheduled]>
+	<TaskInstance: csc_ops_update.get_table_list manual__2022-10-12T05:08:51.271196+00:00 [scheduled]>[0m
+[[34m2022-10-12 13:08:52,338[0m] {[34mscheduler_job.py:[0m412} INFO[0m - DAG csc_ops_update has 0/16 running and queued tasks[0m
+[[34m2022-10-12 13:08:52,338[0m] {[34mscheduler_job.py:[0m412} INFO[0m - DAG csc_ops_update has 1/16 running and queued tasks[0m
+[[34m2022-10-12 13:08:52,338[0m] {[34mscheduler_job.py:[0m498} INFO[0m - Setting the following tasks to queued state:
+	<TaskInstance: csc_ops_update.get_data_list manual__2022-10-12T05:08:51.271196+00:00 [scheduled]>
+	<TaskInstance: csc_ops_update.get_table_list manual__2022-10-12T05:08:51.271196+00:00 [scheduled]>[0m
+[[34m2022-10-12 13:08:52,339[0m] {[34mscheduler_job.py:[0m537} INFO[0m - Sending TaskInstanceKey(dag_id='csc_ops_update', task_id='get_data_list', run_id='manual__2022-10-12T05:08:51.271196+00:00', try_number=1, map_index=-1) to executor with priority 3 and queue default[0m
+[[34m2022-10-12 13:08:52,340[0m] {[34mbase_executor.py:[0m95} INFO[0m - Adding to queue: ['airflow', 'tasks', 'run', 'csc_ops_update', 'get_data_list', 'manual__2022-10-12T05:08:51.271196+00:00', '--local', '--subdir', 'DAGS_FOLDER/zirui_dag/csc_ops_update.py'][0m
+[[34m2022-10-12 13:08:52,340[0m] {[34mscheduler_job.py:[0m537} INFO[0m - Sending TaskInstanceKey(dag_id='csc_ops_update', task_id='get_table_list', run_id='manual__2022-10-12T05:08:51.271196+00:00', try_number=1, map_index=-1) to executor with priority 3 and queue default[0m
+[[34m2022-10-12 13:08:52,340[0m] {[34mbase_executor.py:[0m95} INFO[0m - Adding to queue: ['airflow', 'tasks', 'run', 'csc_ops_update', 'get_table_list', 'manual__2022-10-12T05:08:51.271196+00:00', '--local', '--subdir', 'DAGS_FOLDER/zirui_dag/csc_ops_update.py'][0m
+[[34m2022-10-12 13:08:52,344[0m] {[34mlocal_executor.py:[0m81} INFO[0m - QueuedLocalWorker running ['airflow', 'tasks', 'run', 'csc_ops_update', 'get_data_list', 'manual__2022-10-12T05:08:51.271196+00:00', '--local', '--subdir', 'DAGS_FOLDER/zirui_dag/csc_ops_update.py'][0m
+[[34m2022-10-12 13:08:52,344[0m] {[34mlocal_executor.py:[0m81} INFO[0m - QueuedLocalWorker running ['airflow', 'tasks', 'run', 'csc_ops_update', 'get_table_list', 'manual__2022-10-12T05:08:51.271196+00:00', '--local', '--subdir', 'DAGS_FOLDER/zirui_dag/csc_ops_update.py'][0m
+[[34m2022-10-12 13:08:52,455[0m] {[34mtask_command.py:[0m384} INFO[0m - Running <TaskInstance: csc_ops_update.get_table_list manual__2022-10-12T05:08:51.271196+00:00 [queued]> on host administrator-OptiPlex-7090[0m
+[[34m2022-10-12 13:08:52,455[0m] {[34mtask_command.py:[0m384} INFO[0m - Running <TaskInstance: csc_ops_update.get_data_list manual__2022-10-12T05:08:51.271196+00:00 [queued]> on host administrator-OptiPlex-7090[0m
+[[34m2022-10-12 13:08:53,417[0m] {[34mscheduler_job.py:[0m347} INFO[0m - 4 tasks up for execution:
+	<TaskInstance: csc_ops_update.extract_sql_by_table manual__2022-10-12T05:08:51.271196+00:00 map_index=0 [scheduled]>
+	<TaskInstance: csc_ops_update.extract_sql_by_table manual__2022-10-12T05:08:51.271196+00:00 map_index=1 [scheduled]>
+	<TaskInstance: csc_ops_update.extract_sql_by_table manual__2022-10-12T05:08:51.271196+00:00 map_index=2 [scheduled]>
+	<TaskInstance: csc_ops_update.extract_sql_by_table manual__2022-10-12T05:08:51.271196+00:00 map_index=3 [scheduled]>[0m
+[[34m2022-10-12 13:08:53,417[0m] {[34mscheduler_job.py:[0m412} INFO[0m - DAG csc_ops_update has 0/16 running and queued tasks[0m
+[[34m2022-10-12 13:08:53,417[0m] {[34mscheduler_job.py:[0m412} INFO[0m - DAG csc_ops_update has 1/16 running and queued tasks[0m
+[[34m2022-10-12 13:08:53,417[0m] {[34mscheduler_job.py:[0m412} INFO[0m - DAG csc_ops_update has 2/16 running and queued tasks[0m
+[[34m2022-10-12 13:08:53,417[0m] {[34mscheduler_job.py:[0m412} INFO[0m - DAG csc_ops_update has 3/16 running and queued tasks[0m
+[[34m2022-10-12 13:08:53,417[0m] {[34mscheduler_job.py:[0m498} INFO[0m - Setting the following tasks to queued state:
+	<TaskInstance: csc_ops_update.extract_sql_by_table manual__2022-10-12T05:08:51.271196+00:00 map_index=0 [scheduled]>
+	<TaskInstance: csc_ops_update.extract_sql_by_table manual__2022-10-12T05:08:51.271196+00:00 map_index=1 [scheduled]>
+	<TaskInstance: csc_ops_update.extract_sql_by_table manual__2022-10-12T05:08:51.271196+00:00 map_index=2 [scheduled]>
+	<TaskInstance: csc_ops_update.extract_sql_by_table manual__2022-10-12T05:08:51.271196+00:00 map_index=3 [scheduled]>[0m
+[[34m2022-10-12 13:08:53,418[0m] {[34mscheduler_job.py:[0m537} INFO[0m - Sending TaskInstanceKey(dag_id='csc_ops_update', task_id='extract_sql_by_table', run_id='manual__2022-10-12T05:08:51.271196+00:00', try_number=1, map_index=0) to executor with priority 2 and queue default[0m
+[[34m2022-10-12 13:08:53,419[0m] {[34mbase_executor.py:[0m95} INFO[0m - Adding to queue: ['airflow', 'tasks', 'run', 'csc_ops_update', 'extract_sql_by_table', 'manual__2022-10-12T05:08:51.271196+00:00', '--local', '--subdir', 'DAGS_FOLDER/zirui_dag/csc_ops_update.py', '--map-index', '0'][0m
+[[34m2022-10-12 13:08:53,419[0m] {[34mscheduler_job.py:[0m537} INFO[0m - Sending TaskInstanceKey(dag_id='csc_ops_update', task_id='extract_sql_by_table', run_id='manual__2022-10-12T05:08:51.271196+00:00', try_number=1, map_index=1) to executor with priority 2 and queue default[0m
+[[34m2022-10-12 13:08:53,419[0m] {[34mbase_executor.py:[0m95} INFO[0m - Adding to queue: ['airflow', 'tasks', 'run', 'csc_ops_update', 'extract_sql_by_table', 'manual__2022-10-12T05:08:51.271196+00:00', '--local', '--subdir', 'DAGS_FOLDER/zirui_dag/csc_ops_update.py', '--map-index', '1'][0m
+[[34m2022-10-12 13:08:53,419[0m] {[34mscheduler_job.py:[0m537} INFO[0m - Sending TaskInstanceKey(dag_id='csc_ops_update', task_id='extract_sql_by_table', run_id='manual__2022-10-12T05:08:51.271196+00:00', try_number=1, map_index=2) to executor with priority 2 and queue default[0m
+[[34m2022-10-12 13:08:53,419[0m] {[34mbase_executor.py:[0m95} INFO[0m - Adding to queue: ['airflow', 'tasks', 'run', 'csc_ops_update', 'extract_sql_by_table', 'manual__2022-10-12T05:08:51.271196+00:00', '--local', '--subdir', 'DAGS_FOLDER/zirui_dag/csc_ops_update.py', '--map-index', '2'][0m
+[[34m2022-10-12 13:08:53,419[0m] {[34mscheduler_job.py:[0m537} INFO[0m - Sending TaskInstanceKey(dag_id='csc_ops_update', task_id='extract_sql_by_table', run_id='manual__2022-10-12T05:08:51.271196+00:00', try_number=1, map_index=3) to executor with priority 2 and queue default[0m
+[[34m2022-10-12 13:08:53,419[0m] {[34mbase_executor.py:[0m95} INFO[0m - Adding to queue: ['airflow', 'tasks', 'run', 'csc_ops_update', 'extract_sql_by_table', 'manual__2022-10-12T05:08:51.271196+00:00', '--local', '--subdir', 'DAGS_FOLDER/zirui_dag/csc_ops_update.py', '--map-index', '3'][0m
+[[34m2022-10-12 13:08:53,422[0m] {[34mlocal_executor.py:[0m81} INFO[0m - QueuedLocalWorker running ['airflow', 'tasks', 'run', 'csc_ops_update', 'extract_sql_by_table', 'manual__2022-10-12T05:08:51.271196+00:00', '--local', '--subdir', 'DAGS_FOLDER/zirui_dag/csc_ops_update.py', '--map-index', '0'][0m
+[[34m2022-10-12 13:08:53,422[0m] {[34mlocal_executor.py:[0m81} INFO[0m - QueuedLocalWorker running ['airflow', 'tasks', 'run', 'csc_ops_update', 'extract_sql_by_table', 'manual__2022-10-12T05:08:51.271196+00:00', '--local', '--subdir', 'DAGS_FOLDER/zirui_dag/csc_ops_update.py', '--map-index', '1'][0m
+[[34m2022-10-12 13:08:53,422[0m] {[34mlocal_executor.py:[0m81} INFO[0m - QueuedLocalWorker running ['airflow', 'tasks', 'run', 'csc_ops_update', 'extract_sql_by_table', 'manual__2022-10-12T05:08:51.271196+00:00', '--local', '--subdir', 'DAGS_FOLDER/zirui_dag/csc_ops_update.py', '--map-index', '2'][0m
+[[34m2022-10-12 13:08:53,422[0m] {[34mlocal_executor.py:[0m81} INFO[0m - QueuedLocalWorker running ['airflow', 'tasks', 'run', 'csc_ops_update', 'extract_sql_by_table', 'manual__2022-10-12T05:08:51.271196+00:00', '--local', '--subdir', 'DAGS_FOLDER/zirui_dag/csc_ops_update.py', '--map-index', '3'][0m
+[[34m2022-10-12 13:08:53,422[0m] {[34mscheduler_job.py:[0m589} INFO[0m - Executor reports execution of csc_ops_update.get_table_list run_id=manual__2022-10-12T05:08:51.271196+00:00 exited with status success for try_number 1[0m
+[[34m2022-10-12 13:08:53,423[0m] {[34mscheduler_job.py:[0m589} INFO[0m - Executor reports execution of csc_ops_update.get_data_list run_id=manual__2022-10-12T05:08:51.271196+00:00 exited with status success for try_number 1[0m
+[[34m2022-10-12 13:08:53,426[0m] {[34mscheduler_job.py:[0m632} INFO[0m - TaskInstance Finished: dag_id=csc_ops_update, task_id=get_data_list, run_id=manual__2022-10-12T05:08:51.271196+00:00, map_index=-1, run_start_date=2022-10-12 05:08:52.512147+00:00, run_end_date=2022-10-12 05:08:52.814751+00:00, run_duration=0.302604, state=success, executor_state=success, try_number=1, max_tries=0, job_id=23495, pool=default_pool, queue=default, priority_weight=3, operator=_PythonDecoratedOperator, queued_dttm=2022-10-12 05:08:52.338776+00:00, queued_by_job_id=23403, pid=1906911[0m
+[[34m2022-10-12 13:08:53,426[0m] {[34mscheduler_job.py:[0m632} INFO[0m - TaskInstance Finished: dag_id=csc_ops_update, task_id=get_table_list, run_id=manual__2022-10-12T05:08:51.271196+00:00, map_index=-1, run_start_date=2022-10-12 05:08:52.499493+00:00, run_end_date=2022-10-12 05:08:52.803918+00:00, run_duration=0.304425, state=success, executor_state=success, try_number=1, max_tries=0, job_id=23496, pool=default_pool, queue=default, priority_weight=3, operator=_PythonDecoratedOperator, queued_dttm=2022-10-12 05:08:52.338776+00:00, queued_by_job_id=23403, pid=1906908[0m
+[[34m2022-10-12 13:08:53,535[0m] {[34mtask_command.py:[0m384} INFO[0m - Running <TaskInstance: csc_ops_update.extract_sql_by_table manual__2022-10-12T05:08:51.271196+00:00 map_index=3 [queued]> on host administrator-OptiPlex-7090[0m
+[[34m2022-10-12 13:08:53,535[0m] {[34mtask_command.py:[0m384} INFO[0m - Running <TaskInstance: csc_ops_update.extract_sql_by_table manual__2022-10-12T05:08:51.271196+00:00 map_index=2 [queued]> on host administrator-OptiPlex-7090[0m
+[[34m2022-10-12 13:08:53,564[0m] {[34mtask_command.py:[0m384} INFO[0m - Running <TaskInstance: csc_ops_update.extract_sql_by_table manual__2022-10-12T05:08:51.271196+00:00 map_index=0 [queued]> on host administrator-OptiPlex-7090[0m
+[[34m2022-10-12 13:08:53,569[0m] {[34mtask_command.py:[0m384} INFO[0m - Running <TaskInstance: csc_ops_update.extract_sql_by_table manual__2022-10-12T05:08:51.271196+00:00 map_index=1 [queued]> on host administrator-OptiPlex-7090[0m
+[[34m2022-10-12 13:08:54,372[0m] {[34mscheduler_job.py:[0m347} INFO[0m - 4 tasks up for execution:
+	<TaskInstance: csc_ops_update.load_sql_query manual__2022-10-12T05:08:51.271196+00:00 map_index=0 [scheduled]>
+	<TaskInstance: csc_ops_update.load_sql_query manual__2022-10-12T05:08:51.271196+00:00 map_index=1 [scheduled]>
+	<TaskInstance: csc_ops_update.load_sql_query manual__2022-10-12T05:08:51.271196+00:00 map_index=2 [scheduled]>
+	<TaskInstance: csc_ops_update.load_sql_query manual__2022-10-12T05:08:51.271196+00:00 map_index=3 [scheduled]>[0m
+[[34m2022-10-12 13:08:54,372[0m] {[34mscheduler_job.py:[0m412} INFO[0m - DAG csc_ops_update has 0/16 running and queued tasks[0m
+[[34m2022-10-12 13:08:54,372[0m] {[34mscheduler_job.py:[0m412} INFO[0m - DAG csc_ops_update has 1/16 running and queued tasks[0m
+[[34m2022-10-12 13:08:54,372[0m] {[34mscheduler_job.py:[0m412} INFO[0m - DAG csc_ops_update has 2/16 running and queued tasks[0m
+[[34m2022-10-12 13:08:54,372[0m] {[34mscheduler_job.py:[0m412} INFO[0m - DAG csc_ops_update has 3/16 running and queued tasks[0m
+[[34m2022-10-12 13:08:54,372[0m] {[34mscheduler_job.py:[0m498} INFO[0m - Setting the following tasks to queued state:
+	<TaskInstance: csc_ops_update.load_sql_query manual__2022-10-12T05:08:51.271196+00:00 map_index=0 [scheduled]>
+	<TaskInstance: csc_ops_update.load_sql_query manual__2022-10-12T05:08:51.271196+00:00 map_index=1 [scheduled]>
+	<TaskInstance: csc_ops_update.load_sql_query manual__2022-10-12T05:08:51.271196+00:00 map_index=2 [scheduled]>
+	<TaskInstance: csc_ops_update.load_sql_query manual__2022-10-12T05:08:51.271196+00:00 map_index=3 [scheduled]>[0m
+[[34m2022-10-12 13:08:54,374[0m] {[34mscheduler_job.py:[0m537} INFO[0m - Sending TaskInstanceKey(dag_id='csc_ops_update', task_id='load_sql_query', run_id='manual__2022-10-12T05:08:51.271196+00:00', try_number=1, map_index=0) to executor with priority 1 and queue default[0m
+[[34m2022-10-12 13:08:54,374[0m] {[34mbase_executor.py:[0m95} INFO[0m - Adding to queue: ['airflow', 'tasks', 'run', 'csc_ops_update', 'load_sql_query', 'manual__2022-10-12T05:08:51.271196+00:00', '--local', '--subdir', 'DAGS_FOLDER/zirui_dag/csc_ops_update.py', '--map-index', '0'][0m
+[[34m2022-10-12 13:08:54,374[0m] {[34mscheduler_job.py:[0m537} INFO[0m - Sending TaskInstanceKey(dag_id='csc_ops_update', task_id='load_sql_query', run_id='manual__2022-10-12T05:08:51.271196+00:00', try_number=1, map_index=1) to executor with priority 1 and queue default[0m
+[[34m2022-10-12 13:08:54,374[0m] {[34mbase_executor.py:[0m95} INFO[0m - Adding to queue: ['airflow', 'tasks', 'run', 'csc_ops_update', 'load_sql_query', 'manual__2022-10-12T05:08:51.271196+00:00', '--local', '--subdir', 'DAGS_FOLDER/zirui_dag/csc_ops_update.py', '--map-index', '1'][0m
+[[34m2022-10-12 13:08:54,374[0m] {[34mscheduler_job.py:[0m537} INFO[0m - Sending TaskInstanceKey(dag_id='csc_ops_update', task_id='load_sql_query', run_id='manual__2022-10-12T05:08:51.271196+00:00', try_number=1, map_index=2) to executor with priority 1 and queue default[0m
+[[34m2022-10-12 13:08:54,374[0m] {[34mbase_executor.py:[0m95} INFO[0m - Adding to queue: ['airflow', 'tasks', 'run', 'csc_ops_update', 'load_sql_query', 'manual__2022-10-12T05:08:51.271196+00:00', '--local', '--subdir', 'DAGS_FOLDER/zirui_dag/csc_ops_update.py', '--map-index', '2'][0m
+[[34m2022-10-12 13:08:54,374[0m] {[34mscheduler_job.py:[0m537} INFO[0m - Sending TaskInstanceKey(dag_id='csc_ops_update', task_id='load_sql_query', run_id='manual__2022-10-12T05:08:51.271196+00:00', try_number=1, map_index=3) to executor with priority 1 and queue default[0m
+[[34m2022-10-12 13:08:54,374[0m] {[34mbase_executor.py:[0m95} INFO[0m - Adding to queue: ['airflow', 'tasks', 'run', 'csc_ops_update', 'load_sql_query', 'manual__2022-10-12T05:08:51.271196+00:00', '--local', '--subdir', 'DAGS_FOLDER/zirui_dag/csc_ops_update.py', '--map-index', '3'][0m
+[[34m2022-10-12 13:08:54,377[0m] {[34mlocal_executor.py:[0m81} INFO[0m - QueuedLocalWorker running ['airflow', 'tasks', 'run', 'csc_ops_update', 'load_sql_query', 'manual__2022-10-12T05:08:51.271196+00:00', '--local', '--subdir', 'DAGS_FOLDER/zirui_dag/csc_ops_update.py', '--map-index', '0'][0m
+[[34m2022-10-12 13:08:54,377[0m] {[34mlocal_executor.py:[0m81} INFO[0m - QueuedLocalWorker running ['airflow', 'tasks', 'run', 'csc_ops_update', 'load_sql_query', 'manual__2022-10-12T05:08:51.271196+00:00', '--local', '--subdir', 'DAGS_FOLDER/zirui_dag/csc_ops_update.py', '--map-index', '1'][0m
+[[34m2022-10-12 13:08:54,377[0m] {[34mlocal_executor.py:[0m81} INFO[0m - QueuedLocalWorker running ['airflow', 'tasks', 'run', 'csc_ops_update', 'load_sql_query', 'manual__2022-10-12T05:08:51.271196+00:00', '--local', '--subdir', 'DAGS_FOLDER/zirui_dag/csc_ops_update.py', '--map-index', '2'][0m
+[[34m2022-10-12 13:08:54,377[0m] {[34mlocal_executor.py:[0m81} INFO[0m - QueuedLocalWorker running ['airflow', 'tasks', 'run', 'csc_ops_update', 'load_sql_query', 'manual__2022-10-12T05:08:51.271196+00:00', '--local', '--subdir', 'DAGS_FOLDER/zirui_dag/csc_ops_update.py', '--map-index', '3'][0m
+[[34m2022-10-12 13:08:54,378[0m] {[34mscheduler_job.py:[0m589} INFO[0m - Executor reports execution of csc_ops_update.extract_sql_by_table run_id=manual__2022-10-12T05:08:51.271196+00:00 exited with status success for try_number 1[0m
+[[34m2022-10-12 13:08:54,378[0m] {[34mscheduler_job.py:[0m589} INFO[0m - Executor reports execution of csc_ops_update.extract_sql_by_table run_id=manual__2022-10-12T05:08:51.271196+00:00 exited with status success for try_number 1[0m
+[[34m2022-10-12 13:08:54,378[0m] {[34mscheduler_job.py:[0m589} INFO[0m - Executor reports execution of csc_ops_update.extract_sql_by_table run_id=manual__2022-10-12T05:08:51.271196+00:00 exited with status success for try_number 1[0m
+[[34m2022-10-12 13:08:54,378[0m] {[34mscheduler_job.py:[0m589} INFO[0m - Executor reports execution of csc_ops_update.extract_sql_by_table run_id=manual__2022-10-12T05:08:51.271196+00:00 exited with status success for try_number 1[0m
+[[34m2022-10-12 13:08:54,381[0m] {[34mscheduler_job.py:[0m632} INFO[0m - TaskInstance Finished: dag_id=csc_ops_update, task_id=extract_sql_by_table, run_id=manual__2022-10-12T05:08:51.271196+00:00, map_index=0, run_start_date=2022-10-12 05:08:53.620212+00:00, run_end_date=2022-10-12 05:08:54.062037+00:00, run_duration=0.441825, state=success, executor_state=success, try_number=1, max_tries=0, job_id=23499, pool=default_pool, queue=default, priority_weight=2, operator=_PythonDecoratedOperator, queued_dttm=2022-10-12 05:08:53.417859+00:00, queued_by_job_id=23403, pid=1907048[0m
+[[34m2022-10-12 13:08:54,381[0m] {[34mscheduler_job.py:[0m632} INFO[0m - TaskInstance Finished: dag_id=csc_ops_update, task_id=extract_sql_by_table, run_id=manual__2022-10-12T05:08:51.271196+00:00, map_index=1, run_start_date=2022-10-12 05:08:53.631178+00:00, run_end_date=2022-10-12 05:08:54.076059+00:00, run_duration=0.444881, state=success, executor_state=success, try_number=1, max_tries=0, job_id=23500, pool=default_pool, queue=default, priority_weight=2, operator=_PythonDecoratedOperator, queued_dttm=2022-10-12 05:08:53.417859+00:00, queued_by_job_id=23403, pid=1907053[0m
+[[34m2022-10-12 13:08:54,381[0m] {[34mscheduler_job.py:[0m632} INFO[0m - TaskInstance Finished: dag_id=csc_ops_update, task_id=extract_sql_by_table, run_id=manual__2022-10-12T05:08:51.271196+00:00, map_index=2, run_start_date=2022-10-12 05:08:53.594042+00:00, run_end_date=2022-10-12 05:08:54.058386+00:00, run_duration=0.464344, state=success, executor_state=success, try_number=1, max_tries=0, job_id=23498, pool=default_pool, queue=default, priority_weight=2, operator=_PythonDecoratedOperator, queued_dttm=2022-10-12 05:08:53.417859+00:00, queued_by_job_id=23403, pid=1907044[0m
+[[34m2022-10-12 13:08:54,381[0m] {[34mscheduler_job.py:[0m632} INFO[0m - TaskInstance Finished: dag_id=csc_ops_update, task_id=extract_sql_by_table, run_id=manual__2022-10-12T05:08:51.271196+00:00, map_index=3, run_start_date=2022-10-12 05:08:53.601558+00:00, run_end_date=2022-10-12 05:08:54.041092+00:00, run_duration=0.439534, state=success, executor_state=success, try_number=1, max_tries=0, job_id=23497, pool=default_pool, queue=default, priority_weight=2, operator=_PythonDecoratedOperator, queued_dttm=2022-10-12 05:08:53.417859+00:00, queued_by_job_id=23403, pid=1907045[0m
+[[34m2022-10-12 13:08:54,510[0m] {[34mtask_command.py:[0m384} INFO[0m - Running <TaskInstance: csc_ops_update.load_sql_query manual__2022-10-12T05:08:51.271196+00:00 map_index=1 [queued]> on host administrator-OptiPlex-7090[0m
+[[34m2022-10-12 13:08:54,512[0m] {[34mtask_command.py:[0m384} INFO[0m - Running <TaskInstance: csc_ops_update.load_sql_query manual__2022-10-12T05:08:51.271196+00:00 map_index=3 [queued]> on host administrator-OptiPlex-7090[0m
+[[34m2022-10-12 13:08:54,544[0m] {[34mtask_command.py:[0m384} INFO[0m - Running <TaskInstance: csc_ops_update.load_sql_query manual__2022-10-12T05:08:51.271196+00:00 map_index=0 [queued]> on host administrator-OptiPlex-7090[0m
+[[34m2022-10-12 13:08:54,544[0m] {[34mtask_command.py:[0m384} INFO[0m - Running <TaskInstance: csc_ops_update.load_sql_query manual__2022-10-12T05:08:51.271196+00:00 map_index=2 [queued]> on host administrator-OptiPlex-7090[0m
+[[34m2022-10-12 13:08:55,459[0m] {[34mdagrun.py:[0m597} INFO[0m - Marking run <DagRun csc_ops_update @ 2022-10-12 05:08:51.271196+00:00: manual__2022-10-12T05:08:51.271196+00:00, state:running, queued_at: 2022-10-12 05:08:51.283192+00:00. externally triggered: True> successful[0m
+[[34m2022-10-12 13:08:55,459[0m] {[34mdagrun.py:[0m644} INFO[0m - DagRun Finished: dag_id=csc_ops_update, execution_date=2022-10-12 05:08:51.271196+00:00, run_id=manual__2022-10-12T05:08:51.271196+00:00, run_start_date=2022-10-12 05:08:52.319240+00:00, run_end_date=2022-10-12 05:08:55.459682+00:00, run_duration=3.140442, state=success, external_trigger=True, run_type=manual, data_interval_start=2022-10-12 05:08:51.271196+00:00, data_interval_end=2022-10-12 05:08:51.271196+00:00, dag_hash=b42781936c4c4ec2206441d50f863caf[0m
+[[34m2022-10-12 13:08:55,461[0m] {[34mdag.py:[0m3324} INFO[0m - Setting next_dagrun for csc_ops_update to None, run_after=None[0m
+[[34m2022-10-12 13:08:55,467[0m] {[34mscheduler_job.py:[0m589} INFO[0m - Executor reports execution of csc_ops_update.load_sql_query run_id=manual__2022-10-12T05:08:51.271196+00:00 exited with status success for try_number 1[0m
+[[34m2022-10-12 13:08:55,467[0m] {[34mscheduler_job.py:[0m589} INFO[0m - Executor reports execution of csc_ops_update.load_sql_query run_id=manual__2022-10-12T05:08:51.271196+00:00 exited with status success for try_number 1[0m
+[[34m2022-10-12 13:08:55,467[0m] {[34mscheduler_job.py:[0m589} INFO[0m - Executor reports execution of csc_ops_update.load_sql_query run_id=manual__2022-10-12T05:08:51.271196+00:00 exited with status success for try_number 1[0m
+[[34m2022-10-12 13:08:55,467[0m] {[34mscheduler_job.py:[0m589} INFO[0m - Executor reports execution of csc_ops_update.load_sql_query run_id=manual__2022-10-12T05:08:51.271196+00:00 exited with status success for try_number 1[0m
+[[34m2022-10-12 13:08:55,469[0m] {[34mscheduler_job.py:[0m632} INFO[0m - TaskInstance Finished: dag_id=csc_ops_update, task_id=load_sql_query, run_id=manual__2022-10-12T05:08:51.271196+00:00, map_index=0, run_start_date=2022-10-12 05:08:54.594860+00:00, run_end_date=2022-10-12 05:08:55.316037+00:00, run_duration=0.721177, state=success, executor_state=success, try_number=1, max_tries=0, job_id=23503, pool=default_pool, queue=default, priority_weight=1, operator=_PythonDecoratedOperator, queued_dttm=2022-10-12 05:08:54.373011+00:00, queued_by_job_id=23403, pid=1907162[0m
+[[34m2022-10-12 13:08:55,469[0m] {[34mscheduler_job.py:[0m632} INFO[0m - TaskInstance Finished: dag_id=csc_ops_update, task_id=load_sql_query, run_id=manual__2022-10-12T05:08:51.271196+00:00, map_index=1, run_start_date=2022-10-12 05:08:54.565983+00:00, run_end_date=2022-10-12 05:08:55.241587+00:00, run_duration=0.675604, state=success, executor_state=success, try_number=1, max_tries=0, job_id=23501, pool=default_pool, queue=default, priority_weight=1, operator=_PythonDecoratedOperator, queued_dttm=2022-10-12 05:08:54.373011+00:00, queued_by_job_id=23403, pid=1907160[0m
+[[34m2022-10-12 13:08:55,470[0m] {[34mscheduler_job.py:[0m632} INFO[0m - TaskInstance Finished: dag_id=csc_ops_update, task_id=load_sql_query, run_id=manual__2022-10-12T05:08:51.271196+00:00, map_index=2, run_start_date=2022-10-12 05:08:54.594794+00:00, run_end_date=2022-10-12 05:08:55.314777+00:00, run_duration=0.719983, state=success, executor_state=success, try_number=1, max_tries=0, job_id=23504, pool=default_pool, queue=default, priority_weight=1, operator=_PythonDecoratedOperator, queued_dttm=2022-10-12 05:08:54.373011+00:00, queued_by_job_id=23403, pid=1907163[0m
+[[34m2022-10-12 13:08:55,470[0m] {[34mscheduler_job.py:[0m632} INFO[0m - TaskInstance Finished: dag_id=csc_ops_update, task_id=load_sql_query, run_id=manual__2022-10-12T05:08:51.271196+00:00, map_index=3, run_start_date=2022-10-12 05:08:54.564190+00:00, run_end_date=2022-10-12 05:08:55.288720+00:00, run_duration=0.72453, state=success, executor_state=success, try_number=1, max_tries=0, job_id=23502, pool=default_pool, queue=default, priority_weight=1, operator=_PythonDecoratedOperator, queued_dttm=2022-10-12 05:08:54.373011+00:00, queued_by_job_id=23403, pid=1907159[0m
+[[34m2022-10-12 13:11:29,314[0m] {[34mscheduler_job.py:[0m1369} INFO[0m - Resetting orphaned tasks for active dag runs[0m

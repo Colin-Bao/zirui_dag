@@ -41,7 +41,7 @@ def csc_ops_update():
 
     # 任务流
     import sys
-    sys.path.append('/home/lianghua/rtt/soft/airflow/dags/zirui_dag')
+    sys.path.append(Variable.get('csc_zirui_dag'))  # 导入包
     from csc_ops_load import extract_sql_by_table, load_sql_query
     load_sql_query.expand(data_dict=extract_sql_by_table.expand(table_name=get_table_list(),
                                                                 load_date=get_data_list())
