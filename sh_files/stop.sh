@@ -12,5 +12,5 @@ echo "Stop success"
 # P@ssw0rd
 # sudo fuser - k 8793/tcp
 # kill $(cat /home/lianghua/rtt/soft/airflow/airflow-webserver.pid)
-# sudo lsof -i: 8081 | grep - v "PID" | awk '{print "kill -9",$2}' | sh
+# sudo lsof -i: 8793 | grep - v "PID" | awk '{print "kill -9",$2}' | sh
 # kill $(cat /home/lianghua/rtt/soft/airflow/airflow-scheduler.pid)

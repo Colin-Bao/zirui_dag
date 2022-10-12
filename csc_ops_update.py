@@ -43,7 +43,7 @@ def csc_ops_update():
     import sys
     sys.path.append(Variable.get('csc_zirui_dag'))  # 导入包
     from csc_ops_load import extract_sql_by_table, load_sql_query
-    load_sql_query.expand(data_dict=extract_sql_by_table.expand(table_name=get_table_list(),
+    load_sql_query.expand(xcom_dict=extract_sql_by_table.expand(table_name=get_table_list(),
                                                                 load_date=get_data_list())
                           )
 
