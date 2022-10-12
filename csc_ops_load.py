@@ -135,6 +135,8 @@ def send_info(xcom_dict: dict):
                      """}
 
     # 发送邮件
+    # TODO 如果过了指定时间
+    #
     from airflow.utils.email import send_email
     send_email(to=['523393445@qq.com'],
                subject=email_content['subject'],
@@ -187,8 +189,7 @@ def csc_ops_load():
         'ASHAREDIVIDEND', 'ASHAREEXRIGHTDIVIDENDRECORD', 'BAS_STK_HISDISTRIBUTION']
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=1) as executor:
-        _ = {executor.submit(start_tasks, table)
-                             : table for table in table_list}
+        _ = {executor.submit(start_tasks, table)             : table for table in table_list}
 
     # [END main_flow]
 

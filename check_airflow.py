@@ -75,7 +75,6 @@ def check_process(Process):
 if __name__ == '__main__':
     # check_process('scheduler')
     # restart_scheduler()
-   
     i = 0
     while i < MAX_TRY:
         try:
