@@ -14,28 +14,6 @@ from datetime import timedelta, date
 
 
 @task
-def send_info(data_dict: dict):
-    """
-    发送邮件
-    """
-    # 解析load的内容
-    table_name = data_dict['table_name']
-    query_sql = data_dict['query_sql']
-    email_content = {'subject': 'Airflow 警告',
-                     'html_content':
-                     f""" 
-                     <h3>{table_name} 是空的</h3> 
-                     详细SQL语法为:{query_sql}
-                     """}
-
-    # 发送邮件
-    from airflow.utils.email import send_email
-    send_email(to=['523393445@qq.com'],
-               subject=email_content['subject'],
-               html_content=email_content['html_content'],)
-
-
-@task
 def extract_sql_by_table(table_name: str, load_date: str) -> dict:
     """
     根据表名和日期返回sql查询语句
@@ -62,16 +40,16 @@ def extract_sql_by_table(table_name: str, load_date: str) -> dict:
 
 
 @task
-def load_sql_query(data_dict: dict, load_path: str = "csc_load_path") -> dict:
+def load_sql_query(xcom_dict: dict, load_path: str = "csc_load_path") -> dict:
     """
      根据sql查询语句下载数据到本地
     :return:
     """
     # -----------------参数传递----------------- #
-    connector_id = data_dict['connector_id']
-    query_sql = data_dict['query_sql']
-    table_name = data_dict['table_name']
-    load_date = data_dict['load_date']
+    connector_id = xcom_dict['connector_id']
+    query_sql = xcom_dict['query_sql']
+    table_name = xcom_dict['table_name']
+    load_date = xcom_dict['load_date']
 
     # -----------------输出文件的路径----------------- #
     LOAD_PATH = Variable.get(load_path) + table_name
@@ -98,15 +76,19 @@ def load_sql_query(data_dict: dict, load_path: str = "csc_load_path") -> dict:
 
 
 @task
-def check_load(data_dict: dict) -> dict:
+def check_load(xcom_dict: dict) -> dict:
     """
     检查保存后的文件,并输出字段类型与含义
     :param data_dict:
     :return:
     """
     # 传参数
-    table_path = data_dict['table_path']
-    table_name = data_dict['table_name']
+    table_empty = xcom_dict['table_empty']
+    table_path = xcom_dict['table_path']
+    table_name = xcom_dict['table_name']
+
+    if table_empty:
+        return xcom_dict
 
     # 文件目录
     DICT_DATA_PATH = Variable.get('csc_data_dict_path') + table_name+'.csv'
@@ -129,7 +111,34 @@ def check_load(data_dict: dict) -> dict:
                         left_on='column', right_on='fieldName')
     df_merge.to_csv(LOAD_TYPE_PATH, index=False)
 
-    return data_dict
+    return xcom_dict
+
+
+@task
+def send_info(xcom_dict: dict):
+    """
+    发送邮件
+    """
+    # 解析load的内容
+    table_empty = xcom_dict['table_empty']
+    if not table_empty:
+        # TODO 如果不为空的处理
+        return
+    table_name = xcom_dict['table_name']
+    query_sql = xcom_dict['query_sql']
+
+    email_content = {'subject': 'Airflow 警告',
+                     'html_content':
+                     f""" 
+                     <h3>{table_name} 是空的</h3> 
+                     详细SQL语法为:{query_sql}
+                     """}
+
+    # 发送邮件
+    from airflow.utils.email import send_email
+    send_email(to=['523393445@qq.com'],
+               subject=email_content['subject'],
+               html_content=email_content['html_content'],)
 
 
 # [START DAG] 实例化一个DAG
@@ -140,13 +149,13 @@ def check_load(data_dict: dict) -> dict:
                   'email': ['523393445@qq.com', ],  # '821538716@qq.com'
                   'email_on_failure': True,
                   'email_on_retry': True,
-                  'retries': 1,
-                  "retry_delay": timedelta(minutes=5), },
+                  #   'retries': 1,
+                  "retry_delay": timedelta(minutes=1), },
     schedule="0 17 * * 1-7",
     start_date=pendulum.datetime(2022, 9, 1, tz="UTC"),
     catchup=False,
     dagrun_timeout=timedelta(minutes=60),
-    tags=['数据运维', '数据加载'],
+    tags=['数据加载'],
 )
 # 在DAG中定义任务
 def csc_ops_load():
@@ -160,17 +169,14 @@ def csc_ops_load():
         # 下载昨天的数据
         load_date = (date.today() + timedelta(-1)
                      ).strftime('%Y%m%d')
+        # load_date = '20220102'
         # ETL
         load_return = load_sql_query.override(
             task_id='L_' + table_name, outlets=[Dataset('L_' + table_name, extra={'load_date': load_date})])(
             extract_sql_by_table.override(task_id='E_' + table_name, )(table_name, load_date))
 
         # 根据load的结果是否为空，进行告警或者下一步动作
-        if load_return['table_empty']:
-            send_info(load_return)
-
-        else:
-            check_load(load_return)
+        send_info(check_load(load_return))
 
     # 多进程异步执行
     test_list = ['ASHAREBALANCESHEET']
