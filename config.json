@@ -1,0 +1,180 @@
+{
+    "primary_key": [],
+    "is_append": true,
+    "date_column": "ANN_DT",
+    "last_update": "",
+    "all_columns": {
+        "ID": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "COMPANY_CODE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "STOCK_CODE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "STOCK_NAME": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "DECLARE_DATE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "DISTRI_YEAR": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "DISTRIDATE_TYPE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "DISTRI_TYPE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "OBJECT_TYPE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "OBJECT_DESC": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "SCHEME_TYPE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "SPEDISTRI_NUMBER": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "CAPBASE_DATE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "CAP_BASE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "RIGHT_RECORDDATE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "XR_XD_DATE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "LAST_TRADEDATE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "BEFTAX_MAXCASHDIV": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "BEFTAX_MINCASHDIV": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "AFTAX_CASHDIV": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "AFTAX_CASHDIV_QFII": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "CASHDIV_STARTDATE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "CASHDIV_ENDDATE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "ALLOT_RATIO": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "ALLOT_PRICE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "STOCKDIV_RATIO": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "TRANS_RATIO": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "SUPRSV_TRANSRATIO": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "CAPRSV_TRANSRATIO": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "BONUS_RATIO": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "STOCK_ARRDATE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "LIST_DATE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "CHANGE_RATIO": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "BUYBACK_STARTDATE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "BUYBACK_ENDDATE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "ASS_REPLACEDATE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "BDRESOL_DECLAREDATE": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "IS_NEWEST": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "RD_DESC": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "IS_VALID": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "ENTRYTIME": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "UPDATETIME": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        },
+        "TMSTAMP": {
+            "parquet_type": "string",
+            "original_type": "VARCHAR2"
+        }
+    }
+}

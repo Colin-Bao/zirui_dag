@@ -66,8 +66,8 @@ def load_sql_query(xcom_dict: dict, load_path: str = "csc_load_path") -> dict:
     chunk_count = 0
     for df_chunk in sql_hook.get_pandas_df_by_chunks(query_sql, chunksize=10000):
         if chunk_count == 0:
-            table_path = LOAD_PATH + f'/{load_date}.csv'
-            df_chunk.to_csv(table_path, index=False)
+            table_path = LOAD_PATH + f'/{load_date}.parquet'
+            df_chunk.to_parquet(table_path, index=False)
             return {'table_path': table_path, 'table_name': table_name, 'table_empty': df_chunk.empty, 'query_sql': query_sql}
         else:
             # TODO 只保存chunksize行，如果超过chunksize行要分片保存再合并
@@ -93,7 +93,7 @@ def check_load(xcom_dict: dict) -> dict:
     # 文件目录
     DICT_DATA_PATH = Variable.get('csc_data_dict_path') + table_name+'.csv'
     LOAD_TYPE_PATH = Variable.get('csc_load_path') + table_name+'/' + table_path.split(
-        '/')[-1].split('.')[0]+'_type.csv'
+        '/')[-1].split('.')[0]+'_type.parquet'
 
     # 读取load的文件
     import pandas as pd
@@ -183,7 +183,7 @@ def csc_ops_load():
             extract_sql_by_table.override(task_id='E_' + table_name, )(table_name, load_date))
 
         # 根据load的结果是否为空，进行告警或者下一步动作
-        send_info(check_load(load_return))
+        # send_info(check_load(load_return))
 
     # 多进程异步执行
     test_list = ['ASHAREBALANCESHEET']
@@ -194,8 +194,7 @@ def csc_ops_load():
         'ASHAREDIVIDEND', 'ASHAREEXRIGHTDIVIDENDRECORD', 'BAS_STK_HISDISTRIBUTION']
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=1) as executor:
-        _ = {executor.submit(start_tasks, table)
-                             : table for table in table_list}
+        _ = {executor.submit(start_tasks, table): table for table in test_list}
 
     # [END main_flow]
 
