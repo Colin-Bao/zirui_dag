@@ -63,6 +63,7 @@ def load_sql_query(xcom_dict: dict, load_path: str = "csc_load_path") -> dict:
         os.mkdir(LOAD_PATH)
 
     # 防止服务器内存占用过大
+
     chunk_count = 0
     for df_chunk in sql_hook.get_pandas_df_by_chunks(query_sql, chunksize=10000):
         if chunk_count == 0:

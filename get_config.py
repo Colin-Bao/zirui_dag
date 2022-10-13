@@ -7,11 +7,27 @@ import pyarrow.parquet as pq
 
 
 # df转换
+
+
 def df_to_parquet(table_name: str, df_by_sql: pd.DataFrame):
-    print(df_by_sql.dtypes)
+    # 查找属于何种数据源
+    import json
+    db = json.loads(Variable.get("csc_table_db"))[table_name]  # 去数据字典文件中寻找
+
+    # 查找SQL语法
+    sql_str = ""
+    # 不同数据源操作
+    if db == 'wind':
+        sql_str = json.loads(Variable.get("csc_wind_sql"))[table_name]
+    elif db == 'suntime':
+        sql_str = json.loads(Variable.get("csc_suntime_sql"))[
+            table_name]['sql']  # 去数据字典文件中寻找
+    sql_str = sql_str.upper().split('WHERE')[-1]
+    date_column = sql_str.split('=')[0].strip()
+
     # 输出config文件
     info_dict = {'primary_key':  [], 'is_append': True,
-                 'date_column': 'ANN_DT', 'last_update': '',
+                 'date_column': date_column, 'last_update': '',
                  'all_columns': {}}
     # 字典文件路径
     df_dict = pd.read_csv(Variable.get(
@@ -28,7 +44,7 @@ def df_to_parquet(table_name: str, df_by_sql: pd.DataFrame):
 
         # 数据字典没有找到的默认值
         if target_column.empty:
-            print(table_name)
+
             if column_name == 'OPDATE':
                 fieldType, isPrimarykey = 'VARCHAR2', 'N'
             elif column_name == 'OPMODE':
@@ -60,7 +76,7 @@ def df_to_parquet(table_name: str, df_by_sql: pd.DataFrame):
             # 修改dtypes
             df_by_sql[column_name] = df_by_sql[column_name].astype('str')
 
-            # 修改类型
+            # 修改schema类型
             pa_schema = pa_schema.set(
                 pa_schema.get_field_index(column_name), pa.field(column_name, pa.string()))
 
@@ -69,16 +85,16 @@ def df_to_parquet(table_name: str, df_by_sql: pd.DataFrame):
                 {column_name: {'parquet_type': 'string', 'original_type': fieldType}})
 
     # 生成修改schema后的 Parquet 数据
-    new_schema_table = pa.Table.from_pandas(
-        df_by_sql, schema=pa_schema, safe=False)
+    # new_schema_table = pa.Table.from_pandas(
+        # df_by_sql, schema=pa_schema, safe=False)
 
     # 导出config
     import json
-    with open('config.json', 'w') as f:
+    with open(f'config/{table_name}_config.json', 'w') as f:
         json.dump(info_dict, f)
 
     # # 输出文件1
-    pq.write_table(new_schema_table, f'table_name.parquet')
+    # pq.write_table(new_schema_table, f'table_name.parquet')
 
     # table = pa.Table.from_pandas(df, schema=schema)
     # read_check = pd.read_parquet(
@@ -90,6 +106,13 @@ table_list = [
     'ASHAREINCOME', 'FIN_INCOME_GEN', 'ASHAREEODPRICES', 'QT_STK_DAILY', 'ASHAREEODDERIVATIVEINDICATOR',
     'ASHAREPROFITNOTICE', 'FIN_PERFORMANCE_FORECAST', 'ASHAREPROFITEXPRESS', 'FIN_PERFORMANCE_EXPRESS',
     'ASHAREDIVIDEND', 'ASHAREEXRIGHTDIVIDENDRECORD', 'BAS_STK_HISDISTRIBUTION']
+
+table_test = ['ASHARECASHFLOW']
 for table in table_list:
-    df_to_parquet(table, pd.read_csv(
-        f'/home/lianghua/rtt/soft/airflow/dags/zirui_dag/output/load/{table}/20221012.csv'))
+    try:
+        df_to_parquet(table, pd.read_csv(
+            f'/home/lianghua/rtt/soft/airflow/dags/zirui_dag/output/load/{table}/20221012.csv'))
+        # break
+    except Exception as e:
+        print(table)
+        continue
