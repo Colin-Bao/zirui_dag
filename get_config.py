@@ -1,10 +1,9 @@
-
-
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import time
 from airflow.models import Variable
 import pandas as pd
 import os
-# 1.对应好类型
+from retry import retry
 
 
 def extract_sql_by_table(table_name: str, load_date: str) -> dict:
@@ -12,55 +11,27 @@ def extract_sql_by_table(table_name: str, load_date: str) -> dict:
     根据表名和日期返回sql查询语句,没有where就跳过
     :return:( connector_id, return_sql, table_name, load_date)
     """
-    #
-    dynamic = False
-    # 查找属于何种数据源
+
     import json
-    try:
-        db = json.loads(Variable.get("csc_table_db"))[table_name]  # 去数据字典文件中寻找
-    except KeyError as e:
-        print(table_name, "csc_table_db", e)
-        return False
-    # return
+    # 查找属于何种数据源
+    db = json.loads(Variable.get("csc_table_db"))[table_name]  # 去数据字典文件中寻找
 
     # 不同数据源操作
-    return_sql = ''
-
     if db == 'wind':
         wind_sql = json.loads(Variable.get("csc_wind_sql"))[table_name]
-
-        if wind_sql.count('where') == 1:
-            dynamic = True
-            return_sql = wind_sql % f"\'{load_date}\'"
-
-        else:
-            dynamic = False
-            return_sql = wind_sql
-
+        dynamic = True if wind_sql.count('where') == 1 else False
+        return_sql = wind_sql % f"\'{load_date}\'" if dynamic else wind_sql
     elif db == 'suntime':
-        suntime_sql = ''
-        # TODO 没有写增量表，需要增加逻辑判断
-        try:
-            suntime_sql = json.loads(Variable.get("csc_suntime_sql"))[
-                table_name]['sql']  # 去数据字典文件中寻找
-        except KeyError as e:
-            print(table_name, 'suntime下未注册', e)
-            dynamic = True
-            return_sql = "SELECT * FROM zyyx.%s" % table_name
-
-        if 'WHERE' in suntime_sql:
-            dynamic = True
-            return_sql = suntime_sql % (
-                'zyyx.' + table_name, f"{load_date}")
-        else:
-            dynamic = False
-            return_sql = "SELECT * FROM zyyx.%s" % table_name if suntime_sql == '' else suntime_sql % (
-                'zyyx.' + table_name)
+        suntime_sql_dict = json.loads(Variable.get("csc_suntime_sql"))
+        suntime_sql = suntime_sql_dict[table_name]['sql'] if table_name in suntime_sql_dict.keys(
+        ) else "SELECT * FROM %s"
+        suntime_sql = "SELECT * FROM %s" if suntime_sql == "" else suntime_sql  # suntime_sql可能为空
+        dynamic = True if suntime_sql.count('WHERE') == 1 else False
+        return_sql = suntime_sql % (
+            'zyyx.' + table_name, load_date) if dynamic else suntime_sql % ('zyyx.' + table_name)
 
     return {'connector_id': db + '_af_connector', 'query_sql': return_sql, 'table_name': table_name,
             'load_date': load_date, 'dynamic': dynamic}
-
-# 下载数据
 
 
 def load_sql_query(xcom_dict: dict, load_path: str = "csc_load_path") -> dict:
@@ -86,7 +57,7 @@ def load_sql_query(xcom_dict: dict, load_path: str = "csc_load_path") -> dict:
     import os
     if not os.path.exists(LOAD_PATH):
         os.mkdir(LOAD_PATH)
-    #
+
     #
     # 防止服务器内存占用过大
 
@@ -107,8 +78,7 @@ def load_sql_query(xcom_dict: dict, load_path: str = "csc_load_path") -> dict:
                 df_chunk.to_parquet(table_path, engine='pyarrow')
                 # 传出格式 第一次运行的时候要用
                 # get_type_from_df(table_name, df_chunk, table_path)
-            else:
-                print('是空的', table_name)
+
             return {'table_path': table_path, 'table_name': table_name,
                     'table_empty': df_chunk.empty, 'query_sql': query_sql,
                     'type_dict_path': LOAD_PATH+f'/type_config.json', 'dynamic': dynamic}
@@ -207,7 +177,7 @@ def transform_type(xcom_dict: dict) -> dict:
     # print(new_table)
     # print(pd.read_parquet(parquet_path))
     # 输出日志
-    get_col_from_dict(xcom_dict['table_name'])
+    # get_col_from_dict(xcom_dict['table_name'])
 
     # 返回值
     return xcom_dict
@@ -220,12 +190,12 @@ def get_col_from_dict(table_name):
     import json
     from datetime import datetime
     # 字典文件路径
-    try:
+    data_dict = Variable.get('csc_data_dict_path') + table_name+'.csv'
+    if not os.path.exists(data_dict):  # 没有数据字典的处理
+        return
+    else:
         df_dict = pd.read_csv(Variable.get(
             'csc_data_dict_path') + table_name+'.csv')[['fieldName', 'fieldType']]
-    except Exception as e:  # 没有数据字典的表
-        print(e)
-        return
 
     # 读取type_dict_path
     CONFIG_PATH = Variable.get('csc_type_config_path')+f'{table_name}.json'
@@ -254,9 +224,45 @@ def get_col_from_dict(table_name):
         json.dump(config_dict, f)
 
 
-def download_demo():
+def start_tasks(table_name):
+
+    import warnings
+    warnings.filterwarnings('ignore')  # 忽略警告
     """
-    整个流程验证
+    任务流验证
+    """
+    pd_dates = [str(i).replace('-', '').split(' ')[0]
+                for i in pd.date_range('20220101', '20221015')]
+
+    @retry(exceptions=Exception, tries=10, delay=1)
+    def down_by_date(down_date):
+        # print(table_name)
+        res_extract = extract_sql_by_table(table_name, down_date)
+        # print(res_extract, date)
+        transform_type(load_sql_query(res_extract))
+
+    # get_col_from_dict(xcom_dict['table_name'])
+    for date in pd_dates:
+        table_path = Variable.get(
+            'csc_load_path')+f'{table_name}/{date}.parquet'
+        table_path_2 = Variable.get(
+            'csc_load_path')+f'{table_name}/{table_name}.parquet'
+        if os.path.exists(table_path):
+            # print('exists table_path_1')
+            continue
+        elif os.path.exists(table_path_2):
+            # print('exists table_path_2')
+            break
+        down_by_date(date)  # 某一天出错重试
+    # 所有日期下载完以后
+    get_col_from_dict(table_name)
+
+    return table_name, 'task ok'
+
+
+def download_by_multi():
+    """
+    多进程
     """
     table_list = [
         'FIN_BALANCE_SHEET_GEN', 'ASHAREBALANCESHEET', 'ASHARECASHFLOW', 'FIN_CASH_FLOW_GEN',
@@ -264,160 +270,44 @@ def download_demo():
         'ASHAREPROFITNOTICE', 'FIN_PERFORMANCE_FORECAST', 'ASHAREPROFITEXPRESS', 'FIN_PERFORMANCE_EXPRESS',
         'ASHAREDIVIDEND', 'ASHAREEXRIGHTDIVIDENDRECORD', 'BAS_STK_HISDISTRIBUTION', ]
 
-    # 新加的表验证
-
     new_list_wind = ['ASHAREFINANCIALDERIVATIVE', 'ASHARESALESSEGMENT', 'ASHAREANNFINANCIALINDICATOR',
                      'AINDEXEODPRICES', 'AINDEXFREEWEIGHT', 'AINDEXMEMBERS', 'AINDEXMEMBERSCITICS', 'ASHAREBALANCESHEET',
-                     'ASHAREBLOCKTRADE', 'ASHARECALENDAR', 'ASHARECASHFLOW', 'ASHARECONSENSUSDATA', 'ASHARECONSENSUSROLLINGDATA', 'ASHAREDESCRIPTION',
-                     'ASHAREEODDERIVATIVEINDICATOR', 'ASHAREEODPRICES', 'ASHAREFINANCIALINDICATOR', 'ASHAREINCOME', 'ASHAREINDUSTRIESCLASS_CITICS',
-                     'ASHAREINDUSTRIESCLASS_CS', 'ASHAREINDUSTRIESCLASS_GICS', 'ASHAREINDUSTRIESCLASS_SW', 'ASHAREINDUSTRIESCLASS_WIND', 'ASHAREMONEYFLOW',
+                     'ASHAREBLOCKTRADE', 'ASHARECALENDAR', 'ASHARECASHFLOW', 'ASHARECONSENSUSDATA', 'ASHARECONSENSUSROLLINGDATA',
+                     'ASHAREDESCRIPTION',
+                     'ASHAREEODDERIVATIVEINDICATOR', 'ASHAREEODPRICES', 'ASHAREFINANCIALINDICATOR', 'ASHAREINCOME',
+                     'ASHAREINDUSTRIESCLASS_CITICS',
+                     'ASHAREINDUSTRIESCLASS_CS', 'ASHAREINDUSTRIESCLASS_GICS', 'ASHAREINDUSTRIESCLASS_SW',
+                     'ASHAREINDUSTRIESCLASS_WIND', 'ASHAREMONEYFLOW',
                      'ASHAREPROFITEXPRESS', 'ASHAREPROFITNOTICE', 'ASHAREST', 'ASHARETRADINGSUSPENSION',
-                     'CCOMMODITYFUTURESEODPRICES', 'CCOMMODITYFUTURESPOSITIONS', 'CFUTURESCALENDAR', 'CFUTURESCONTPRO', 'CFUTURESCONTPROCHANGE', 'CFUTURESDESCRIPTION', 'CFUTURESMARGINRATIO', 'SHSCMEMBERS', 'SZSCMEMBERS', 'CHINAMUTUALFUNDSTOCKPORTFOLIO', 'ASHAREMANAGEMENTHOLDREWARD', 'ASHAREDIVIDEND',
-                     'AINDEXCSI500WEIGHT', 'AINDEXHS300CLOSEWEIGHT', 'SHSCCHANNELHOLDINGS', 'ASHAREISACTIVITY', 'ASHARECONSEPTION', 'ASHAREPLANTRADE', 'ASHAREIPO', 'ASHAREEARNINGEST', 'ASHAREAUDITOPINION', 'ASHAREMAJOREVENT', 'ASHAREREGINV']
+                     'CCOMMODITYFUTURESEODPRICES', 'CCOMMODITYFUTURESPOSITIONS', 'CFUTURESCALENDAR', 'CFUTURESCONTPRO',
+                     'CFUTURESCONTPROCHANGE', 'CFUTURESDESCRIPTION', 'CFUTURESMARGINRATIO', 'SHSCMEMBERS', 'SZSCMEMBERS',
+                     'CHINAMUTUALFUNDSTOCKPORTFOLIO', 'ASHAREMANAGEMENTHOLDREWARD', 'ASHAREDIVIDEND',
+                     'AINDEXCSI500WEIGHT', 'AINDEXHS300CLOSEWEIGHT', 'SHSCCHANNELHOLDINGS', 'ASHAREISACTIVITY',
+                     'ASHARECONSEPTION', 'ASHAREPLANTRADE', 'ASHAREIPO', 'ASHAREEARNINGEST', 'ASHAREAUDITOPINION',
+                     'ASHAREMAJOREVENT', 'ASHAREREGINV']
 
-    new_list_suntime = ['RPT_FORECAST_STK', 'RPT_RATING_ADJUST', 'RPT_TARGET_PRICE_ADJUST', 'RPT_EARNINGS_ADJUST', 'RPT_GOGOAL_RATING', 'CON_FORECAST_STK', 'CON_RATING_STK', 'CON_TARGET_PRICE_STK', 'CON_FORECAST_ROLL_STK',
-                        'DER_FORECAST_ADJUST_NUM', 'DER_RATING_ADJUST_NUM', 'DER_REPORT_NUM', 'DER_CONF_STK', 'DER_FOCUS_STK', 'DER_DIVER_STK', 'DER_CON_DEV_ROLL_STK', 'DER_EXCESS_STOCK', 'DER_PROB_EXCESS_STOCK', 'DER_PROB_BELOW_STOCK']
-    test_list = ['AINDEXFREEWEIGHT']
-    # transform_type(load_sql_query(
-    # extract_sql_by_table('ASHAREBALANCESHEET', '20220102')))
-    all_table = table_list+new_list_wind+new_list_suntime
+    new_list_suntime = ['RPT_FORECAST_STK', 'RPT_RATING_ADJUST', 'RPT_TARGET_PRICE_ADJUST', 'RPT_EARNINGS_ADJUST', 'RPT_GOGOAL_RATING',
+                        'CON_FORECAST_STK', 'CON_RATING_STK', 'CON_TARGET_PRICE_STK', 'CON_FORECAST_ROLL_STK',
+                        'DER_FORECAST_ADJUST_NUM', 'DER_RATING_ADJUST_NUM', 'DER_REPORT_NUM', 'DER_CONF_STK', 'DER_FOCUS_STK',
+                        'DER_DIVER_STK', 'DER_CON_DEV_ROLL_STK', 'DER_EXCESS_STOCK', 'DER_PROB_EXCESS_STOCK', 'DER_PROB_BELOW_STOCK']
+    test_list = ['RPT_TARGET_PRICE_ADJUST',
+                 'RPT_EARNINGS_ADJUST', 'RPT_GOGOAL_RATING', 'DER_FORECAST_ADJUST_NUM']
 
-    def start_tasks(table_name):
-        pd_dates = [str(i).replace('-', '').split(' ')[0]
-                    for i in pd.date_range('20220101', '20221014')]
+    all_table = new_list_wind+new_list_suntime
+    # _ = {start_tasks(table) for table in all_table}
+    # get_col_from_dict(xcom_dict['table_name'])
 
-        for date in pd_dates:
-            # print(date)
-            table_path = Variable.get(
-                'csc_load_path')+f'{table_name}/{date}.parquet'
-            table_path_2 = Variable.get(
-                'csc_load_path')+f'{table_name}/{table_name}.parquet'
-            if os.path.exists(table_path):
-                # print('exists')
-                continue
-            if os.path.exists(table_path_2):
-                # print('exists')
-                break
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        result = {executor.submit(
+            start_tasks, table): table for table in all_table}
+        for future in as_completed(result):
+            data = future.result()
+            print(data)
 
-            res_extract = extract_sql_by_table(table_name, date)
-            # print(res_extract, date, res_extract['dynamic'])
-            res_trans = transform_type(load_sql_query(res_extract))
-
-        # if res_trans:
-            # get_col_from_dict(table_name)
-
-    # _ = [start_tasks(table) for table in all_table]
-    with ThreadPoolExecutor(max_workers=4) as executor:
-        _ = {executor.submit(start_tasks, table): table for table in all_table}
+            #     _ = {executor.submit(start_tasks, table): table for table in test_list}
 
 
-download_demo()
-
-
-# def df_to_parquet(table_name: str, df_by_sql: pd.DataFrame):
-#     # 查找属于何种数据源
-#     import json
-#     db = json.loads(Variable.get("csc_table_db"))[table_name]  # 去数据字典文件中寻找
-
-#     # 查找SQL语法
-#     sql_str = ""
-#     # 不同数据源操作
-#     if db == 'wind':
-#         sql_str = json.loads(Variable.get("csc_wind_sql"))[table_name]
-#     elif db == 'suntime':
-#         sql_str = json.loads(Variable.get("csc_suntime_sql"))[
-#             table_name]['sql']  # 去数据字典文件中寻找
-#     sql_str = sql_str.upper().split('WHERE')[-1]
-#     date_column = sql_str.split('=')[0].strip()
-
-#     # 输出config文件
-#     info_dict = {'primary_key':  [], 'is_append': True,
-#                  'date_column': date_column, 'last_update': '',
-#                  'all_columns': {}}
-#     # 字典文件路径
-#     df_dict = pd.read_csv(Variable.get(
-#         'csc_data_dict_path') + table_name+'.csv')[['fieldName', 'fieldType', 'isPrimarykey']]
-
-#     # 取出schema
-#     pa_schema = pa.Schema.from_pandas(df_by_sql)
-
-#     # print(pa.Table.to_pandas(pa_by_sql).dtypes)
-#     # 遍历df_by_sql中的所有字段
-#     for column_name in df_by_sql.columns:
-#         # 在数据字典中找字段信息
-#         target_column = df_dict[df_dict['fieldName'] == column_name]
-
-#         # 数据字典没有找到的默认值
-#         if target_column.empty:
-
-#             if column_name == 'OPDATE':
-#                 fieldType, isPrimarykey = 'VARCHAR2', 'N'
-#             elif column_name == 'OPMODE':
-#                 fieldType, isPrimarykey = 'NUMBER', 'N'
-#             else:
-#                 fieldType, isPrimarykey = 'VARCHAR2', 'N'
-#         else:
-#             fieldType, isPrimarykey = target_column['fieldType'].iloc[0], target_column['isPrimarykey'].iloc[0]
-
-#         # 更新primary_key
-#         if isPrimarykey == 'Y':
-#             info_dict['primary_key'] += [column_name]
-
-#         # 更改类型
-#         fieldType_judge = fieldType.split('(')[0]
-#         if fieldType_judge in ['NUMBER', '']:
-
-#             # 修改dtypes
-#             df_by_sql[column_name] = df_by_sql[column_name].astype('float64')
-
-#             # 修改schema
-#             pa_schema = pa_schema.set(
-#                 pa_schema.get_field_index(column_name), pa.field(column_name, pa.float64()))
-
-#             # 更新all_columns
-#             info_dict['all_columns'].update(
-#                 {column_name: {'parquet_type': 'double', 'original_type': fieldType}})
-#         elif fieldType_judge in ['VARCHAR2', '']:
-#             # 修改dtypes
-#             df_by_sql[column_name] = df_by_sql[column_name].astype('str')
-
-#             # 修改schema类型
-#             pa_schema = pa_schema.set(
-#                 pa_schema.get_field_index(column_name), pa.field(column_name, pa.string()))
-
-#             # 更新all_columns
-#             info_dict['all_columns'].update(
-#                 {column_name: {'parquet_type': 'string', 'original_type': fieldType}})
-
-#     # 生成修改schema后的 Parquet 数据
-#     new_schema_table = pa.Table.from_pandas(
-#         df_by_sql, schema=pa_schema, safe=False)
-
-#     # 导出config
-#     import json
-#     with open(f'config/{table_name}_config.json', 'w') as f:
-#         json.dump(info_dict, f)
-
-#     # # 输出文件1
-#     pq.write_table(new_schema_table, f'parquet_demo/{table_name}.parquet')
-
-#     # table = pa.Table.from_pandas(df, schema=schema)
-#     # read_check = pd.read_parquet(
-#     #     '/home/lianghua/rtt/soft/airflow/dags/zirui_dag/20221012.parquet')
-
-
-# table_list = [
-#     'FIN_BALANCE_SHEET_GEN', 'ASHARECASHFLOW',
-#     'ASHAREINCOME', 'FIN_INCOME_GEN', 'ASHAREEODPRICES', 'QT_STK_DAILY', 'ASHAREEODDERIVATIVEINDICATOR',
-#     'ASHAREPROFITNOTICE', 'FIN_PERFORMANCE_FORECAST', 'ASHAREPROFITEXPRESS', 'FIN_PERFORMANCE_EXPRESS',
-#     'ASHAREDIVIDEND', 'ASHAREEXRIGHTDIVIDENDRECORD', 'BAS_STK_HISDISTRIBUTION']
-
-# table_test = ['ASHARECASHFLOW']
-# for table in table_list:
-#     try:
-#         df_to_parquet(table, pd.read_csv(
-#             f'/home/lianghua/rtt/soft/airflow/dags/zirui_dag/output/load/{table}/20221012.csv'))
-#         # break
-#     except Exception as e:
-#         print(table)
-#         continue
+st = time.time()
+download_by_multi()
+et = time.time()
+print(et-st)
