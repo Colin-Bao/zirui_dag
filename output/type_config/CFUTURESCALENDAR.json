@@ -1,0 +1,1 @@
+{"TRADE_DAYS": {"pandas_type": "object", "pyarrow_type": "string", "parquet_type": "string"}, "S_INFO_EXCHMARKET": {"pandas_type": "object", "pyarrow_type": "string", "parquet_type": "string"}}
