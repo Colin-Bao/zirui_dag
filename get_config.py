@@ -294,7 +294,7 @@ def download_by_multi():
                  'RPT_EARNINGS_ADJUST', 'RPT_GOGOAL_RATING', 'DER_FORECAST_ADJUST_NUM']
 
     all_table = new_list_wind+new_list_suntime
-    # _ = {start_tasks(table) for table in all_table}
+
     # get_col_from_dict(xcom_dict['table_name'])
 
     with ThreadPoolExecutor(max_workers=10) as executor:
