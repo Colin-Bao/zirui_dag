@@ -7,10 +7,96 @@
 
 import os
 import pendulum
-from airflow.decorators import dag, task
+from airflow.decorators import dag, task, task_group
 from airflow.models import Variable
 from airflow.datasets import Dataset
 from datetime import timedelta, date, datetime
+
+
+def get_type_from_df(table_name: str, df_by_sql,) -> dict:
+    import pyarrow as pa
+    import pandas as pd
+    pa_schema = pa.Table.from_pandas(df_by_sql).schema  # 取出schema
+
+    # 生成数据结构字典
+    type_config = {}
+
+    # 遍历spa_schema
+    for field in pa_schema:
+        # 对应好类型
+        pyarrow_type = str(field.type)
+        pandas_type = str(df_by_sql[field.name].dtype)
+        trans_schema_type = pyarrow_type  # 自定义转换类型
+
+        # 修改类型 主要出错在null上
+        if trans_schema_type == 'null':
+            df_info = pd.read_csv(
+                Variable.get('csc_table_info') + f'{table_name}.csv')
+            db_type = df_info[df_info['COLUMN_NAME'] ==
+                              field.name]['DATA_TYPE'].iloc[0]
+            if db_type == 'varchar':
+                trans_schema_type = 'string'
+            elif db_type == 'numeric':
+                trans_schema_type = 'double'
+            elif db_type == 'NUMBER':
+                trans_schema_type = 'double'
+            elif db_type == 'VARCHAR2':
+                trans_schema_type = 'string'
+
+        type_config.update({
+            field.name: {
+                'pandas_type': pandas_type,
+                'pyarrow_type': pyarrow_type,
+                'parquet_type': trans_schema_type
+            }
+        })
+
+    # 导出config
+    import json
+    CONFIG_PATH = Variable.get('csc_parquet_schema') + f'{table_name}.json'
+    with open(CONFIG_PATH, 'w') as f:
+        json.dump(type_config, f)
+
+    # 进行转换
+
+
+def check_update(table_name, table_path, df_chunk, load_date):
+    """
+    检查
+    """
+    import pandas as pd
+    import datacompy
+    # --------------找信息--------------#
+    # 找到PK
+    df_info = pd.read_csv(Variable.get(
+        'csc_table_info') + f'{table_name}.csv')
+
+    df_mask = (df_info['CONSTRAINT_TYPE']
+               == 'PK') | (df_info['CONSTRAINT_TYPE'] == 'P')
+
+    # 有的是空的
+    pk_column = df_info[df_mask]['COLUMN_NAME'].to_list()
+
+    df_old = pd.read_parquet(table_path)
+    df_new = df_chunk.copy()
+
+    # --------------比较--------------#
+    if pk_column:  # 不是空
+        compare_log = datacompy.Compare(
+            df_old, df_new, df1_name='df_old', df2_name='df_new', join_columns=pk_column)
+
+    else:
+        # TODO 已经采用临时手段修复
+        compare_log = datacompy.Compare(
+            df_old, df_new, df1_name='df_old', df2_name='df_new', on_index=True)
+
+    # --------------输出--------------#
+    LOG_PATH = Variable.get(
+        'csc_log_path') + f"{table_name}/"
+    _ = os.mkdir(LOG_PATH) if not os.path.exists(
+        LOG_PATH) else None
+    with open(LOG_PATH+f'{load_date}.txt', 'w') as f:
+        f.write(compare_log.report())
 
 
 @task
@@ -21,35 +107,53 @@ def extract_sql_by_table(table_name: str, load_date: str) -> dict:
     """
     # 查找属于何种数据源
     import json
-    db = json.loads(Variable.get("csc_table_db"))[table_name]  # 去数据字典文件中寻找
+    # 查找属于何种数据源
+    with open(Variable.get("csc_table_db")) as j:
+        db = json.load(j)[table_name]  # 去数据字典文件中寻找
+
     # 不同数据源操作
     if db == 'wind':
-        wind_sql = json.loads(Variable.get("csc_wind_sql"))
-        return_sql = wind_sql[table_name] % f"\'{load_date}\'"
-
+        wind_sql = json.loads(Variable.get("csc_wind_sql"))[table_name]
+        dynamic = True if wind_sql.upper().count('WHERE') == 1 else False
+        return_sql = wind_sql % f"\'{load_date}\'" if dynamic else wind_sql
     elif db == 'suntime':
-        # TODO 没有写增量表，需要增加逻辑判断
-        suntime_sql = json.loads(Variable.get("csc_suntime_sql"))[
-            table_name]['sql']  # 去数据字典文件中寻找
-        return_sql = suntime_sql % (
-            'zyyx.' + table_name, f"{load_date}") if suntime_sql else None
-    else:
-        raise Exception
-    return {'connector_id': db + '_af_connector', 'query_sql': return_sql, 'table_name': table_name,
-            'load_date': load_date}
+        suntime_sql_dict = json.loads(Variable.get("csc_suntime_sql"))
+        suntime_sql = suntime_sql_dict[table_name][
+            'sql'] if table_name in suntime_sql_dict.keys(
+        ) else "SELECT * FROM %s"
+        suntime_sql = "SELECT * FROM %s" if suntime_sql == "" else suntime_sql  # suntime_sql可能为空
+        dynamic = True if suntime_sql.upper().count('WHERE') == 1 else False
+        return_sql = suntime_sql % ('zyyx.' + table_name,
+                                    load_date) if dynamic else suntime_sql % (
+                                        'zyyx.' + table_name)
+
+    # 日期
+    select_date = return_sql.upper().split('WHERE')[-1].split(
+        '=')[0].strip() if dynamic else ""
+
+    return {
+        'connector_id': db + '_af_connector',
+        'query_sql': return_sql,
+        'table_name': table_name,
+        'load_date': load_date,
+        'dynamic': dynamic,
+        'date_column': select_date
+    }
 
 
 @task
 def load_sql_query(xcom_dict: dict, load_path: str = "csc_load_path") -> dict:
     """
-     根据sql查询语句下载数据到本地
-    :return:
+    根据sql查询语句下载数据到本地
+    :return:xcom_dict
     """
     # -----------------参数传递----------------- #
     connector_id = xcom_dict['connector_id']
     query_sql = xcom_dict['query_sql']
     table_name = xcom_dict['table_name']
     load_date = xcom_dict['load_date']
+    dynamic = xcom_dict['dynamic']
+    date_column = xcom_dict['date_column']
 
     # -----------------输出文件的路径----------------- #
     LOAD_PATH = Variable.get(load_path) + table_name
@@ -59,21 +163,51 @@ def load_sql_query(xcom_dict: dict, load_path: str = "csc_load_path") -> dict:
     sql_hook = BaseHook.get_connection(connector_id).get_hook()
 
     # -----------------df执行sql查询,保存文件----------------- #
-    if not os.path.exists(LOAD_PATH):
-        os.mkdir(LOAD_PATH)
-
+    import os
+    _ = os.mkdir(LOAD_PATH) if not os.path.exists(LOAD_PATH) else None
     # 防止服务器内存占用过大
 
     chunk_count = 0
     for df_chunk in sql_hook.get_pandas_df_by_chunks(query_sql, chunksize=10000):
         if chunk_count == 0:
-            table_path = LOAD_PATH + f'/{load_date}.parquet'
-            df_chunk.to_parquet(table_path, index=False)
-            return {'table_path': table_path, 'table_name': table_name, 'table_empty': df_chunk.empty, 'query_sql': query_sql}
+            table_path = LOAD_PATH + \
+                f'/{load_date}.parquet' if dynamic else f'{LOAD_PATH}/{table_name}.parquet'
+
+            # 转为str：orcale有问题
+            if connector_id == 'suntime_af_connector':
+                str_column = df_chunk.select_dtypes(
+                    include='object').columns
+                df_chunk[str_column] = df_chunk[str_column].astype('str')
+
+            # ----------------保存检查点:保存规则----------------- #
+            if not df_chunk.empty:
+
+                # 0. 传出格式 第一次运行的时候要用
+                get_type_from_df(table_name, df_chunk)
+                # _ = get_type_from_df(table_name, df_chunk) if not os.path.exists(
+                # Variable.get('csc_parquet_schema') + f'{table_name}.json') else None
+
+                # 1.读取csc_parquet_schema
+                import json
+                import pyarrow as pa
+                with open(Variable.get(
+                        'csc_parquet_schema') + f'{table_name}.json') as json_file:
+                    schema_list = [(column_name, types['parquet_type'])
+                                   for column_name, types in json.load(json_file).items()]
+
+                # ----------------更新检测----------------- #
+                if os.path.exists(table_path):  # 如果旧文件存在
+                    check_update(table_name, table_path, df_chunk, load_date)
+
+                # 2.修改schema 输出文件
+                df_chunk.to_parquet(
+                    table_path, engine='pyarrow', schema=pa.schema(schema_list))
+
+            return {'table_path': table_path, 'table_name': table_name,
+                    'table_empty': df_chunk.empty, 'dynamic': dynamic, 'date_column': date_column, }
         else:
             # TODO 只保存chunksize行，如果超过chunksize行要分片保存再合并
             break
-        chunk_count += 1
 
 
 @task
@@ -111,6 +245,71 @@ def check_load(xcom_dict: dict) -> dict:
     df_merge = pd.merge(df_info, df_dict, how='left',
                         left_on='column', right_on='fieldName')
     df_merge.to_csv(LOAD_TYPE_PATH, index=False)
+
+    return xcom_dict
+
+
+@task
+def get_config(xcom_dict: dict) -> dict:
+    """
+    得到鹏队要的config表
+    """
+    import json
+    from datetime import datetime
+    import pandas as pd
+    if xcom_dict['table_empty']:
+        return xcom_dict
+    table_name = xcom_dict['table_name']
+    dynamic = xcom_dict['dynamic']
+    date_column = xcom_dict['date_column']
+
+    # 1.csc_table_info文件路径
+    df_table_info = pd.read_csv(Variable.get('csc_table_info') +
+                                f'{table_name}.csv',
+                                index_col='COLUMN_NAME',
+                                usecols=[
+                                    'COLUMN_NAME',
+                                    'CONSTRAINT_TYPE',
+                                    'DATA_TYPE',
+                                    'DATA_LENGTH',
+    ])
+    # 2.csc_parquet_schema文件路径
+    df_schema_info = pd.read_json(
+        Variable.get('csc_parquet_schema') +
+        f'{table_name}.json').transpose()[['parquet_type']]
+
+    # 3.连接
+    df_config = df_schema_info.join(df_table_info, how='left')
+    df_config['DATA_TYPE'] = df_config['DATA_TYPE'].astype('str').str.upper(
+    ) + ' ' + df_config['DATA_LENGTH'].astype('str').str.upper()
+
+    # 4.取出主键
+    pk_list = [
+        k for k, v in df_config[['CONSTRAINT_TYPE'
+                                 ]].transpose().to_dict().items()
+        if v['CONSTRAINT_TYPE'] == 'PK' or v['CONSTRAINT_TYPE'] == 'P'
+    ]
+
+    # 5.取出columns_config
+    df_config.rename(columns={'DATA_TYPE': 'original_type'}, inplace=True)
+    columns_config = df_config[['parquet_type',
+                                'original_type']].transpose().to_dict()
+
+    # column_dict={for i in df_config}
+    # 6.合并config
+    config_dict = {
+        "primary_key": pk_list,
+        "dynamic": dynamic,
+        "date_column": date_column,
+        "last_update": str(datetime.now()),
+        "all_columns": columns_config
+    }
+
+    # 输出config
+    with open(
+            Variable.get('csc_load_path') + f'{table_name}/config.json',
+            'w') as f:
+        json.dump(config_dict, f)
 
     return xcom_dict
 
@@ -167,7 +366,9 @@ def send_info(xcom_dict: dict):
 )
 # 在DAG中定义任务
 def csc_ops_load():
+
     # [START main_flow]
+
     def start_tasks(table_name: str):
         """
         任务流控制函数，用于被多进程调用，每张表下载都是一个并行的进程
@@ -175,27 +376,27 @@ def csc_ops_load():
         """
 
         # 下载昨天的数据
-        load_date = (date.today() + timedelta(-1)
-                     ).strftime('%Y%m%d')
-        # load_date = '20220102'
+        load_date = (date.today() + timedelta(-1)).strftime('%Y%m%d')
+        # load_date = '20221012'
+
         # ETL
         load_return = load_sql_query.override(
-            task_id='L_' + table_name, outlets=[Dataset('L_' + table_name, extra={'load_date': load_date})])(
-            extract_sql_by_table.override(task_id='E_' + table_name, )(table_name, load_date))
-
+            task_id='L_' + table_name, )(extract_sql_by_table.override(task_id='E_' + table_name, )(table_name, load_date))
+        # config
+        get_config.override(task_id='C_' + table_name)(load_return)
+        # transform_schema.override(task_id='T_' + table_name)(load_return)
+        # outlets=[Dataset('L_' + table_name, extra={'load_date': load_date})]
         # 根据load的结果是否为空，进行告警或者下一步动作
         # send_info(check_load(load_return))
 
     # 多进程异步执行
-    test_list = ['ASHAREBALANCESHEET']
-    table_list = [
-        'FIN_BALANCE_SHEET_GEN', 'ASHAREBALANCESHEET', 'ASHARECASHFLOW', 'FIN_CASH_FLOW_GEN',
-        'ASHAREINCOME', 'FIN_INCOME_GEN', 'ASHAREEODPRICES', 'QT_STK_DAILY', 'ASHAREEODDERIVATIVEINDICATOR',
-        'ASHAREPROFITNOTICE', 'FIN_PERFORMANCE_FORECAST', 'ASHAREPROFITEXPRESS', 'FIN_PERFORMANCE_EXPRESS',
-        'ASHAREDIVIDEND', 'ASHAREEXRIGHTDIVIDENDRECORD', 'BAS_STK_HISDISTRIBUTION']
+    import json
+    with open(Variable.get("csc_input_table")) as j:
+        table_list = json.load(j)['need_tables']
+    test_list = ['AINDEXCSI500WEIGHT']
     from concurrent.futures import ThreadPoolExecutor
-    with ThreadPoolExecutor(max_workers=1) as executor:
-        _ = {executor.submit(start_tasks, table): table for table in test_list}
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        _ = {executor.submit(start_tasks, table): table for table in table_list}
 
     # [END main_flow]
 
@@ -203,5 +404,5 @@ def csc_ops_load():
 # [END DAG]
 
 # [START dag_invocation]
-dag = csc_ops_load()
+csc_ops_load()
 # [END dag_invocation]
