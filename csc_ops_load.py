@@ -13,11 +13,13 @@ from airflow.datasets import Dataset
 from datetime import timedelta, date, datetime
 
 
-def get_type_from_df(table_name: str, df_by_sql,) -> dict:
+def get_type_from_df(table_name: str, df_by_sql) -> dict:
     import pyarrow as pa
     import pandas as pd
+    # df_by_sql = df_by_sql.copy()
+    # print(df_by_sql.reset_index().columns)
     pa_schema = pa.Table.from_pandas(df_by_sql).schema  # 取出schema
-
+    # print(, pa_schema)
     # 生成数据结构字典
     type_config = {}
 
@@ -32,8 +34,13 @@ def get_type_from_df(table_name: str, df_by_sql,) -> dict:
         if trans_schema_type == 'null':
             df_info = pd.read_csv(
                 Variable.get('csc_table_info') + f'{table_name}.csv')
-            db_type = df_info[df_info['COLUMN_NAME'] ==
-                              field.name]['DATA_TYPE'].iloc[0]
+            if df_info.empty:
+                # TODO 有的没有,查回来是空的
+                break
+            else:
+                db_type = df_info[df_info['COLUMN_NAME']
+                                  == field.name]['DATA_TYPE'].iloc[0]
+
             if db_type == 'varchar':
                 trans_schema_type = 'string'
             elif db_type == 'numeric':
@@ -60,9 +67,9 @@ def get_type_from_df(table_name: str, df_by_sql,) -> dict:
     # 进行转换
 
 
-def check_update(table_name, table_path, df_chunk, load_date):
+def check_update(table_name, table_path, df_chunk, load_date, dynamic):
     """
-    检查
+    检查- 输出日志
     """
     import pandas as pd
     import datacompy
@@ -76,26 +83,44 @@ def check_update(table_name, table_path, df_chunk, load_date):
 
     # 有的是空的
     pk_column = df_info[df_mask]['COLUMN_NAME'].to_list()
-
     df_old = pd.read_parquet(table_path)
     df_new = df_chunk.copy()
 
+    # --------------日志文件路径--------------#
+    today_date = date.today().strftime('%Y%m%d')
+    LOG_PATH = Variable.get(
+        'csc_log_path') + f"{table_name}/"
+    _ = os.mkdir(LOG_PATH) if not os.path.exists(
+        LOG_PATH) else None
+    LOG_OUTPUT_PATH = LOG_PATH + load_date if dynamic else LOG_PATH+today_date
+
+    # --------------输出日志文件--------------#
+    import logging
+    from datacompy.core import LOG
+    fh = logging.FileHandler(f'{LOG_OUTPUT_PATH}.log', encoding='utf-8')
+    fh_formatter = logging.Formatter(
+        '%(asctime)s %(module)s-%(lineno)d [%(levelname)s]:%(message)s',
+        datefmt='%Y/%m/%d %H:%M:%S')
+    fh.setFormatter(fh_formatter)
+    LOG.addHandler(fh)
+
     # --------------比较--------------#
     if pk_column:  # 不是空
-        compare_log = datacompy.Compare(
-            df_old, df_new, df1_name='df_old', df2_name='df_new', join_columns=pk_column)
-
+        # TODO 临时修复 保存的没有obj id
+        # print(df_old.columns, df_new.columns)
+        if pk_column in df_old.columns.to_list() and pk_column in df_new.columns.to_list():
+            compare_log = datacompy.Compare(
+                df_old, df_new, df1_name='df_old', df2_name='df_new', join_columns=pk_column)
+        else:
+            compare_log = datacompy.Compare(
+                df_old, df_new, df1_name='df_old', df2_name='df_new', on_index=True)
     else:
         # TODO 已经采用临时手段修复
         compare_log = datacompy.Compare(
             df_old, df_new, df1_name='df_old', df2_name='df_new', on_index=True)
 
-    # --------------输出--------------#
-    LOG_PATH = Variable.get(
-        'csc_log_path') + f"{table_name}/"
-    _ = os.mkdir(LOG_PATH) if not os.path.exists(
-        LOG_PATH) else None
-    with open(LOG_PATH+f'{load_date}.txt', 'w') as f:
+    # --------------输出差异比较--------------#
+    with open(f'{LOG_OUTPUT_PATH}.txt', 'w') as f:
         f.write(compare_log.report())
 
 
@@ -197,7 +222,9 @@ def load_sql_query(xcom_dict: dict, load_path: str = "csc_load_path") -> dict:
 
                 # ----------------更新检测----------------- #
                 if os.path.exists(table_path):  # 如果旧文件存在
-                    check_update(table_name, table_path, df_chunk, load_date)
+                    check_update(table_name, table_path,
+                                 df_chunk, load_date, dynamic)
+                    # pass
 
                 # 2.修改schema 输出文件
                 df_chunk.to_parquet(
@@ -377,7 +404,9 @@ def csc_ops_load():
 
         # 下载昨天的数据
         load_date = (date.today() + timedelta(-1)).strftime('%Y%m%d')
-        # load_date = '20221012'
+        # load_date = '20221015'
+        # load_date = '20221014'
+        load_date = '20220105'
 
         # ETL
         load_return = load_sql_query.override(
@@ -393,7 +422,7 @@ def csc_ops_load():
     import json
     with open(Variable.get("csc_input_table")) as j:
         table_list = json.load(j)['need_tables']
-    test_list = ['AINDEXCSI500WEIGHT']
+    test_list = ['ASHAREAUDITOPINION', ]
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=5) as executor:
         _ = {executor.submit(start_tasks, table): table for table in table_list}

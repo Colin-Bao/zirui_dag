@@ -1,82 +1,13 @@
 nohup: ignoring input
-[2022-10-16 01:01:01 +0800] [1290922] [INFO] Starting gunicorn 20.1.0
-[2022-10-16 01:01:01 +0800] [1290922] [INFO] Listening at: http://[::]:8793 (1290922)
-[2022-10-16 01:01:01 +0800] [1290922] [INFO] Using worker: sync
-[2022-10-16 01:01:01 +0800] [1290923] [INFO] Booting worker with pid: 1290923
-[2022-10-16 01:01:01 +0800] [1290943] [INFO] Booting worker with pid: 1290943
-[2022-10-16 02:20:06 +0800] [1290922] [INFO] Handling signal: hup
-[2022-10-16 02:20:06 +0800] [1290922] [INFO] Hang up: Master
-[2022-10-16 02:20:06 +0800] [1290922] [WARNING] Worker with pid 1290923 was terminated due to signal 1
-[2022-10-16 02:20:06 +0800] [1290922] [WARNING] Worker with pid 1290943 was terminated due to signal 1
-[2022-10-16 02:20:06 +0800] [1318604] [INFO] Booting worker with pid: 1318604
-[2022-10-16 02:20:06 +0800] [1318605] [INFO] Booting worker with pid: 1318605
+[2022-10-16 15:38:07 +0800] [1822658] [INFO] Starting gunicorn 20.1.0
+[2022-10-16 15:38:07 +0800] [1822658] [INFO] Listening at: http://[::]:8793 (1822658)
+[2022-10-16 15:38:07 +0800] [1822658] [INFO] Using worker: sync
+[2022-10-16 15:38:07 +0800] [1822659] [INFO] Booting worker with pid: 1822659
+[2022-10-16 15:38:07 +0800] [1822744] [INFO] Booting worker with pid: 1822744
+[2022-10-16 15:38:08 +0800] [1822658] [INFO] Handling signal: hup
+[2022-10-16 15:38:08 +0800] [1822658] [INFO] Hang up: Master
+[2022-10-16 15:38:08 +0800] [1822658] [WARNING] Worker with pid 1822659 was terminated due to signal 1
+[2022-10-16 15:38:08 +0800] [1822658] [WARNING] Worker with pid 1822744 was terminated due to signal 1
+[2022-10-16 15:38:08 +0800] [1822851] [INFO] Booting worker with pid: 1822851
+[2022-10-16 15:38:08 +0800] [1822852] [INFO] Booting worker with pid: 1822852
 /home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/models/taskinstance.py:873 SAWarning: TypeDecorator ExecutorConfigType() will not produce a cache key because the ``cache_ok`` attribute is not set to True.  This can have significant performance implications including some performance degradations in comparison to prior SQLAlchemy versions.  Set this attribute to True if this type object's state is safe to use in a cache key, or False to disable this warning. (Background on this error at: https://sqlalche.me/e/14/cprf)
-/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/models/taskinstance.py:873 SAWarning: TypeDecorator ExecutorConfigType() will not produce a cache key because the ``cache_ok`` attribute is not set to True.  This can have significant performance implications including some performance degradations in comparison to prior SQLAlchemy versions.  Set this attribute to True if this type object's state is safe to use in a cache key, or False to disable this warning. (Background on this error at: https://sqlalche.me/e/14/cprf)
-/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/models/taskinstance.py:873 SAWarning: TypeDecorator ExecutorConfigType() will not produce a cache key because the ``cache_ok`` attribute is not set to True.  This can have significant performance implications including some performance degradations in comparison to prior SQLAlchemy versions.  Set this attribute to True if this type object's state is safe to use in a cache key, or False to disable this warning. (Background on this error at: https://sqlalche.me/e/14/cprf)
-/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/models/taskinstance.py:873 SAWarning: TypeDecorator ExecutorConfigType() will not produce a cache key because the ``cache_ok`` attribute is not set to True.  This can have significant performance implications including some performance degradations in comparison to prior SQLAlchemy versions.  Set this attribute to True if this type object's state is safe to use in a cache key, or False to disable this warning. (Background on this error at: https://sqlalche.me/e/14/cprf)
-/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/models/taskinstance.py:873 SAWarning: TypeDecorator ExecutorConfigType() will not produce a cache key because the ``cache_ok`` attribute is not set to True.  This can have significant performance implications including some performance degradations in comparison to prior SQLAlchemy versions.  Set this attribute to True if this type object's state is safe to use in a cache key, or False to disable this warning. (Background on this error at: https://sqlalche.me/e/14/cprf)
-/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/models/taskinstance.py:873 SAWarning: TypeDecorator ExecutorConfigType() will not produce a cache key because the ``cache_ok`` attribute is not set to True.  This can have significant performance implications including some performance degradations in comparison to prior SQLAlchemy versions.  Set this attribute to True if this type object's state is safe to use in a cache key, or False to disable this warning. (Background on this error at: https://sqlalche.me/e/14/cprf)
-/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/models/taskinstance.py:873 SAWarning: TypeDecorator ExecutorConfigType() will not produce a cache key because the ``cache_ok`` attribute is not set to True.  This can have significant performance implications including some performance degradations in comparison to prior SQLAlchemy versions.  Set this attribute to True if this type object's state is safe to use in a cache key, or False to disable this warning. (Background on this error at: https://sqlalche.me/e/14/cprf)
-Process ForkProcess-35:
-Traceback (most recent call last):
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/mysql/connector/connection_cext.py", line 555, in cmd_query
-    self._cmysql.query(
-_mysql_connector.MySQLInterfaceError: Lost connection to MySQL server during query
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1900, in _execute_context
-    self.dialect.do_execute(
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
-    cursor.execute(statement, parameters)
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/mysql/connector/cursor_cext.py", line 276, in execute
-    result = self._cnx.cmd_query(
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/mysql/connector/connection_cext.py", line 563, in cmd_query
-    raise get_mysql_exception(
-mysql.connector.errors.OperationalError: 2013 (HY000): Lost connection to MySQL server during query
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
-    self.run()
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/multiprocessing/process.py", line 108, in run
-    self._target(*self._args, **self._kwargs)
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/dag_processing/manager.py", line 257, in _run_processor_manager
-    processor_manager.start()
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/dag_processing/manager.py", line 489, in start
-    return self._run_parsing_loop()
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/dag_processing/manager.py", line 603, in _run_parsing_loop
-    DagWarning.purge_inactive_dag_warnings()
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/utils/session.py", line 75, in wrapper
-    return func(*args, session=session, **kwargs)
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/models/dagwarning.py", line 82, in purge_inactive_dag_warnings
-    query.delete(synchronize_session=False)
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/orm/query.py", line 3213, in delete
-    result = self.session.execute(
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1712, in execute
-    result = conn._execute_20(statement, params or {}, execution_options)
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1705, in _execute_20
-    return meth(self, args_10style, kwargs_10style, execution_options)
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 333, in _execute_on_connection
-    return connection._execute_clauseelement(
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1572, in _execute_clauseelement
-    ret = self._execute_context(
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1943, in _execute_context
-    self._handle_dbapi_exception(
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2124, in _handle_dbapi_exception
-    util.raise_(
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
-    raise exception
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1900, in _execute_context
-    self.dialect.do_execute(
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
-    cursor.execute(statement, parameters)
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/mysql/connector/cursor_cext.py", line 276, in execute
-    result = self._cnx.cmd_query(
-  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/mysql/connector/connection_cext.py", line 563, in cmd_query
-    raise get_mysql_exception(
-sqlalchemy.exc.OperationalError: (mysql.connector.errors.OperationalError) 2013 (HY000): Lost connection to MySQL server during query
-[SQL: DELETE FROM dag_warning USING dag_warning, dag WHERE dag_warning.dag_id = dag.dag_id AND dag.is_active = false]
-(Background on this error at: https://sqlalche.me/e/14/e3q8)
