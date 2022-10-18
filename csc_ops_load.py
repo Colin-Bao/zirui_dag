@@ -433,5 +433,5 @@ def csc_ops_load():
 # [END DAG]
 
 # [START dag_invocation]
-csc_ops_load()
+# csc_ops_load()
 # [END dag_invocation]

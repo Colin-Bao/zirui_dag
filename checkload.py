@@ -1,4 +1,3 @@
-
 import os
 import time
 from airflow.models import Variable
@@ -9,23 +8,25 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import pandas as pd
 import pyarrow.parquet as pq
 
-LOAD_PATH_ROOT = '/home/lianghua/rtt/mountdir/data/load/'
-# 检查是否可以读取
+LOAD_PATH_ROOT = '/home/lianghua/rtt/mountdir/data/load_new/'
+
+
+def check_all_files():
+    for i in os.listdir(LOAD_PATH_ROOT):
+        LOAD_PATH_ROOT+i+'.parquet'
+        df_chunk = pq.ParquetDataset(LOAD_PATH_ROOT+i).read().to_pandas()
+        print(i, 'success')
 
 
 def check_dataset():
-    no_use_list = []
-    for table in [
-            LOAD_PATH_ROOT + i + '/' for i in os.listdir(LOAD_PATH_ROOT)
-    ]:
-        try:
-            df_chunk = pq.ParquetDataset(table).read().to_pandas()
-            # df_chunk.info()
-        except Exception as e:
-            print(table, e)
-            no_use_list.append(table)
-            continue
-    print([i.split(LOAD_PATH_ROOT)[-1] for i in no_use_list])
+    table_list = ['AINDEXHS300CLOSEWEIGHT/',
+                  'ASHARETRADINGSUSPENSION/',
+
+                  ]
+    for i in table_list:
+        df_chunk = pq.ParquetDataset(LOAD_PATH_ROOT+i).read().to_pandas()
+        print(df_chunk.dtypes)
 
 
-check_dataset()
+check_all_files()
+# check_dataset()

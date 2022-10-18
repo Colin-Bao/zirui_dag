@@ -56,4 +56,4 @@ def csc_ops_check_update():
             )
 
 
-csc_ops_check_update()
+# csc_ops_check_update()
