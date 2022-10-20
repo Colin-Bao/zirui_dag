@@ -1,6 +1,5 @@
 import os
 import time
-from tkinter import N
 from airflow.models import Variable
 from datetime import timedelta, date, datetime
 from retry import retry
@@ -8,15 +7,49 @@ import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import pandas as pd
 import pyarrow.parquet as pq
+import numpy as np
+# -----------------运行参数----------------- #
+LOAD_PATH_ROOT = '/home/lianghua/rtt/mountdir/data/load_test/'
+CONFIG_PATH = '/home/lianghua/ZIRUI/rely_files/test_type_df_and_parquet/'
+MODE_LIST = ['GET_CONFIG', 'DOWN_BY_ONE', "GET_CONFIG_AND_DOWN_BY_ONE"]
+MODE_NUM = 2
+DATE_LIST = [
+    str(i).replace('-', '').split(' ')[0]
+    for i in pd.date_range('20100101', '20221015')
+]
+os.environ['NUMEXPR_MAX_THREADS'] = '12'
 
-LOAD_PATH_ROOT = '/home/lianghua/rtt/mountdir/data/load_new/'
+with open(Variable.get("csc_input_table")) as j:
+    TABLE_LIST = json.load(j)['need_tables']
+# TABLE_LIST = ['ASHAREDIVIDEND']
+DATE_NAME = []
+# -----------------运行参数----------------- #
 
 
-def get_config_from_df(df_chunk: pd.DataFrame, real_table: str,
-                       select_table: str):
+def get_config_from_df(
+    connector_id,
+    sql_hook,
+    query_sql: str,
+    real_table: str,
+    select_table: str,
+):
     """
     跑一遍,获取所有的信息
     """
+    # -----------------得到df----------------- #
+    df_chunk = pd.DataFrame()
+    for chunk in sql_hook.get_pandas_df_by_chunks(query_sql, chunksize=100):
+        # 转为str：orcale有问题
+        if connector_id == 'suntime_af_connector':
+            str_column = chunk.select_dtypes(include='object').columns
+            chunk[str_column] = chunk[str_column].astype('str')
+        if chunk.empty:
+            return None
+        else:
+            df_chunk = chunk
+            break
+
+    # -----------------三种config---------------- #
     import pyarrow as pa
     config_dict = {}
     db_from_df = pd.read_csv(
@@ -45,7 +78,7 @@ def get_config_from_df(df_chunk: pd.DataFrame, real_table: str,
             parquet_type = 'double'
         elif database_type in ['datetime', 'DATE']:
             # database_len = db_from_df['DATA_LENGTH'][k]
-            pandas_type = 'int'
+            pandas_type = 'int64'
             parquet_type = 'int64'
             # pandas_type = 'str'
             # parquet_type = 'string'
@@ -53,12 +86,16 @@ def get_config_from_df(df_chunk: pd.DataFrame, real_table: str,
             raise Exception(
                 f'定义类型{database_type}, {pandas_type}, {parquet_type}')
 
-        # -----------------判断类型：2.日期---------------- #
-        if ('DATE' in k) | ('date' in k) | (k in ['TRADE_DT', 'ANN_DT']):
-            pandas_type = 'int'
+        # -----------------判断类型：2.日期---------------- # ('DATE' in k) | ('date' in k) |
+        if (k in ['TRADE_DT', 'ANN_DT', 'REPORT_PERIOD'
+                  ]) | ('_DT' in k) | ('date' in k) | ('DATE' in k):
+            DATE_NAME.append(k)
+            pandas_type = 'int64'
             parquet_type = 'int64'
+        # print(k[-4:])
 
         # -----------------更新config---------------- #
+
         config_dict.update({
             k: {
                 'database_type': database_type,
@@ -66,10 +103,55 @@ def get_config_from_df(df_chunk: pd.DataFrame, real_table: str,
                 'parquet_type': parquet_type
             }
         })
+
+    # -----------------测试config---------------- #
+    dtype_config = {k: v['pandas_type'] for k, v in config_dict.items()}
+    schema_list = [(column_name, types['parquet_type'])
+                   for column_name, types in config_dict.items()
+                   if column_name in df_chunk.columns.to_list()]
+
+    # -----------------转换dtype前要加的步骤---------------- #
+
+    # 非字符串处理
+    float_columns = [k for k, v in dtype_config.items() if v == 'float64']
+    df_chunk[float_columns] = df_chunk[float_columns].replace([None, 'None'],
+                                                              np.float64(0))
+    # 日期处理
+    int_columns = [k for k, v in dtype_config.items() if v == 'int64']
+    df_chunk[int_columns] = df_chunk[int_columns].replace([None, 'None'],
+                                                          np.int64(0))
+    # 日期处理
+    for i in int_columns:
+        df_chunk[i] = df_chunk[i].apply(lambda x: x.timestamp()
+                                        if type(x) == pd.Timestamp else x)
+
+    # -----------------排查出错的字段---------------- #
+    try:
+        df_chunk = df_chunk.astype(dtype=dtype_config)
+    except Exception as e:
+
+        print(f'# -----------------{select_table}---------------- #')
+        # 逐字段排查
+        for i in df_chunk.columns.to_list():
+            print(
+                df_chunk[i].to_list(),
+                '\n-----------------\n',
+                dtype_config[i],
+            )
+            df_chunk[i] = df_chunk[i].astype(dtype_config[i])
+
+    # -----------------转换dtype后要加的步骤---------------- #
+    # 把str中的空值替换
+    obj_columns = list(
+        df_chunk.select_dtypes(include=['object']).columns.values)
+    df_chunk[obj_columns] = df_chunk[obj_columns].replace([None, 'None'], '')
+
+    # 测试pa
+    pa_table = pa.Table.from_pandas(df_chunk, schema=pa.schema(schema_list))
+    # print(f'{select_table} success')
+
     # -----------------输出config---------------- #
-    with open(
-            f"/home/lianghua/ZIRUI/rely_files/type_df_and_parquet/{select_table}.json",
-            'w') as f:
+    with open(f"{CONFIG_PATH}{select_table}.json", 'w') as f:
         json.dump(config_dict, f)
 
 
@@ -111,40 +193,54 @@ def load_sql_query(xcom_dict: dict) -> dict:
     load_date = xcom_dict['load_date']
     dynamic = xcom_dict['dynamic']
     date_column = xcom_dict['date_column']
-    all_columns = xcom_dict['all_columns']
 
     # -----------------数据库接口---------------- #
     from airflow.providers.common.sql.hooks.sql import BaseHook  # airflow通用数据库接口
     sql_hook = BaseHook.get_connection(connector_id).get_hook()
 
-    # # -----------------先跑一遍----------------- #
-    # for df_chunk in sql_hook.get_pandas_df_by_chunks(query_sql,
-    #                                                  chunksize=1000):
-    #     # 转为str：orcale有问题
-    #     if connector_id == 'suntime_af_connector':
-    #         str_column = df_chunk.select_dtypes(include='object').columns
-    #         df_chunk[str_column] = df_chunk[str_column].astype('str')
+    # -----------------获取config信息----------------- #
+    if MODE_LIST[MODE_NUM] == 'GET_CONFIG':
+        get_config_from_df(connector_id, sql_hook, query_sql, real_table,
+                           select_table)
+        return MODE_LIST[MODE_NUM]
 
-    #     get_config_from_df(df_chunk, real_table, select_table)
-
-    #     return None
-    # return None
     # -----------------去字典文件中找config信息----------------- #
-    with open(
-            f'/home/lianghua/ZIRUI/rely_files/type_df_and_parquet/{select_table}.json'
-    ) as j:
-        table_info = json.load(j)
-    all_columns = table_info
-    dtype_config = {k: v['pandas_type'] for k, v in table_info.items()}
+    with open(f'{CONFIG_PATH}{select_table}.json') as j:
+        config_dict = json.load(j)
+    dtype_config = {k: v['pandas_type'] for k, v in config_dict.items()}
 
     # ----------------------------------大表分片保存---------------------------------- #
     chunk_count = 0
-    for df_chunk in sql_hook.get_pandas_df_by_chunks_zirui(query_sql,
-                                                           chunksize=500000,
-                                                           dtype=dtype_config):
+    for df_chunk in sql_hook.get_pandas_df_by_chunks(
+            query_sql,
+            chunksize=1000000,
+    ):
         # 无数据跳出
         if df_chunk.empty:
             break
+        # -----------------转换dtype前要加的步骤---------------- #
+
+        # 非字符串处理
+        float_columns = [k for k, v in dtype_config.items() if v == 'float64']
+        df_chunk[float_columns] = df_chunk[float_columns].replace(
+            [None, 'None'], np.float64(0))
+        # 日期处理
+        int_columns = [k for k, v in dtype_config.items() if v == 'int64']
+        df_chunk[int_columns] = df_chunk[int_columns].replace([None, 'None'],
+                                                              np.int64(0))
+        # 日期处理
+        for i in int_columns:
+            df_chunk[i] = df_chunk[i].apply(lambda x: x.timestamp()
+                                            if type(x) == pd.Timestamp else x)
+
+        # ----------------- 转换dtype----------------- #
+        df_chunk = df_chunk.astype(dtype=dtype_config)
+
+        # ----------------- 转换dtype后要加的步骤----------------- #
+        obj_columns = list(
+            df_chunk.select_dtypes(include=['object']).columns.values)
+        df_chunk[obj_columns] = df_chunk[obj_columns].replace([None, 'None'],
+                                                              '')
         # ----------------- 命名----------------- #
         if dynamic:
             LOAD_PATH = LOAD_PATH_ROOT + \
@@ -155,15 +251,12 @@ def load_sql_query(xcom_dict: dict) -> dict:
                 f'{real_table}/{real_table}.parquet' if chunk_count == 0 else LOAD_PATH_ROOT + \
                 f'{real_table}/{real_table}_{chunk_count}.parquet'
 
-        # ----------------- 1.读取schema----------------- #
-        schema_list = [(column_name, types['parquet_type'])
-                       for column_name, types in all_columns.items()
-                       if column_name in df_chunk.columns.to_list()]
-
         # -----------------2.修改schema 输出文件----------------- #
         import pyarrow as pa
         import os
-        # print(df_chunk)
+        schema_list = [(column_name, types['parquet_type'])
+                       for column_name, types in config_dict.items()
+                       if column_name in df_chunk.columns.to_list()]
         pa_table = pa.Table.from_pandas(df_chunk,
                                         schema=pa.schema(schema_list))
 
@@ -174,56 +267,42 @@ def load_sql_query(xcom_dict: dict) -> dict:
         chunk_count += 1
 
 
-# @retry(exceptions=Exception, tries=10, delay=1)
+@retry(exceptions=Exception, tries=10, delay=1)
 def download_by_table(table_name):
-
-    date_list = [
-        str(i).replace('-', '').split(' ')[0]
-        for i in pd.date_range('20220101', '20221015')
-    ]
+    """
+    按照表名下载 
+    """
     # 按日期下载
-    for load_date in date_list:
+    for load_date in DATE_LIST:
         LOAD_PATH = LOAD_PATH_ROOT + table_name + f'/{load_date}.parquet'
-        # 判断是否存在
-        if os.path.exists(LOAD_PATH):
-            # pass
+        if os.path.exists(LOAD_PATH):  # 判断是否存在
             continue
         extract = extract_sql_by_table(table_name, load_date)
-        # 开始下载
         if not extract['dynamic']:
             break
 
-        load_date = load_sql_query(extract)
+        load_date = load_sql_query(extract)  # 开始下载
 
     return f'task {table_name} ok'
 
 
 def start_task_one():
-    with open(Variable.get("csc_input_table")) as j:
-        table_list = json.load(j)['need_tables']
-    len_t = len(table_list)
-    # table_list = ['ASHARETRADINGSUSPENSION']
-    for i, table in enumerate(table_list):
-        # print(i, table)
-        # 判断是否存在
-        # if os.path.exists(LOAD_PATH_ROOT + table):
-        #     # pass
-        #     continue
-
-        # download_by_table(table)
-
+    """
+    单线程用于测试
+    """
+    len_t = len(TABLE_LIST)
+    for i, table in enumerate(TABLE_LIST):
         print('------------------------------')
         print(f'{table} {i}/{len_t}')
         download_by_table(table)
 
 
 def start_task_mul():
-    with open(Variable.get("csc_input_table")) as j:
-        table_list = json.load(j)['need_tables']
+
     with ThreadPoolExecutor(max_workers=10) as executor:
         result = {
             executor.submit(download_by_table, table): table
-            for table in table_list
+            for table in TABLE_LIST
         }
         for future in as_completed(result):
             try:
@@ -234,7 +313,10 @@ def start_task_mul():
 
 st = time.time()
 
-start_task_one()
-# check_dataset_byx_table('ASHARECONSENSUSROLLINGDATA')
-
+if MODE_NUM <= 1:
+    start_task_one()
+elif MODE_NUM == 2:
+    start_task_mul()
 print(time.time() - st)
+# print(DATE_NAME)
+# print(list(set(DATE_NAME)).sort())
