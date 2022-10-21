@@ -16,7 +16,8 @@ from airflow.datasets import Dataset
 from datetime import timedelta, date, datetime
 
 # -----------------加载运行依赖的配置信息----------------- #
-
+with open(Variable.get("csc_input_table")) as j:
+    TABLE_LIST = json.load(j)['need_tables']
 with open(Variable.get("db_sql_dict")) as j:
     DB_SQL_DICT = json.load(j)  # 依赖的SQL语句
 
@@ -66,10 +67,10 @@ def transform(df_chunk, select_table):
         # 非字符串处理
         float_columns = [k for k, v in dtype_config.items() if v == 'float64']
         df_trans[float_columns] = df_trans[float_columns].replace(
-            [None, 'None'], np.float64(0))
+            [None, 'None', np.nan], np.float64(0))
         # 日期处理
         int_columns = [k for k, v in dtype_config.items() if v == 'int64']
-        df_trans[int_columns] = df_trans[int_columns].replace([None, 'None'],
+        df_trans[int_columns] = df_trans[int_columns].replace([None, 'None', np.nan],
                                                               np.int64(0))
         # 日期处理，有的传回来的值是一个Timestamp对象
 
@@ -101,6 +102,32 @@ def transform(df_chunk, select_table):
         pa_table = pa.Table.from_pandas(df_trans,
                                         schema=pa.schema(schema_list))
         return pa_table
+
+    def get_config():
+        table_info = DB_SQL_DICT[select_table]
+        # -----------------cols----------------- #
+        type_config = {
+            k: {
+                'original_type': v['database_type'],
+                'parquet_type': v['parquet_type']
+            }
+            for k, v in config_dict.items()
+        }
+
+        # -----------------date----------------- #
+        table_info.update({"all_columns": type_config})
+        # ---------------输出----------------- #
+
+        out_put_config = {
+            "primary_key": table_info['primary_key'],
+            'dynamic': table_info['dynamic'],
+            'date_column': table_info['date_where'],
+            'last_update': str(datetime.now()),
+            'all_cols': table_info['all_columns']
+        }
+        OUT_PUT_PATH = f'{LOAD_PATH_ROOT}{select_table}/config.json'
+        with open(OUT_PUT_PATH, 'w') as f:
+            json.dump(out_put_config, f)
     # -----------------transform---------------- #
     return trans_schema(trans_hdf(trans_dtype(df_chunk)))
 
@@ -138,25 +165,65 @@ def load_sql_query(xcom_dict: dict) -> dict:
         # ----------------- 命名----------------- #
         if dynamic:
             LOAD_PATH = LOAD_PATH_ROOT + \
-                f'{real_table}/{load_date}.parquet' if chunk_count == 0 else LOAD_PATH_ROOT + \
-                f'{real_table}/{load_date}_{chunk_count}.parquet'
+                f'{select_table}/{load_date}.parquet' if chunk_count == 0 else LOAD_PATH_ROOT + \
+                f'{select_table}/{load_date}_{chunk_count}.parquet'
         else:
             LOAD_PATH = LOAD_PATH_ROOT + \
-                f'{real_table}/{real_table}.parquet' if chunk_count == 0 else LOAD_PATH_ROOT + \
-                f'{real_table}/{real_table}_{chunk_count}.parquet'
+                f'{select_table}/{select_table}.parquet' if chunk_count == 0 else LOAD_PATH_ROOT + \
+                f'{select_table}/{select_table}_{chunk_count}.parquet'
 
         # -----------------输出文件----------------- #
         import os
         import pyarrow.parquet as pq
         _ = os.mkdir(LOAD_PATH_ROOT +
-                     real_table) if not os.path.exists(LOAD_PATH_ROOT +
-                                                       real_table) else None
+                     select_table) if not os.path.exists(LOAD_PATH_ROOT +
+                                                         select_table) else None
         pq.write_table(pa_table, LOAD_PATH)
         chunk_count += 1
 
 
-def start_task():
-    load_sql_query(extract_sql_by_table('ASHAREBALANCESHEET', '20220104'))
+@dag(
+    default_args={'owner': 'zirui',
+                  'email': ['523393445@qq.com', ],  # '821538716@qq.com'
+                  'email_on_failure': True,
+                  'email_on_retry': True,
+                  #   'retries': 1,
+                  "retry_delay": timedelta(minutes=1), },
+    schedule="0/30 1-6 * * 1-7",
+    start_date=pendulum.datetime(2022, 9, 1, tz="Asia/Shanghai"),
+    catchup=False,
+    dagrun_timeout=timedelta(minutes=60),
+    tags=['数据加载'],
+)
+# 在DAG中定义任务
+def csc_data_load():
 
+    # [START main_flow]
 
-start_task()
+    def start_tasks(table_name: str):
+        """
+        任务流控制函数，用于被多进程调用，每张表下载都是一个并行的进程
+        :return:
+        """
+
+        # 下载昨天的数据
+        load_date = (date.today() + timedelta(-1)).strftime('%Y%m%d')
+
+        # ETL
+        load_sql_query.override(
+            task_id='L_' + table_name, )(extract_sql_by_table.override(task_id='E_' + table_name, )(table_name, load_date))
+        # config
+        # get_config.override(task_id='C_' + table_name)(load_return)
+        # transform_schema.override(task_id='T_' + table_name)(load_return)
+        # outlets=[Dataset('L_' + table_name, extra={'load_date': load_date})]
+        # 根据load的结果是否为空，进行告警或者下一步动作
+        # send_info(check_load(load_return))
+
+    # 多进程异步执行
+
+    from concurrent.futures import ThreadPoolExecutor
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        _ = {executor.submit(start_tasks, table): table for table in TABLE_LIST}
+
+    # [END main_flow]
+csc_data_load()
