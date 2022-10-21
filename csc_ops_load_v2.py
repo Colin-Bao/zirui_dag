@@ -1,13 +1,12 @@
-import os
 import time
 from airflow.models import Variable
 from datetime import timedelta, date, datetime
 from retry import retry
 import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
-import pandas as pd
-import pyarrow.parquet as pq
-import numpy as np
+# import pandas as pd
+
+# import numpy as np
 
 import os
 import pendulum
@@ -17,12 +16,12 @@ from airflow.datasets import Dataset
 from datetime import timedelta, date, datetime
 
 # -----------------加载运行依赖的配置信息----------------- #
-# 去数据字典文件中找信息
-with open(Variable.get("db_sql_dict")) as j:
-    DB_SQL_DICT = json.load(j)
 
-CONFIG_PATH = '/home/lianghua/ZIRUI/rely_files/test_type_df_and_parquet'  # 转换依赖的CONFIG
-LOAD_PATH_ROOT = '/home/lianghua/rtt/mountdir/data/load_test/'  # 输出路径
+with open(Variable.get("db_sql_dict")) as j:
+    DB_SQL_DICT = json.load(j)  # 依赖的SQL语句
+
+CONFIG_PATH = '/home/lianghua/ZIRUI/rely_files/test_type_df_and_parquet/'  # 转换依赖的CONFIG
+LOAD_PATH_ROOT = '/home/lianghua/rtt/soft/airflow/dags/zirui_dag/load/'  # 输出路径
 
 
 def extract_sql_by_table(table_name: str, load_date: str) -> dict:
@@ -49,43 +48,61 @@ def extract_sql_by_table(table_name: str, load_date: str) -> dict:
     }
 
 
-def trans_before_astype(df_chunk, dtype_config: dict):
-    """
-    转换dtypes前的步骤
-    """
-    # -----------------转换dtype前要加的步骤---------------- #
-    # 非字符串处理
-    float_columns = [k for k, v in dtype_config.items() if v == 'float64']
-    df_chunk[float_columns] = df_chunk[float_columns].replace(
-        [None, 'None'], np.float64(0))
-    # 日期处理
-    int_columns = [k for k, v in dtype_config.items() if v == 'int64']
-    df_chunk[int_columns] = df_chunk[int_columns].replace([None, 'None'],
-                                                          np.int64(0))
-    # 日期处理，有的传回来的值是一个Timestamp对象
-    for i in int_columns:
-        df_chunk[i] = df_chunk[i].apply(lambda x: x.timestamp()
-                                        if type(x) == pd.Timestamp else x)
+def transform(df_chunk, select_table):
+    import pandas as pd
+    import numpy as np
 
-    return df_chunk
+    # -----------------去字典文件中找config信息----------------- #
+    with open(f'{CONFIG_PATH}{select_table}.json') as j:
+        config_dict = json.load(j)
 
+    def trans_dtype(df_trans):
+        """
+        转换dtypes前的步骤
+        """
 
-def trans_before_hdf(df_chunk):
-    """
-    转换hdf前的步骤,按照鹏队的需求把str的None转为''
-    """
-    obj_columns = list(df_chunk.select_dtypes(
-        include=['object', 'str']).columns.values)
-    df_chunk[obj_columns] = df_chunk[obj_columns].replace([None, 'None'],
-                                                          '')
-    return df_chunk
+        dtype_config = {k: v['pandas_type'] for k, v in config_dict.items()}
+        # -----------------转换dtype前要加的步骤---------------- #
+        # 非字符串处理
+        float_columns = [k for k, v in dtype_config.items() if v == 'float64']
+        df_trans[float_columns] = df_trans[float_columns].replace(
+            [None, 'None'], np.float64(0))
+        # 日期处理
+        int_columns = [k for k, v in dtype_config.items() if v == 'int64']
+        df_trans[int_columns] = df_trans[int_columns].replace([None, 'None'],
+                                                              np.int64(0))
+        # 日期处理，有的传回来的值是一个Timestamp对象
 
+        for i in int_columns:
+            df_trans[i] = df_trans[i].apply(lambda x: x.timestamp()
+                                            if type(x) == pd.Timestamp else x)
+        # -----------------转换dtype---------------- #
+        df_trans = df_trans.astype(dtype=dtype_config)
+        return df_trans
 
-def trans_before_schema(df_chunk):
-    """
-    转换schema前的步骤
-    """
-    return df_chunk
+    def trans_hdf(df_trans):
+        """
+        转换hdf前的步骤,按照鹏队的需求把str的None转为''
+        """
+        obj_columns = list(df_trans.select_dtypes(
+            include=['object']).columns.values)
+        df_trans[obj_columns] = df_trans[obj_columns].replace([None, 'None'],
+                                                              '')
+        return df_trans
+
+    def trans_schema(df_trans):
+        """
+        修改统一的schema
+        """
+        import pyarrow as pa
+        schema_list = [(column_name, types['parquet_type'])
+                       for column_name, types in config_dict.items()
+                       if column_name in df_trans.columns.to_list()]
+        pa_table = pa.Table.from_pandas(df_trans,
+                                        schema=pa.schema(schema_list))
+        return pa_table
+    # -----------------transform---------------- #
+    return trans_schema(trans_hdf(trans_dtype(df_chunk)))
 
 
 def load_sql_query(xcom_dict: dict) -> dict:
@@ -106,11 +123,6 @@ def load_sql_query(xcom_dict: dict) -> dict:
     from airflow.providers.common.sql.hooks.sql import BaseHook
     sql_hook = BaseHook.get_connection(connector_id).get_hook()
 
-    # -----------------去字典文件中找config信息----------------- #
-    with open(f'{CONFIG_PATH}{select_table}.json') as j:
-        config_dict = json.load(j)
-    dtype_config = {k: v['pandas_type'] for k, v in config_dict.items()}
-
     # ----------------------------------大表分片保存---------------------------------- #
     chunk_count = 0
     for df_chunk in sql_hook.get_pandas_df_by_chunks(
@@ -120,15 +132,8 @@ def load_sql_query(xcom_dict: dict) -> dict:
         # 无数据跳出
         if df_chunk.empty:
             break
-        # -----------------转换dtype前要加的步骤---------------- #
-        df_chunk = trans_before_astype(df_chunk, dtype_config)
-
-        # ----------------- 转换dtype----------------- #
-
-        df_chunk = df_chunk.astype(dtype=dtype_config)
-
-        # ----------------- 转换dtype后要加的步骤----------------- #
-        df_chunk = trans_before_hdf(df_chunk)
+        # -----------------转换---------------- #
+        pa_table = transform(df_chunk, select_table)
 
         # ----------------- 命名----------------- #
         if dynamic:
@@ -140,17 +145,18 @@ def load_sql_query(xcom_dict: dict) -> dict:
                 f'{real_table}/{real_table}.parquet' if chunk_count == 0 else LOAD_PATH_ROOT + \
                 f'{real_table}/{real_table}_{chunk_count}.parquet'
 
-        # -----------------2.修改schema 输出文件----------------- #
-        import pyarrow as pa
+        # -----------------输出文件----------------- #
         import os
-        schema_list = [(column_name, types['parquet_type'])
-                       for column_name, types in config_dict.items()
-                       if column_name in df_chunk.columns.to_list()]
-        pa_table = pa.Table.from_pandas(df_chunk,
-                                        schema=pa.schema(schema_list))
-
+        import pyarrow.parquet as pq
         _ = os.mkdir(LOAD_PATH_ROOT +
                      real_table) if not os.path.exists(LOAD_PATH_ROOT +
                                                        real_table) else None
         pq.write_table(pa_table, LOAD_PATH)
         chunk_count += 1
+
+
+def start_task():
+    load_sql_query(extract_sql_by_table('ASHAREBALANCESHEET', '20220104'))
+
+
+start_task()
