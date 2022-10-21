@@ -1,18 +1,10 @@
-import time
 from airflow.models import Variable
 from datetime import timedelta, date, datetime
-from retry import retry
 import json
-from concurrent.futures import ThreadPoolExecutor, as_completed
-# import pandas as pd
-
-# import numpy as np
-
-import os
 import pendulum
 from airflow.decorators import dag, task, task_group
 from airflow.models import Variable
-from airflow.datasets import Dataset
+# from airflow.datasets import Dataset
 from datetime import timedelta, date, datetime
 
 # -----------------加载运行依赖的配置信息----------------- #
@@ -22,9 +14,10 @@ with open(Variable.get("db_sql_dict")) as j:
     DB_SQL_DICT = json.load(j)  # 依赖的SQL语句
 
 CONFIG_PATH = '/home/lianghua/ZIRUI/rely_files/test_type_df_and_parquet/'  # 转换依赖的CONFIG
-LOAD_PATH_ROOT = '/home/lianghua/rtt/soft/airflow/dags/zirui_dag/load/'  # 输出路径
+LOAD_PATH_ROOT = '/home/lianghua/rtt/mountdir/data/load/'  # 输出路径
 
 
+@task
 def extract_sql_by_table(table_name: str, load_date: str) -> dict:
     """
     根据表名和日期返回sql查询语句
@@ -128,10 +121,12 @@ def transform(df_chunk, select_table):
         OUT_PUT_PATH = f'{LOAD_PATH_ROOT}{select_table}/config.json'
         with open(OUT_PUT_PATH, 'w') as f:
             json.dump(out_put_config, f)
+    get_config()
     # -----------------transform---------------- #
     return trans_schema(trans_hdf(trans_dtype(df_chunk)))
 
 
+@task
 def load_sql_query(xcom_dict: dict) -> dict:
     """
     根据sql查询语句下载数据到本地
@@ -158,9 +153,8 @@ def load_sql_query(xcom_dict: dict) -> dict:
     ):
         # 无数据跳出
         if df_chunk.empty:
+            LOAD_PATH = ''
             break
-        # -----------------转换---------------- #
-        pa_table = transform(df_chunk, select_table)
 
         # ----------------- 命名----------------- #
         if dynamic:
@@ -178,13 +172,18 @@ def load_sql_query(xcom_dict: dict) -> dict:
         _ = os.mkdir(LOAD_PATH_ROOT +
                      select_table) if not os.path.exists(LOAD_PATH_ROOT +
                                                          select_table) else None
+        # -----------------转换---------------- #
+        pa_table = transform(df_chunk, select_table)
         pq.write_table(pa_table, LOAD_PATH)
         chunk_count += 1
+    return {'table_path': LOAD_PATH, 'select_table': select_table,
+            'table_empty': df_chunk.empty, 'dynamic': dynamic, 'date_column': date_column, }
 
 
 @dag(
     default_args={'owner': 'zirui',
-                  'email': ['523393445@qq.com', ],  # '821538716@qq.com'
+                  # '821538716@qq.com'
+                  'email': ['523393445@qq.com', '821538716@qq.com', ],
                   'email_on_failure': True,
                   'email_on_retry': True,
                   #   'retries': 1,
@@ -197,33 +196,22 @@ def load_sql_query(xcom_dict: dict) -> dict:
 )
 # 在DAG中定义任务
 def csc_data_load():
-
-    # [START main_flow]
-
     def start_tasks(table_name: str):
         """
         任务流控制函数，用于被多进程调用，每张表下载都是一个并行的进程
         :return:
         """
-
         # 下载昨天的数据
         load_date = (date.today() + timedelta(-1)).strftime('%Y%m%d')
 
         # ETL
         load_sql_query.override(
             task_id='L_' + table_name, )(extract_sql_by_table.override(task_id='E_' + table_name, )(table_name, load_date))
-        # config
-        # get_config.override(task_id='C_' + table_name)(load_return)
-        # transform_schema.override(task_id='T_' + table_name)(load_return)
-        # outlets=[Dataset('L_' + table_name, extra={'load_date': load_date})]
-        # 根据load的结果是否为空，进行告警或者下一步动作
-        # send_info(check_load(load_return))
 
     # 多进程异步执行
-
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=5) as executor:
         _ = {executor.submit(start_tasks, table): table for table in TABLE_LIST}
 
-    # [END main_flow]
+
 csc_data_load()
