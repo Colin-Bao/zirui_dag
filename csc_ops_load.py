@@ -199,7 +199,7 @@ def load_sql_query(xcom_dict: dict) -> dict:
                   'email_on_retry': True,
                   #   'retries': 1,
                   "retry_delay": timedelta(minutes=1), },
-    schedule="0/30 2-6 * * 1-7",
+    schedule="0/30 2-4 * * 1-7",
     start_date=pendulum.datetime(2022, 9, 1, tz="Asia/Shanghai"),
     catchup=False,
     dagrun_timeout=timedelta(minutes=60),
@@ -213,7 +213,6 @@ def csc_data_load():
         """
         # 下载昨天的数据
         load_date = (date.today() + timedelta(-1)).strftime('%Y%m%d')
-        load_date = '20220104'
 
         # ETL
         load_sql_query.override(

@@ -2,19 +2,22 @@ from airflow.models import Variable
 from datetime import timedelta, date, datetime
 import json
 import pendulum
-from airflow.decorators import dag, task, task_group
+from airflow.decorators import dag, task
 from airflow.models import Variable
 # from airflow.datasets import Dataset
 from datetime import timedelta, date, datetime
 
 # -----------------加载运行依赖的配置信息----------------- #
-with open(Variable.get("csc_input_table")) as j:
-    TABLE_LIST = json.load(j)['need_tables']
+SUN_LIST = ['CON_FORECAST_ROLL_STK', 'CON_FORECAST_STK', 'CON_RATING_STK', 'CON_TARGET_PRICE_STK', 'DER_FORECAST_ADJUST_NUM', 'DER_RATING_ADJUST_NUM', 'RPT_EARNINGS_ADJUST', 'RPT_FORECAST_STK',
+            'RPT_RATING_ADJUST', 'RPT_TARGET_PRICE_ADJUST', 'DER_REPORT_NUM', 'DER_CONF_STK', 'DER_FOCUS_STK', 'DER_DIVER_STK', 'DER_CON_DEV_ROLL_STK', 'DER_EXCESS_STOCK', 'DER_PROB_EXCESS_STOCK', 'DER_PROB_BELOW_STOCK']
+WIND_LIST = ['AINDEXFREEWEIGHT', 'ASHAREBALANCESHEET', 'ASHAREBLOCKTRADE', 'ASHARECASHFLOW', 'ASHARECONSENSUSDATA', 'ASHARECONSENSUSROLLINGDATA', 'ASHAREEODDERIVATIVEINDICATOR', 'ASHAREEODPRICES', 'ASHAREFINANCIALINDICATOR', 'ASHAREINCOME',
+             'ASHAREMONEYFLOW', 'ASHAREPROFITEXPRESS', 'ASHAREPROFITNOTICE', 'ASHARETRADINGSUSPENSION', 'CCOMMODITYFUTURESEODPRICES', 'CCOMMODITYFUTURESPOSITIONS', 'ASHAREPLANTRADE', 'ASHAREEARNINGEST', 'ASHAREAUDITOPINION', 'ASHAREMAJOREVENT', 'ASHAREREGINV']
+TABLE_LIST = SUN_LIST+WIND_LIST
 with open(Variable.get("db_sql_dict")) as j:
     DB_SQL_DICT = json.load(j)  # 依赖的SQL语句
 
 CONFIG_PATH = '/home/lianghua/ZIRUI/rely_files/test_type_df_and_parquet/'  # 转换依赖的CONFIG
-LOAD_PATH_ROOT = '/home/lianghua/rtt/mountdir/data/load/'  # 输出路径
+LOAD_PATH_ROOT = '/home/lianghua/rtt/mountdir/data/load_op/'  # 输出路径
 
 
 # TODO DB_SQL_DICT删除 demo
@@ -30,6 +33,15 @@ def extract_sql_by_table(table_name: str, load_date: str) -> dict:
     # 处理增量表
     query_sql = table_info['sql'] % (
         load_date) if table_info['dynamic'] else table_info['sql']
+
+    # 换成OPDATE
+    # query_sql=query_sql.split('where')[-1]
+    if table_info['data_base'] == 'wind':
+        query_sql = query_sql.replace(
+            table_info['date_where']+' =', ' convert(varchar(100), OPDATE, 112) = ')
+    else:
+        query_sql = query_sql.replace(
+            table_info['date_where']+' =', ' ENTRYTIME = ')
 
     return {
         'connector_id': table_info['data_base'] + '_af_connector',
@@ -122,7 +134,7 @@ def transform(df_chunk, select_table):
             "primary_key": table_info['primary_key'],
             "original_table": table_info['oraignal_table'],
             'dynamic': table_info['dynamic'],
-            'date_column': table_info['date_where'],
+            'date_column': 'OPDATE',
             'last_update': str(datetime.now()),
             'all_cols': table_info['all_columns']
         }
@@ -199,13 +211,13 @@ def load_sql_query(xcom_dict: dict) -> dict:
                   'email_on_retry': True,
                   #   'retries': 1,
                   "retry_delay": timedelta(minutes=1), },
-    schedule="0/30 2-6 * * 1-7",
+    schedule="5/30 2-4 * * 1-7",
     start_date=pendulum.datetime(2022, 9, 1, tz="Asia/Shanghai"),
     catchup=False,
     dagrun_timeout=timedelta(minutes=60),
-    tags=['数据加载'],
+    tags=['数据加载', 'OPDATE'],
 )
-def csc_data_load():
+def csc_data_load_op():
     def start_tasks(table_name: str):
         """
         任务流控制函数，用于被多进程调用，每张表下载都是一个并行的进程
@@ -213,8 +225,6 @@ def csc_data_load():
         """
         # 下载昨天的数据
         load_date = (date.today() + timedelta(-1)).strftime('%Y%m%d')
-        load_date = '20220104'
-
         # ETL
         load_sql_query.override(
             task_id='L_' + table_name, )(
@@ -223,7 +233,12 @@ def csc_data_load():
     # 多进程异步执行
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=5) as executor:
-        _ = {executor.submit(start_tasks, table)             : table for table in TABLE_LIST}
+        _ = {executor.submit(start_tasks, table)
+                             : table for table in TABLE_LIST}
 
 
-csc_data_load()
+csc_data_load_op()
+
+# for table in TABLE_LIST:
+#     res = extract_sql_by_table(table, '20220101')['query_sql']
+#     print(res)

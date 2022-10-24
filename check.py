@@ -3,6 +3,8 @@ import json
 from airflow.models import Variable
 from datetime import timedelta, date, datetime
 LOAD_PATH_ROOT = '/home/lianghua/rtt/mountdir/data/load/'
+with open(Variable.get("csc_input_table")) as j:
+    TABLE_LIST = json.load(j)['need_tables']
 with open(Variable.get("db_sql_dict")) as j:
     DB_SQL_DICT = json.load(j)  # 依赖的SQL语句
 CONFIG_PATH = '/home/lianghua/ZIRUI/rely_files/test_type_df_and_parquet/'  # 转换依赖的CONFIG
@@ -92,9 +94,10 @@ def check():
 
         # get_config(table)
         date_list = [date for date in os.listdir(LOAD_PATH_ROOT+table)]
-        if 2 < len(date_list) <= 5000:
+        if 3 < len(date_list) <= 5000:
             print(table, len(date_list))
             WAIT_LIST.append(table)
+    print(WAIT_LIST)
 
 
 def get_db_config(select_table):
@@ -142,8 +145,35 @@ def get_config(select_table):
     # -----------------config---------------- #
 
 
+def get_wind_table():
+    WIND = []
+    for k, v in DB_SQL_DICT.items():
+        # print(k,v)
+        # break
+        if v['data_base'] == 'wind' and v['dynamic'] == True and k in TABLE_LIST:
+            # print(v['all_columns'],k)
+            if '[OPDATE]' in v['sql']:
+                WIND.append(k)
+
+    print(WIND)
+
+
+def get_suntime_table():
+    SUNTIME = []
+    for k, v in DB_SQL_DICT.items():
+        # print(k,v)
+        # break
+        if v['data_base'] == 'suntime' and v['dynamic'] == True and k in TABLE_LIST:
+            # print(v['all_columns'],k)
+            SUNTIME.append(k)
+
+    # print(SUNTIME)
+
+
+# get_df()
 check()
+# get_suntime_table()
 # print(get_new_pk())
-print(WAIT_LIST)
+# get_wind_table()
 # with open('DateColumns.json', 'w') as f:
 #     json.dump(DateColumns, f)
