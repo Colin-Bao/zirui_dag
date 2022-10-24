@@ -17,6 +17,7 @@ CONFIG_PATH = '/home/lianghua/ZIRUI/rely_files/test_type_df_and_parquet/'  # 转
 LOAD_PATH_ROOT = '/home/lianghua/rtt/mountdir/data/load/'  # 输出路径
 
 
+# TODO DB_SQL_DICT删除 demo
 @task
 def extract_sql_by_table(table_name: str, load_date: str) -> dict:
     """
@@ -43,12 +44,15 @@ def extract_sql_by_table(table_name: str, load_date: str) -> dict:
 
 
 def transform(df_chunk, select_table):
+    """
+    转换3次,输出config
+    """
     import pandas as pd
     import numpy as np
 
     # -----------------去字典文件中找config信息----------------- #
     with open(f'{CONFIG_PATH}{select_table}.json') as j:
-        config_dict = json.load(j)
+        config_dict = json.load(j)  # 转换type的config
 
     def trans_dtype(df_trans):
         """
@@ -97,6 +101,9 @@ def transform(df_chunk, select_table):
         return pa_table
 
     def get_config():
+        """
+        按表输出config.json文件
+        """
         table_info = DB_SQL_DICT[select_table]
         # -----------------cols----------------- #
         type_config = {
@@ -113,6 +120,7 @@ def transform(df_chunk, select_table):
 
         out_put_config = {
             "primary_key": table_info['primary_key'],
+            "original_table": table_info['oraignal_table'],
             'dynamic': table_info['dynamic'],
             'date_column': table_info['date_where'],
             'last_update': str(datetime.now()),
@@ -121,6 +129,7 @@ def transform(df_chunk, select_table):
         OUT_PUT_PATH = f'{LOAD_PATH_ROOT}{select_table}/config.json'
         with open(OUT_PUT_PATH, 'w') as f:
             json.dump(out_put_config, f)
+    # -----------------config---------------- #
     get_config()
     # -----------------transform---------------- #
     return trans_schema(trans_hdf(trans_dtype(df_chunk)))
@@ -133,9 +142,10 @@ def load_sql_query(xcom_dict: dict) -> dict:
     :return:xcom_dict
     """
     # -----------------参数传递----------------- #
+    print(xcom_dict)
+    print('\n# -----------------参数传递----------------- #\n')
     connector_id = xcom_dict['connector_id']
     query_sql = xcom_dict['query_sql']
-    real_table = xcom_dict['real_table']
     select_table = xcom_dict['select_table']
     load_date = xcom_dict['load_date']
     dynamic = xcom_dict['dynamic']
@@ -146,6 +156,7 @@ def load_sql_query(xcom_dict: dict) -> dict:
     sql_hook = BaseHook.get_connection(connector_id).get_hook()
 
     # ----------------------------------大表分片保存---------------------------------- #
+    # get_pandas_df   连接suntime会报错
     chunk_count = 0
     for df_chunk in sql_hook.get_pandas_df_by_chunks(
             query_sql,
@@ -188,13 +199,12 @@ def load_sql_query(xcom_dict: dict) -> dict:
                   'email_on_retry': True,
                   #   'retries': 1,
                   "retry_delay": timedelta(minutes=1), },
-    schedule="0/30 1-6 * * 1-7",
+    schedule="0/30 2-6 * * 1-7",
     start_date=pendulum.datetime(2022, 9, 1, tz="Asia/Shanghai"),
     catchup=False,
     dagrun_timeout=timedelta(minutes=60),
     tags=['数据加载'],
 )
-# 在DAG中定义任务
 def csc_data_load():
     def start_tasks(table_name: str):
         """
@@ -203,15 +213,17 @@ def csc_data_load():
         """
         # 下载昨天的数据
         load_date = (date.today() + timedelta(-1)).strftime('%Y%m%d')
+        load_date = '20220104'
 
         # ETL
         load_sql_query.override(
-            task_id='L_' + table_name, )(extract_sql_by_table.override(task_id='E_' + table_name, )(table_name, load_date))
+            task_id='L_' + table_name, )(
+                extract_sql_by_table.override(task_id='E_' + table_name, )(table_name, load_date))
 
     # 多进程异步执行
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=5) as executor:
-        _ = {executor.submit(start_tasks, table): table for table in TABLE_LIST}
+        _ = {executor.submit(start_tasks, table)             : table for table in TABLE_LIST}
 
 
 csc_data_load()
