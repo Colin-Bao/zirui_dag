@@ -1,10 +1,14 @@
 {
-    "folders": [
-        {
-            "path": "."
-        },
-        {
-            "path": "../../../../mountdir/data"
-        }
-    ]
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../../mountdir/data"
+		},
+		{
+			"path": "../../../../mountdir/wp"
+		}
+	],
+	"settings": {}
 }

@@ -20,6 +20,82 @@ CONFIG_PATH = '/home/lianghua/ZIRUI/rely_files/test_type_df_and_parquet/'  # 转
 LOAD_PATH_ROOT = '/home/lianghua/rtt/mountdir/data/load_op/'  # 输出路径
 
 
+def get_new_pk(select_table):
+    """
+    鹏队临时加的需求,改config里面的主键
+    """
+    PrimaryKeys = {
+        'aindexcsi500weight': ['S_INFO_WINDCODE', 'S_CON_WINDCODE', 'TRADE_DT'],
+        'aindexeodprices': ['S_INFO_WINDCODE', 'TRADE_DT'],
+        'aindexfreeweight': ['S_INFO_WINDCODE', 'S_CON_WINDCODE', 'TRADE_DT'],
+        'aindexhs300closeweight': ['S_INFO_WINDCODE', 'S_CON_WINDCODE', 'TRADE_DT'],
+        'aindexhs300freeweight': ['S_INFO_WINDCODE', 'S_CON_WINDCODE', 'TRADE_DT'],
+        'aindexmembers': ['S_INFO_WINDCODE', 'S_CON_WINDCODE'],
+        'aindexmemberscitics': ['S_INFO_WINDCODE', 'S_CON_WINDCODE'],
+        'ASHAREPLANTRADE': ['S_INFO_WINDCODE', 'ANN_DT', 'ANN_DT_NEW'],
+        'ashareannfinancialindicator': ['S_INFO_WINDCODE', 'ANN_DT', 'REPORT_PERIOD'],
+        'ashareauditopinion': ['S_INFO_WINDCODE', 'ANN_DT', 'REPORT_PERIOD'],
+        'asharebalancesheet': ['S_INFO_WINDCODE', 'ANN_DT', 'REPORT_PERIOD', 'STATEMENT_TYPE'],
+        'ashareblocktrade': ['S_INFO_WINDCODE', 'TRADE_DT'],
+        'asharecalendar': ['S_INFO_EXCHMARKET'],
+        'asharecashflow': ['S_INFO_WINDCODE', 'ANN_DT', 'REPORT_PERIOD', 'STATEMENT_TYPE'],
+        'ashareconsensusdata': ['S_INFO_WINDCODE', 'EST_DT', 'EST_REPORT_DT', 'CONSEN_DATA_CYCLE_TYP'],
+        'ashareconsensusrollingdata': ['S_INFO_WINDCODE', 'EST_DT', 'ROLLING_TYPE'],
+        'ashareconseption': ['S_INFO_WINDCODE', 'WIND_SEC_CODE'],
+        'asharedescription': ['S_INFO_WINDCODE'],
+        'asharedividend': ['S_INFO_WINDCODE', 'S_DIV_PROGRESS', 'ANN_DT'],
+        'ashareearningest': ['S_INFO_WINDCODE', 'WIND_CODE'],
+        'ashareeodderivativeindicator': ['S_INFO_WINDCODE', 'TRADE_DT'],
+        'ashareeodprices': ['S_INFO_WINDCODE', 'TRADE_DT'],
+        'asharefinancialderivative': ['S_INFO_COMPCODE', 'BEGINDATE', 'ENDDATE'],
+        'asharefinancialindicator': ['S_INFO_WINDCODE', 'ANN_DT', 'REPORT_PERIOD'],
+        'ashareincome': ['S_INFO_WINDCODE', 'ANN_DT', 'REPORT_PERIOD', 'STATEMENT_TYPE'],
+        'ashareipo': ['S_INFO_WINDCODE'],
+        'ashareisactivity': ['S_INFO_WINDCODE', 'S_SURVEYDATE', 'S_SURVEYTIME', 'S_ACTIVITIESTYPE'],
+        'asharemajorevent': ['S_INFO_WINDCODE', 'S_EVENT_CATEGORYCODE', 'S_EVENT_ANNCEDATE'],
+        'asharemanagementholdreward': ['S_INFO_WINDCODE', 'ANN_DATE'],
+        'asharemoneyflow': ['S_INFO_WINDCODE', 'TRADE_DT'],
+        'ashareprofitexpress': ['S_INFO_WINDCODE', 'ANN_DT', 'REPORT_PERIOD'],
+        'ashareprofitnotice': ['S_INFO_WINDCODE', 'S_PROFITNOTICE_DATE', 'S_PROFITNOTICE_PERIOD'],
+        'asharereginv': ['S_INFO_WINDCODE', 'STR_DATE'],
+        'asharesalessegment': ['S_INFO_WINDCODE', 'REPORT_PERIOD', 'S_SEGMENT_ITEM'],
+        'asharest': ['S_INFO_WINDCODE', 'ANN_DT'],
+        'asharetradingsuspension': ['S_INFO_WINDCODE', 'S_DQ_SUSPENDDATE'],
+        'ccommodityfutureseodprices': ['S_INFO_WINDCODE', 'TRADE_DT'],
+        'ccommodityfuturespositions': ['S_INFO_WINDCODE', 'TRADE_DT', 'S_INFO_COMPCODE', 'FS_INFO_TYPE'],
+        'cfuturescalendar': [],
+        'cfuturescontpro': ['S_INFO_WINDCODE'],
+        'cfuturescontprochange': ['S_INFO_WINDCODE'],
+        'cfuturesdescription': ['S_INFO_WINDCODE'],
+        'cfuturesmarginratio': ['S_INFO_WINDCODE', 'TRADE_DT'],
+        'chinamutualfundstockportfolio': ['S_INFO_WINDCODE', 'ANN_DATE'],
+        'con_forecast_roll_stk': ['stock_code', 'con_date'],
+        'con_forecast_stk': ['stock_code', 'con_date'],
+        'con_rating_stk': ['stock_code', 'con_date'],
+        'con_target_price_stk': ['stock_code', 'con_date'],
+        'der_conf_stk': ['stock_code', 'con_date', 'con_year'],
+        'der_con_dev_roll_stk': ['stock_code', 'con_date'],
+        'der_diver_stk': ['stock_code', 'con_date', 'con_year'],
+        'der_excess_stock': ['stock_code', 'declare_date', 'report_year'],
+        'der_focus_stk': ['stock_code', 'con_date'],
+        'der_forecast_adjust_num': ['stock_code', 'con_date', 'con_year'],
+        'der_prob_below_stock': ['stock_code', 'report_year', 'declare_date'],
+        'der_prob_excess_stock': ['stock_code', 'report_year', 'report_quarter', 'declare_date'],
+        'der_rating_adjust_num': ['stock_code', 'con_date'],
+        'der_report_num': ['stock_code', 'con_date'],
+        'rpt_earnings_adjust': ['stock_code', 'current_create_date', 'report_year'],
+        'rpt_forecast_stk': ['stock_code', 'create_date', 'report_year'],
+        'rpt_gogoal_rating': ['gg_rating_code'],
+        'rpt_rating_adjust': ['stock_code', ''],
+        'rpt_target_price_adjust': ['stock_code', 'updatetime', 'organ_id'],
+        'shscchannelholdings': ['S_INFO_WINDCODE', 'TRADE_DT'],
+        'shscmembers': ['S_INFO_WINDCODE'],
+        'szscmembers': ['S_INFO_WINDCODE']
+    }
+    PrimaryKeys = {k.upper(): v for k, v in PrimaryKeys.items()}
+    return PrimaryKeys[select_table]
+
+
 # TODO DB_SQL_DICT删除 demo
 @task
 def extract_sql_by_table(table_name: str, load_date: str) -> dict:
@@ -131,7 +207,7 @@ def transform(df_chunk, select_table):
         # ---------------输出----------------- #
 
         out_put_config = {
-            "primary_key": table_info['primary_key'],
+            "primary_key": get_new_pk(select_table),
             "original_table": table_info['oraignal_table'],
             'dynamic': table_info['dynamic'],
             'date_column': 'OPDATE',
@@ -225,6 +301,7 @@ def csc_data_load_op():
         """
         # 下载昨天的数据
         load_date = (date.today() + timedelta(-1)).strftime('%Y%m%d')
+        # load_date = '20220104'
         # ETL
         load_sql_query.override(
             task_id='L_' + table_name, )(
@@ -233,8 +310,7 @@ def csc_data_load_op():
     # 多进程异步执行
     from concurrent.futures import ThreadPoolExecutor
     with ThreadPoolExecutor(max_workers=5) as executor:
-        _ = {executor.submit(start_tasks, table)
-                             : table for table in TABLE_LIST}
+        _ = {executor.submit(start_tasks, table): table for table in TABLE_LIST}
 
 
 csc_data_load_op()
