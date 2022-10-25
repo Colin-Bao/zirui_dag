@@ -58,7 +58,7 @@ def check_date(select_table, load_date):
 
     # --------------比较--------------#
     compare_log = datacompy.Compare(
-        df_old, df_new, df1_name='df_old', df2_name='df_new', join_columns=pk_column)
+        df_old, df_new, df1_name='df_load', df2_name='df_opdate', join_columns=pk_column)
 
     # --------------输出差异比较--------------#
     with open(f'{LOG_OUTPUT_PATH}.txt', 'w') as f:
@@ -77,7 +77,7 @@ def check_date(select_table, load_date):
     start_date=pendulum.datetime(2022, 9, 1, tz="Asia/Shanghai"),
     catchup=False,
     dagrun_timeout=timedelta(minutes=60),
-    tags=['数据加载'],
+    tags=['日期检查'],
 )
 def csc_check_date():
     import os
