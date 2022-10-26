@@ -1,13 +1,20 @@
 {
 	"folders": [
 		{
+			"name": "zirui_dag",
 			"path": "."
 		},
 		{
-			"path": "../../../../mountdir/data"
+			"name": "ZIRUI",
+			"path": "../../../../../ZIRUI"
 		},
 		{
+			"name": "wp",
 			"path": "../../../../mountdir/wp"
+		},
+		{
+			"name": "data",
+			"path": "../../../../mountdir/data"
 		}
 	],
 	"settings": {}

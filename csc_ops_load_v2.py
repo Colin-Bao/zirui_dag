@@ -282,7 +282,7 @@ def load_sql_query(xcom_dict: dict, load_path_root=LOAD_PATH_ROOT) -> dict:
     dagrun_timeout=timedelta(minutes=10),
     tags=['每日更新'],
 )
-def csc_data_load():
+def csc_data_load_v2():
     def start_tasks(table_name: str):
         """
         任务流控制函数，用于被多进程调用，每张表下载都是一个并行的进程
@@ -303,4 +303,4 @@ def csc_data_load():
                              : table for table in TABLE_LIST}
 
 
-csc_data_load()
+# csc_data_load()
