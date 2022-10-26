@@ -73,7 +73,7 @@ def check_date(select_table, load_date):
                   'email_on_retry': True,
                   #   'retries': 1,
                   "retry_delay": timedelta(minutes=1), },
-    schedule="0 5 * * 1-7",
+    schedule="30 3 * * 1-7",
     start_date=pendulum.datetime(2022, 9, 1, tz="Asia/Shanghai"),
     catchup=False,
     dagrun_timeout=timedelta(minutes=60),
