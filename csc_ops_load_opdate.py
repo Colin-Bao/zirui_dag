@@ -291,7 +291,7 @@ def load_sql_query(xcom_dict: dict) -> dict:
     start_date=pendulum.datetime(2022, 9, 1, tz="Asia/Shanghai"),
     catchup=False,
     dagrun_timeout=timedelta(minutes=10),
-    tags=['数据加载', 'OPDATE'],
+    tags=['每日更新', 'OPDATE'],
 )
 def csc_data_load_op():
     def start_tasks(table_name: str):

@@ -206,9 +206,16 @@ def transform(df_chunk, select_table, load_path_root, config_dict: dict, load_da
         for i in int_columns:
             df_trans[i] = df_trans[i].apply(lambda x: x.timestamp()
                                             if type(x) == pd.Timestamp else x)
-        # -----------------鹏队的需求，删除OPMODE=1---------------- #
-        # if 'OPMODE' in df_trans.columns:
-        #     df_trans = df_trans[df_trans['OPMODE'] == 0]
+        # -----------------转换OPDATE---------------- #
+        if connector_id == 'wind_af_connector':
+            df_trans['OPDATE'] = pd.to_datetime(df_trans['OPDATE'], unit='s')
+            df_trans['OPDATE'] = df_trans['OPDATE'].apply(
+                lambda x: int(x.date().strftime('%Y%m%d')))
+        else:
+            df_trans['ENTRYTIME'] = pd.to_datetime(
+                df_trans['ENTRYTIME'], unit='s')
+            df_trans['ENTRYTIME'] = df_trans['ENTRYTIME'].apply(
+                lambda x: int(x.date().strftime('%Y%m%d')))
 
         # -----------------转换dtype---------------- #
         df_trans = df_trans.astype(dtype=dtype_config)
