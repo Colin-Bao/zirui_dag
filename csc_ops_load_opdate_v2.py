@@ -27,6 +27,8 @@ def extract_sql_by_table(table_name: str, load_date: str) -> dict:
     if table_info['data_base'] == 'wind':
         query_sql = query_sql.replace(
             table_info['date_column']+' =', ' convert(varchar(100), OPDATE, 112) = ')
+        query_sql = query_sql+"and OPMODE='0'"
+
     else:
         query_sql = query_sql.replace(
             table_info['date_column']+' =', ' ENTRYTIME = ')
@@ -51,7 +53,7 @@ def load_sql_query(xcom_dict: dict, load_path_root=LOAD_PATH_ROOT) -> dict:
     # -----------------参数传递----------------- #
 
     print('\n# -----------------参数传递----------------- #\n')
-    print(xcom_dict)
+    # print(xcom_dict)
     connector_id = xcom_dict['connector_id']
     query_sql = xcom_dict['query_sql']
     select_table = xcom_dict['select_table']
@@ -94,14 +96,14 @@ def load_sql_query(xcom_dict: dict, load_path_root=LOAD_PATH_ROOT) -> dict:
                                                          select_table) else None
         # -----------------转换---------------- #
         pa_table = transform(df_chunk, select_table,
-                             load_path_root, config_dict, load_date)
+                             load_path_root, config_dict, load_date, connector_id)
         pq.write_table(pa_table, LOAD_PATH)
         chunk_count += 1
     return {'table_path': LOAD_PATH, 'select_table': select_table,
             'table_empty': df_chunk.empty, 'dynamic': dynamic, 'date_column': date_column, }
 
 
-def transform(df_chunk, select_table, load_path_root, config_dict: dict, load_date: str):
+def transform(df_chunk, select_table, load_path_root, config_dict: dict, load_date: str, connector_id: str):
     """
     转换3次,输出config
     """
@@ -121,7 +123,7 @@ def transform(df_chunk, select_table, load_path_root, config_dict: dict, load_da
             'aindexhs300freeweight': ['S_INFO_WINDCODE', 'S_CON_WINDCODE', 'TRADE_DT'],
             'aindexmembers': ['S_INFO_WINDCODE', 'S_CON_WINDCODE'],
             'aindexmemberscitics': ['S_INFO_WINDCODE', 'S_CON_WINDCODE'],
-            'ASHAREPLANTRADE': ['S_INFO_WINDCODE', 'ANN_DT', 'ANN_DT_NEW'],
+            'ASAREPLANTRADE': ['S_INFO_WINDCODE', 'ANN_DT', 'ANN_DT_NEW'],
             'ashareannfinancialindicator': ['S_INFO_WINDCODE', 'ANN_DT', 'REPORT_PERIOD'],
             'ashareauditopinion': ['S_INFO_WINDCODE', 'ANN_DT', 'REPORT_PERIOD'],
             'asharebalancesheet': ['S_INFO_WINDCODE', 'ANN_DT', 'REPORT_PERIOD', 'STATEMENT_TYPE'],
@@ -204,6 +206,10 @@ def transform(df_chunk, select_table, load_path_root, config_dict: dict, load_da
         for i in int_columns:
             df_trans[i] = df_trans[i].apply(lambda x: x.timestamp()
                                             if type(x) == pd.Timestamp else x)
+        # -----------------鹏队的需求，删除OPMODE=1---------------- #
+        # if 'OPMODE' in df_trans.columns:
+        #     df_trans = df_trans[df_trans['OPMODE'] == 0]
+
         # -----------------转换dtype---------------- #
         df_trans = df_trans.astype(dtype=dtype_config)
         return df_trans
@@ -246,8 +252,11 @@ def transform(df_chunk, select_table, load_path_root, config_dict: dict, load_da
             }
             for k, v in config_dict.items()
         }
+        # -----------------自定义增加(鹏队的需求)----------------- #
+        type_config.update(
+            {'LOAD_DATE': {'original_type': 'pengdui', 'parquet_type': 'int64'}})
 
-        # -----------------date----------------- #
+        # -----------------update----------------- #
         table_info.update({"all_cols": type_config})
         # ---------------输出----------------- #
 
@@ -255,7 +264,7 @@ def transform(df_chunk, select_table, load_path_root, config_dict: dict, load_da
             "primary_key": get_new_pk(select_table),
             "original_table": table_info['original_table'],
             'dynamic': table_info['dynamic'],
-            'date_column': 'OPDATE',
+            'date_column': 'OPDATE' if connector_id == 'wind_af_connector' else "ENTRYTIME",
             'last_update': str(datetime.now()),
             'all_cols': table_info['all_cols']
         }
@@ -270,7 +279,6 @@ def transform(df_chunk, select_table, load_path_root, config_dict: dict, load_da
 
 @dag(
     default_args={'owner': 'zirui',
-                  # '821538716@qq.com'
                   'email': ['523393445@qq.com', '821538716@qq.com', ],
                   'email_on_failure': True,
                   'email_on_retry': True,
@@ -280,7 +288,7 @@ def transform(df_chunk, select_table, load_path_root, config_dict: dict, load_da
     start_date=pendulum.datetime(2022, 9, 1, tz="Asia/Shanghai"),
     catchup=False,
     dagrun_timeout=timedelta(minutes=10),
-    tags=['每日更新'],
+    tags=['每日更新', 'OPDATEV2'],
 )
 def csc_data_load_v2():
     def start_tasks(table_name: str):
@@ -297,11 +305,11 @@ def csc_data_load_v2():
             extract_sql_by_table.override(task_id='E_' + table_name, )(table_name, load_date), LOAD_PATH_ROOT)
 
     # 多进程异步执行
-    start_tasks('AINDEXCSI500WEIGHT')
-    # from concurrent.futures import ThreadPoolExecutor
-    # with ThreadPoolExecutor(max_workers=5) as executor:
-    #     _ = {executor.submit(start_tasks, table): table for table in [
-    #         k for k, v in DB_SQL_DICT.items() if v['is_important']]}
+    # start_tasks('AINDEXCSI500WEIGHT')
+    from concurrent.futures import ThreadPoolExecutor
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        _ = {executor.submit(start_tasks, table): table for table in [
+            k for k, v in DB_SQL_DICT.items() if v['is_important'] and v['dynamic']]}
 
 
 csc_data_load_v2()
