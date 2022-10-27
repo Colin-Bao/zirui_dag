@@ -161,7 +161,7 @@
         "original_table": "CON_FORECAST_ROLL_STK",
         "sql": "SELECT * FROM zyyx.CON_FORECAST_ROLL_STK WHERE con_date = to_date('%s','yyyy-MM-dd')",
         "dynamic": true,
-        "date_column": "con_date",
+        "date_column": "CON_DATE",
         "primary_key": [
             "ID"
         ],
@@ -281,7 +281,7 @@
         "original_table": "CON_FORECAST_STK",
         "sql": "SELECT * FROM zyyx.CON_FORECAST_STK WHERE con_date = to_date('%s','yyyy-MM-dd')",
         "dynamic": true,
-        "date_column": "con_date",
+        "date_column": "CON_DATE",
         "primary_key": [
             "ID"
         ],
@@ -461,7 +461,7 @@
         "original_table": "CON_RATING_STK",
         "sql": "SELECT * FROM zyyx.CON_RATING_STK WHERE con_date = to_date('%s','yyyy-MM-dd')",
         "dynamic": true,
-        "date_column": "con_date",
+        "date_column": "CON_DATE",
         "primary_key": [
             "ID"
         ],
@@ -519,7 +519,7 @@
         "original_table": "CON_TARGET_PRICE_STK",
         "sql": "SELECT * FROM zyyx.CON_TARGET_PRICE_STK WHERE con_date = to_date('%s','yyyy-MM-dd')",
         "dynamic": true,
-        "date_column": "con_date",
+        "date_column": "CON_DATE",
         "primary_key": [
             "ID"
         ],
@@ -1449,7 +1449,7 @@
         "original_table": "DER_FORECAST_ADJUST_NUM",
         "sql": "SELECT * FROM zyyx.DER_FORECAST_ADJUST_NUM WHERE con_date = to_date('%s','yyyy-MM-dd')",
         "dynamic": true,
-        "date_column": "con_date",
+        "date_column": "CON_DATE",
         "primary_key": [
             "ID"
         ],
@@ -1532,7 +1532,7 @@
         "original_table": "DER_RATING_ADJUST_NUM",
         "sql": "SELECT * FROM zyyx.DER_RATING_ADJUST_NUM WHERE con_date = to_date('%s','yyyy-MM-dd')",
         "dynamic": true,
-        "date_column": "con_date",
+        "date_column": "CON_DATE",
         "primary_key": [
             "ID"
         ],
@@ -2309,7 +2309,7 @@
         "original_table": "DER_REPORT_NUM",
         "sql": "SELECT * FROM zyyx.DER_REPORT_NUM WHERE con_date = to_date('%s','yyyy-MM-dd')",
         "dynamic": true,
-        "date_column": "con_date",
+        "date_column": "CON_DATE",
         "primary_key": [
             "ID"
         ],
@@ -2477,7 +2477,7 @@
         "original_table": "DER_CONF_STK",
         "sql": "SELECT * FROM zyyx.DER_CONF_STK WHERE con_date = to_date('%s','yyyy-MM-dd')",
         "dynamic": true,
-        "date_column": "con_date",
+        "date_column": "CON_DATE",
         "primary_key": [
             "ID"
         ],
@@ -2605,7 +2605,7 @@
         "original_table": "DER_FOCUS_STK",
         "sql": "SELECT * FROM zyyx.DER_FOCUS_STK WHERE con_date = to_date('%s','yyyy-MM-dd')",
         "dynamic": true,
-        "date_column": "con_date",
+        "date_column": "CON_DATE",
         "primary_key": [
             "ID"
         ],
@@ -2683,7 +2683,7 @@
         "original_table": "DER_DIVER_STK",
         "sql": "SELECT * FROM zyyx.DER_DIVER_STK WHERE con_date = to_date('%s','yyyy-MM-dd')",
         "dynamic": true,
-        "date_column": "con_date",
+        "date_column": "CON_DATE",
         "primary_key": [
             "ID"
         ],
@@ -2756,7 +2756,7 @@
         "original_table": "DER_CON_DEV_ROLL_STK",
         "sql": "SELECT * FROM zyyx.DER_CON_DEV_ROLL_STK WHERE con_date = to_date('%s','yyyy-MM-dd')",
         "dynamic": true,
-        "date_column": "con_date",
+        "date_column": "CON_DATE",
         "primary_key": [
             "ID"
         ],
@@ -4366,13 +4366,18 @@
         "is_important": true,
         "data_base": "wind",
         "original_table": "AINDEXEODPRICES",
-        "sql": "SELECT [S_INFO_WINDCODE],[TRADE_DT],[S_DQ_PRECLOSE],[S_DQ_OPEN],[S_DQ_HIGH],[S_DQ_LOW],[S_DQ_CLOSE],[S_DQ_CHANGE],[S_DQ_PCTCHANGE],[S_DQ_VOLUME],[S_DQ_AMOUNT],[OPDATE]  FROM [wande].[dbo].[AINDEXEODPRICES]  where TRADE_DT = '%s'",
+        "sql": "SELECT [OBJECT_ID],[S_INFO_WINDCODE],[TRADE_DT],[S_DQ_PRECLOSE],[S_DQ_OPEN],[S_DQ_HIGH],[S_DQ_LOW],[S_DQ_CLOSE],[S_DQ_CHANGE],[S_DQ_PCTCHANGE],[S_DQ_VOLUME],[S_DQ_AMOUNT],[OPDATE]  FROM [wande].[dbo].[AINDEXEODPRICES]  where TRADE_DT = '%s'",
         "dynamic": true,
         "date_column": "TRADE_DT",
         "primary_key": [
             "OBJECT_ID"
         ],
         "all_cols": {
+            "OBJECT_ID": {
+                "database_type": "varchar",
+                "pandas_type": "str",
+                "parquet_type": "string"
+            },
             "S_INFO_WINDCODE": {
                 "database_type": "varchar",
                 "pandas_type": "str",
@@ -11045,6 +11050,11 @@
                 "database_type": "numeric",
                 "pandas_type": "float64",
                 "parquet_type": "double"
+            },
+            "OPDATE": {
+                "database_type": "datetime",
+                "pandas_type": "int64",
+                "parquet_type": "int64"
             }
         }
     },

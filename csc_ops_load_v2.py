@@ -10,7 +10,7 @@ from datetime import timedelta, date, datetime
 with open('/home/lianghua/rtt/soft/airflow/dags/zirui_dag/db_sql_dict.json') as j:
     DB_SQL_DICT = json.load(j)  # 依赖的SQL语句
 
-LOAD_PATH_ROOT = '/home/lianghua/rtt/mountdir/data/load_compare/load_opdate/'  # 输出路径
+LOAD_PATH_ROOT = '/home/lianghua/rtt/mountdir/data/load_compare/load_date/'  # 输出路径
 
 
 @task
@@ -21,32 +21,10 @@ def extract_sql_by_table(table_name: str, load_date: str) -> dict:
     """
     table_info = DB_SQL_DICT[table_name]
 
-    query_sql = table_info['sql'] % (
-        load_date) if table_info['dynamic'] else table_info['sql']
-
-    # 鹏队的需求,先后扫描2天
-    # load_date_l2 = (date.today() + timedelta(-2)).strftime('%Y%m%d')
-
-    if table_info['data_base'] == 'wind':
-
-        # 鹏队的需求 TODO:往后扫描2天
-        # query_sql = query_sql.replace(
-        # table_info['date_column']+' =', f" convert(varchar(100), OPDATE, 112) BETWEEN  '{load_date_l2}' AND ")
-        query_sql = query_sql.replace(
-            table_info['date_column']+' =', f" convert(varchar(100), OPDATE, 112) = ")
-
-        # 鹏队的需求 TODO:有的表OPDATE=1包含了今日的日期不要删
-        query_sql_1 = query_sql+" and OPMODE='0'"
-        query_sql_2 = query_sql + \
-            f" and OPMODE='1' AND {table_info['date_column']} >='{load_date}'"
-        query_sql = query_sql_1+' UNION ALL '+query_sql_2
-    else:
-        query_sql = query_sql.replace(
-            table_info['date_column']+' =', ' ENTRYTIME = ')
-
     return {
         'connector_id': table_info['data_base'] + '_af_connector',
-        'query_sql': query_sql,
+        'query_sql': table_info['sql'] % (
+            load_date) if table_info['dynamic'] else table_info['sql'],
         'select_table': table_info['original_table'],
         'load_date': load_date,
         'dynamic': table_info['dynamic'],
@@ -217,7 +195,7 @@ def transform(df_chunk, select_table, load_path_root, config_dict: dict, date_co
         for i in int_columns:
             df_trans[i] = df_trans[i].apply(lambda x: x.timestamp()
                                             if type(x) == pd.Timestamp else x)
-        # -----------------转换OPDATE---------------- #
+      # -----------------转换OPDATE---------------- #
         if connector_id == 'wind_af_connector':
             df_trans['OPDATE'] = pd.to_datetime(df_trans['OPDATE'], unit='s')
             df_trans['OPDATE'] = df_trans['OPDATE'].apply(
@@ -227,7 +205,6 @@ def transform(df_chunk, select_table, load_path_root, config_dict: dict, date_co
                 df_trans['ENTRYTIME'], unit='s')
             df_trans['ENTRYTIME'] = df_trans['ENTRYTIME'].apply(
                 lambda x: int(x.date().strftime('%Y%m%d')))
-
         # -----------------转换dtype---------------- #
         df_trans = df_trans.astype(dtype=dtype_config)
         return df_trans
@@ -282,7 +259,7 @@ def transform(df_chunk, select_table, load_path_root, config_dict: dict, date_co
             "primary_key": get_new_pk(select_table),
             "original_table": table_info['original_table'],
             'dynamic': table_info['dynamic'],
-            'date_column': 'OPDATE' if connector_id == 'wind_af_connector' else "ENTRYTIME",
+            'date_column': table_info['date_column'],
             'last_update': str(datetime.now()),
             'all_cols': table_info['all_cols']
         }
@@ -302,13 +279,13 @@ def transform(df_chunk, select_table, load_path_root, config_dict: dict, date_co
                   'email_on_retry': True,
                   #   'retries': 1,
                   "retry_delay": timedelta(minutes=1), },
-    schedule="15/15 1 * * 1-7",
+    schedule="10/15 1 * * 1-7",
     start_date=pendulum.datetime(2022, 9, 1, tz="Asia/Shanghai"),
     catchup=False,
     dagrun_timeout=timedelta(minutes=10),
     tags=['每日更新', 'OPDATEV2'],
 )
-def csc_data_load_op_v2():
+def csc_data_load_v2():
     def start_tasks(table_name: str):
         """
         任务流控制函数，用于被多进程调用，每张表下载都是一个并行的进程
@@ -330,4 +307,4 @@ def csc_data_load_op_v2():
             k for k, v in DB_SQL_DICT.items() if v['is_important'] and v['dynamic']]}
 
 
-csc_data_load_op_v2()
+csc_data_load_v2()

@@ -3,16 +3,16 @@ from airflow.models import Variable
 from datetime import timedelta, date, datetime
 import json
 import pendulum
-from airflow.decorators import dag, task, task_group
+from airflow.decorators import dag, task
 from airflow.models import Variable
 from datetime import timedelta, date, datetime
 
-with open(Variable.get("db_sql_dict")) as j:
+with open('/home/lianghua/rtt/soft/airflow/dags/zirui_dag/db_sql_dict.json') as j:
     DB_SQL_DICT = json.load(j)  # 依赖的SQL语句
 
-LOAD_PATH = '/home/lianghua/rtt/mountdir/data/load/'
-LOAD_PATH_OP = '/home/lianghua/rtt/mountdir/data/load_op/'
-LOG_PATH = '/home/lianghua/rtt/mountdir/data/log/'
+LOAD_PATH = '/home/lianghua/rtt/mountdir/data/load_compare/load_date/'
+LOAD_PATH_OP = '/home/lianghua/rtt/mountdir/data/load_compare/load_opdate/'
+LOG_PATH = '/home/lianghua/rtt/mountdir/data/load_compare/log/'
 
 
 @task
@@ -37,8 +37,9 @@ def check_date(select_table, load_date):
     df_old = pd.read_parquet(LOAD_PATH+f'{select_table}/{load_date}.parquet')
     df_new = pd.read_parquet(
         LOAD_PATH_OP+f'{select_table}/{load_date}.parquet')
-
-    # print(df_new.columns, df_old.columns)
+    # print()
+    print(df_new.columns, len(df_new.columns),
+          df_old.columns, len(df_old.columns))
     # print(pk_column, select_table)
 
     # --------------日志文件路径--------------#

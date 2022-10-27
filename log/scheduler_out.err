@@ -11,3 +11,42 @@ nohup: ignoring input
 [2022-10-27 10:53:09 +0800] [4136668] [ERROR] Connection in use: ('::', 8793)
 [2022-10-27 10:53:09 +0800] [4136668] [ERROR] Retrying in 1 second.
 [2022-10-27 10:53:10 +0800] [4136668] [ERROR] Can't connect to ('::', 8793)
+Process ForkProcess-35:
+Traceback (most recent call last):
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/dag_processing/manager.py", line 257, in _run_processor_manager
+    processor_manager.start()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/dag_processing/manager.py", line 489, in start
+    return self._run_parsing_loop()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/dag_processing/manager.py", line 603, in _run_parsing_loop
+    DagWarning.purge_inactive_dag_warnings()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/utils/session.py", line 75, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/airflow/models/dagwarning.py", line 83, in purge_inactive_dag_warnings
+    session.commit()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1451, in commit
+    self._transaction.commit(_to_root=self.future)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 836, in commit
+    trans.commit()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2459, in commit
+    self._do_commit()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2649, in _do_commit
+    self._connection_commit_impl()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2620, in _connection_commit_impl
+    self.connection._commit_impl()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1091, in _commit_impl
+    self._handle_dbapi_exception(e, None, None, None, None)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2128, in _handle_dbapi_exception
+    util.raise_(exc_info[1], with_traceback=exc_info[2])
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 208, in raise_
+    raise exception
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1089, in _commit_impl
+    self.engine.dialect.do_commit(self.connection)
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 686, in do_commit
+    dbapi_connection.commit()
+  File "/home/lianghua/anaconda3/envs/zirui_env/lib/python3.9/site-packages/mysql/connector/connection_cext.py", line 444, in commit
+    self._cmysql.commit()
+_mysql_connector.MySQLInterfaceError: Lost connection to MySQL server during query
