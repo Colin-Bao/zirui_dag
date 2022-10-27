@@ -1,59 +1,113 @@
-from airflow.models import Variable
 from datetime import timedelta, date, datetime
 import json
 import pendulum
 from airflow.decorators import dag, task, task_group
 from airflow.models import Variable
-# from airflow.datasets import Dataset
 from datetime import timedelta, date, datetime
 
 
 # -----------------加载运行依赖的配置信息----------------- #
-with open(Variable.get("csc_input_table")) as j:
-    TABLE_LIST = json.load(j)['need_tables']
-with open(Variable.get("db_sql_dict")) as j:
+with open('/home/lianghua/rtt/soft/airflow/dags/zirui_dag/db_sql_dict.json') as j:
     DB_SQL_DICT = json.load(j)  # 依赖的SQL语句
 
-CONFIG_PATH = '/home/lianghua/ZIRUI/rely_files/test_type_df_and_parquet/'  # 转换依赖的CONFIG
-LOAD_PATH_ROOT = '/home/lianghua/rtt/mountdir/data/load/'  # 输出路径
+LOAD_PATH_ROOT = '/home/lianghua/rtt/soft/airflow/dags/zirui_dag/load_op/'  # 输出路径
 
 
-# TODO DB_SQL_DICT删除 demo
 @task
 def extract_sql_by_table(table_name: str, load_date: str) -> dict:
     """
     根据表名和日期返回sql查询语句
     :return:( connector_id, return_sql, table_name, load_date)
     """
-    # 去数据字典文件中找信息
     table_info = DB_SQL_DICT[table_name]
 
-    # 处理增量表
     query_sql = table_info['sql'] % (
         load_date) if table_info['dynamic'] else table_info['sql']
+
+    if table_info['data_base'] == 'wind':
+        query_sql = query_sql.replace(
+            table_info['date_column']+' =', ' convert(varchar(100), OPDATE, 112) = ')
+    else:
+        query_sql = query_sql.replace(
+            table_info['date_column']+' =', ' ENTRYTIME = ')
 
     return {
         'connector_id': table_info['data_base'] + '_af_connector',
         'query_sql': query_sql,
-        'real_table': table_info['oraignal_table'],
-        'select_table': table_name,
+        'select_table': table_info['original_table'],
         'load_date': load_date,
         'dynamic': table_info['dynamic'],
-        'date_column': table_info['date_where'],
-        'all_columns': table_info['all_columns']
+        'date_column': table_info['date_column'],
+        'all_cols': table_info['all_cols']
     }
 
 
-def transform(df_chunk, select_table, load_path_root):
+@task
+def load_sql_query(xcom_dict: dict, load_path_root=LOAD_PATH_ROOT) -> dict:
+    """
+    根据sql查询语句下载数据到本地
+    :return:xcom_dict
+    """
+    # -----------------参数传递----------------- #
+
+    print('\n# -----------------参数传递----------------- #\n')
+    print(xcom_dict)
+    connector_id = xcom_dict['connector_id']
+    query_sql = xcom_dict['query_sql']
+    select_table = xcom_dict['select_table']
+    load_date = xcom_dict['load_date']
+    dynamic = xcom_dict['dynamic']
+    date_column = xcom_dict['date_column']
+    config_dict = xcom_dict['all_cols']
+
+    # -----------------数据库接口---------------- #
+    from airflow.providers.common.sql.hooks.sql import BaseHook
+    sql_hook = BaseHook.get_connection(connector_id).get_hook()
+
+    # ----------------------------------大表分片保存---------------------------------- #
+    # get_pandas_df   连接suntime会报错
+    chunk_count = 0
+    for df_chunk in sql_hook.get_pandas_df_by_chunks(
+            query_sql,
+            chunksize=1000000,
+    ):
+        # 无数据跳出
+        if df_chunk.empty:
+            LOAD_PATH = ''
+            break
+
+        # ----------------- 命名----------------- #
+        if dynamic:
+            LOAD_PATH = load_path_root + \
+                f'{select_table}/{load_date}.parquet' if chunk_count == 0 else load_path_root + \
+                f'{select_table}/{load_date}_{chunk_count}.parquet'
+        else:
+            LOAD_PATH = load_path_root + \
+                f'{select_table}/{select_table}.parquet' if chunk_count == 0 else load_path_root + \
+                f'{select_table}/{select_table}_{chunk_count}.parquet'
+
+        # -----------------输出文件----------------- #
+        import os
+        import pyarrow.parquet as pq
+        _ = os.mkdir(load_path_root +
+                     select_table) if not os.path.exists(load_path_root +
+                                                         select_table) else None
+        # -----------------转换---------------- #
+        pa_table = transform(df_chunk, select_table,
+                             load_path_root, config_dict, load_date)
+        pq.write_table(pa_table, LOAD_PATH)
+        chunk_count += 1
+    return {'table_path': LOAD_PATH, 'select_table': select_table,
+            'table_empty': df_chunk.empty, 'dynamic': dynamic, 'date_column': date_column, }
+
+
+def transform(df_chunk, select_table, load_path_root, config_dict: dict, load_date: str):
     """
     转换3次,输出config
     """
     import pandas as pd
     import numpy as np
-
-    # -----------------去字典文件中找config信息----------------- #
-    with open(f'{CONFIG_PATH}{select_table}.json') as j:
-        config_dict = json.load(j)  # 转换type的config
+    import pyarrow as pa
 
     def get_new_pk(select_table):
         """
@@ -134,8 +188,8 @@ def transform(df_chunk, select_table, load_path_root):
         """
         转换dtypes前的步骤
         """
-
-        dtype_config = {k: v['pandas_type'] for k, v in config_dict.items()}
+        dtype_config = {k: v['pandas_type']
+                        for k, v in config_dict.items() if k in df_trans.columns}
         # -----------------转换dtype前要加的步骤---------------- #
         # 非字符串处理
         float_columns = [k for k, v in dtype_config.items() if v == 'float64']
@@ -168,13 +222,16 @@ def transform(df_chunk, select_table, load_path_root):
         """
         修改统一的schema
         """
-        import pyarrow as pa
+
         schema_list = [(column_name, types['parquet_type'])
                        for column_name, types in config_dict.items()
                        if column_name in df_trans.columns.to_list()]
         pa_table = pa.Table.from_pandas(df_trans,
                                         schema=pa.schema(schema_list))
         return pa_table
+
+    def add_column(pa_trans):
+        return pa_trans.append_column('LOAD_DATE', pa.array([int(load_date)] * len(pa_trans), pa.int64()))
 
     def get_config():
         """
@@ -191,16 +248,16 @@ def transform(df_chunk, select_table, load_path_root):
         }
 
         # -----------------date----------------- #
-        table_info.update({"all_columns": type_config})
+        table_info.update({"all_cols": type_config})
         # ---------------输出----------------- #
 
         out_put_config = {
             "primary_key": get_new_pk(select_table),
-            "original_table": table_info['oraignal_table'],
+            "original_table": table_info['original_table'],
             'dynamic': table_info['dynamic'],
             'date_column': 'OPDATE',
             'last_update': str(datetime.now()),
-            'all_cols': table_info['all_columns']
+            'all_cols': table_info['all_cols']
         }
         OUT_PUT_PATH = f'{load_path_root}{select_table}/config.json'
         with open(OUT_PUT_PATH, 'w') as f:
@@ -208,64 +265,7 @@ def transform(df_chunk, select_table, load_path_root):
     # -----------------config---------------- #
     get_config()
     # -----------------transform---------------- #
-    return trans_schema(trans_hdf(trans_dtype(df_chunk)))
-
-
-@task
-def load_sql_query(xcom_dict: dict, load_path_root=LOAD_PATH_ROOT) -> dict:
-    """
-    根据sql查询语句下载数据到本地
-    :return:xcom_dict
-    """
-    # -----------------参数传递----------------- #
-
-    print('\n# -----------------参数传递----------------- #\n')
-    print(xcom_dict)
-    connector_id = xcom_dict['connector_id']
-    query_sql = xcom_dict['query_sql']
-    select_table = xcom_dict['select_table']
-    load_date = xcom_dict['load_date']
-    dynamic = xcom_dict['dynamic']
-    date_column = xcom_dict['date_column']
-
-    # -----------------数据库接口---------------- #
-    from airflow.providers.common.sql.hooks.sql import BaseHook
-    sql_hook = BaseHook.get_connection(connector_id).get_hook()
-
-    # ----------------------------------大表分片保存---------------------------------- #
-    # get_pandas_df   连接suntime会报错
-    chunk_count = 0
-    for df_chunk in sql_hook.get_pandas_df_by_chunks(
-            query_sql,
-            chunksize=1000000,
-    ):
-        # 无数据跳出
-        if df_chunk.empty:
-            LOAD_PATH = ''
-            break
-
-        # ----------------- 命名----------------- #
-        if dynamic:
-            LOAD_PATH = load_path_root + \
-                f'{select_table}/{load_date}.parquet' if chunk_count == 0 else load_path_root + \
-                f'{select_table}/{load_date}_{chunk_count}.parquet'
-        else:
-            LOAD_PATH = load_path_root + \
-                f'{select_table}/{select_table}.parquet' if chunk_count == 0 else load_path_root + \
-                f'{select_table}/{select_table}_{chunk_count}.parquet'
-
-        # -----------------输出文件----------------- #
-        import os
-        import pyarrow.parquet as pq
-        _ = os.mkdir(load_path_root +
-                     select_table) if not os.path.exists(load_path_root +
-                                                         select_table) else None
-        # -----------------转换---------------- #
-        pa_table = transform(df_chunk, select_table, load_path_root)
-        pq.write_table(pa_table, LOAD_PATH)
-        chunk_count += 1
-    return {'table_path': LOAD_PATH, 'select_table': select_table,
-            'table_empty': df_chunk.empty, 'dynamic': dynamic, 'date_column': date_column, }
+    return add_column(trans_schema(trans_hdf(trans_dtype(df_chunk))))
 
 
 @dag(
@@ -276,7 +276,7 @@ def load_sql_query(xcom_dict: dict, load_path_root=LOAD_PATH_ROOT) -> dict:
                   'email_on_retry': True,
                   #   'retries': 1,
                   "retry_delay": timedelta(minutes=1), },
-    schedule="0/15 2 * * 1-7",
+    schedule="0/15 1 * * 1-7",
     start_date=pendulum.datetime(2022, 9, 1, tz="Asia/Shanghai"),
     catchup=False,
     dagrun_timeout=timedelta(minutes=10),
@@ -288,19 +288,20 @@ def csc_data_load_v2():
         任务流控制函数，用于被多进程调用，每张表下载都是一个并行的进程
         :return:
         """
+
         # 下载昨天的数据
         load_date = (date.today() + timedelta(-1)).strftime('%Y%m%d')
 
         # ETL
-        load_sql_query.override(
-            task_id='L_' + table_name, )(
-                extract_sql_by_table.override(task_id='E_' + table_name, )(table_name, load_date))
+        load_sql_query.override(task_id='L_' + table_name, )(
+            extract_sql_by_table.override(task_id='E_' + table_name, )(table_name, load_date), LOAD_PATH_ROOT)
 
     # 多进程异步执行
-    from concurrent.futures import ThreadPoolExecutor
-    with ThreadPoolExecutor(max_workers=5) as executor:
-        _ = {executor.submit(start_tasks, table)
-                             : table for table in TABLE_LIST}
+    start_tasks('AINDEXCSI500WEIGHT')
+    # from concurrent.futures import ThreadPoolExecutor
+    # with ThreadPoolExecutor(max_workers=5) as executor:
+    #     _ = {executor.submit(start_tasks, table): table for table in [
+    #         k for k, v in DB_SQL_DICT.items() if v['is_important']]}
 
 
-# csc_data_load()
+csc_data_load_v2()
